@@ -19,6 +19,7 @@ const WindowLayer = ({
   onClose,
   minimizingIds = [],
   closingIds = [],
+  onOpenUrl,
 }) => {
   return (
     <>
@@ -26,7 +27,9 @@ const WindowLayer = ({
         const Frame = w.state === "fullscreen" ? FullscreenFrame : WindowFrame;
         const isActive = w.id === activeId;
 
-        const WindowComponent = WINDOW_COMPONENTS[w.id];
+        const WindowComponent =
+          w.type === "browser" ? WINDOW_COMPONENTS.browser : WINDOW_COMPONENTS[w.id];
+
 
         return (
           <Frame
@@ -83,6 +86,7 @@ const WindowLayer = ({
                 <WindowComponent
                   window={w}
                   isActive={isActive}
+                  actions={{ openUrlWindow: onOpenUrl }}
                 />
               ) : (
                 <div style={{ color: "inherit" }}>

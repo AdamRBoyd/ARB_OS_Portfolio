@@ -347,32 +347,55 @@ export const FullscreenFrame = styled(WindowFrame)`
 /* ----------------------------- */
 
 export const DockArea = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
 
-  padding: 0.75rem;
+  height: 50px;
   display: flex;
+  align-items: center;
   justify-content: center;
 
+  padding: 0 1rem;
+
+  /* allow clicks only on dock contents */
   pointer-events: none;
-  z-index: 1000;
+  z-index: 1200;
+
+  /* subtle edge fade / separation */
+  background: linear-gradient(
+    180deg,
+    rgba(11, 15, 20, 0) 0%,
+    rgba(11, 15, 20, 0.35) 45%,
+    rgba(11, 15, 20, 0.6) 100%
+  );
 `;
+
 
 export const Dock = styled.div`
   pointer-events: auto;
 
+  width: 100%;
+  max-width: 1100px;
+  height: 40px;
+
   display: flex;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.55rem 0.9rem;
 
   background: ${({ theme }) => theme.palette.grays[1]};
   border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  border-radius: 999px;
+  border-radius: 18px 18px 1px 1px;
+
+  backdrop-filter: blur(10px);
 
   box-shadow: 0 20px 50px ${({ theme }) => theme.palette.shadow[4]};
 `;
+
+
 
 export const DockItem = styled.button`
   border: none;

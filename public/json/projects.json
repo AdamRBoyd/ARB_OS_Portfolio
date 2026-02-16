@@ -1,0 +1,18 @@
+[
+    {
+        "imageSrc": "/images/projects/AnvilandEmberMetalworks.jpg",
+        "title": "Anvil and Ember Metalworks",
+        "description": "My custom jewelry business website.",
+        "link": "http://anvilandembermetalworks.com",
+        "github": "https://github.com/AdamRBoyd/AnvilandEmber-Website",
+        "tags": ["Frontend", "Business"]
+    },
+    {
+        "imageSrc": "/images/projects/AlicesWebsite.jpg",
+        "title": "Alice's Family Histories",
+        "description": "A genealogy website for Alice Boyd.",
+        "link": "https://boydhouse.com/alice",
+        "github": "https://github.com/AdamRBoyd/AlicesFamilyHistories",
+        "tags": ["Frontend", "Client"]
+    }
+]
