@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import wallpaper from "@assets/wallpaper.png";
 
 /* ----------------------------- */
 /* FLEX PRIMITIVES */
@@ -38,9 +39,36 @@ export const DesktopShell = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: ${({ theme }) => theme.palette.background[0]};
+
+  background-image: url(${wallpaper});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   color: ${({ theme }) => theme.palette.primary[0]};
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 15, 20, 0.35) 0%,
+      rgba(11, 15, 20, 0.55) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
+
+// NEW: wrapper to keep everything above overlay without breaking positioning
+export const DesktopContent = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+`;
+
 
 /* ----------------------------- */
 /* SYSTEM BAR */
@@ -153,9 +181,43 @@ export const InsetSurface = styled.div`
 /* WINDOW SYSTEM */
 /* ----------------------------- */
 
+const windowEnter = keyframes`
+  from {
+    transform: scale(0.985);
+    opacity: 0.0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+const windowMinimize = keyframes`
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+`;
+
+const windowClose = keyframes`
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+`;
+
+
 export const WindowFrame = styled(Surface)`
   position: absolute;
-
+  
   width: ${({ $size }) =>
     $size === "lg" ? "980px" : $size === "sm" ? "640px" : "820px"};
 
@@ -167,11 +229,31 @@ export const WindowFrame = styled(Surface)`
 
   overflow: hidden;
 
-  transition: box-shadow 160ms ease-out, outline-color 160ms ease-out, transform 160ms ease-out;
+  animation: ${({ $isMinimizing, $isClosing }) =>
+    $isMinimizing
+      ? css`${windowMinimize} 120ms ease-in forwards`
+      : $isClosing
+        ? css`${windowClose} 120ms ease-in forwards`
+        : css`${windowEnter} 130ms ease-out`};
+
+
+
+
+  transform: ${({ $isActive }) =>
+    $isActive ? "scale(1.015)" : "scale(1)"};
+
+  filter: ${({ $isActive }) =>
+    $isActive ? "brightness(1)" : "brightness(0.94)"};
+
+  transition:
+    transform 140ms ease-out,
+    box-shadow 140ms ease-out,
+    outline-color 140ms ease-out,
+    filter 140ms ease-out;
 
   box-shadow: ${({ theme, $isActive }) =>
     $isActive
-      ? `0 18px 44px ${theme.palette.shadow[4]}`
+      ? `0 22px 52px ${theme.palette.shadow[5]}`
       : `0 16px 36px ${theme.palette.shadow[3]}`};
 
   outline: ${({ theme, $isActive }) =>
@@ -199,7 +281,8 @@ export const WindowHeader = styled.div`
 export const WindowTitle = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.palette.primary[0]};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.palette.primary[0] : theme.palette.secondary[0]};
 `;
 
 export const WindowControls = styled.div`
