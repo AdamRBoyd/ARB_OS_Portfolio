@@ -4,8 +4,9 @@ theme.palette = {
   primary:   ['#E7EAF0'],   // main text on dark surfaces
   secondary: ['#AAB3C2'],   // muted text
   tertiary:  ['#6E7687'],   // subtle labels / disabled
-  accent:    ['#4CC9F0'],   // cyan highlight (focus, active, links)
+  accent:    ['#52505c'],   // cyan highlight (focus, active, links)
   alert:     ['#FF3B30'],
+  active:    ['#4CC9F0'],   // active window surfaces, active states
 
   background: ['#0B0F14'],  // desktop background
   bluebutton: ['#2563EB'],  // strong CTA (resume/download)

@@ -20,7 +20,7 @@ const Frame = styled.iframe`
 const ResumePage = () => {
   return (
     <Page>
-      <Frame title="Resume PDF" src={PDF_URL} />
+      <Frame title="Adam Boyds Resume PDF" src={PDF_URL} />
     </Page>
   );
 };

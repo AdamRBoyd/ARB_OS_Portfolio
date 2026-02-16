@@ -11,14 +11,10 @@ import { WINDOW_META } from "@constants/windows";
 const SPAWN_OFFSET_X = 32;
 const SPAWN_OFFSET_Y = 28;
 
-const START_X = 80;
-const START_Y = 70;
+const START_X = 130;
+const START_Y = 80;
 
 const makeInitialWindows = () => {
-    const startX = 80;
-    const startY = 80;
-    const step = 32;
-
     const windows = {};
 
     WINDOW_META.forEach((w, i) => {
@@ -30,8 +26,8 @@ const makeInitialWindows = () => {
             state: w.defaultState ?? "minimized",
             isOpen: w.defaultOpen ?? true,
 
-            x: startX + i * step,
-            y: startY + i * step,
+            x: START_X + i * SPAWN_OFFSET_X,
+            y: START_Y + i * SPAWN_OFFSET_Y,
         };
     });
 
@@ -83,6 +79,11 @@ export default function useWindowManager(initialWindows = DEFAULT_WINDOWS) {
             y: Math.max(padding + 38, Math.min(y, maxY)), // room for SystemBar
         };
     }, []);
+
+    const openWindows = useMemo(() => {
+        return Object.values(windows).filter((w) => w.isOpen);
+    }, [windows]);
+
 
     const openWindow = useCallback(
         (id) => {
@@ -290,6 +291,7 @@ export default function useWindowManager(initialWindows = DEFAULT_WINDOWS) {
 
         visibleWindows,
         minimizedWindows,
+        openWindows,
         minimizingIds,
         closingIds,
 

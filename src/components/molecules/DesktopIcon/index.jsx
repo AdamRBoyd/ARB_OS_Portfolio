@@ -34,10 +34,15 @@ const IconButton = styled.button`
   }
 `;
 
-const IconGlyph = styled.div`
-  font-size: 1.45rem;
-  line-height: 1;
+const IconImage = styled.img`
+  width: 69px;
+  height: 69px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
 `;
+
 
 const IconLabel = styled.div`
   margin-top: 0.35rem;
@@ -77,8 +82,8 @@ const DesktopIcon = ({ icon, label, selected, onSelect, onOpen }) => {
       aria-label={label}
       aria-pressed={selected}
     >
-      <Stack $gap="0.35rem" $align="center">
-        <IconGlyph>{icon}</IconGlyph>
+      <Stack $gap="0.25rem" $align="center">
+        <IconImage src={icon} alt={label} draggable={false} />
         <IconLabel $selected={selected}>{label}</IconLabel>
       </Stack>
     </IconButton>

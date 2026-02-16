@@ -4,7 +4,7 @@ import { Stack, Row, InsetSurface } from "@primitives";
 import { PDF_URL } from "@constants/urls";
 
 const Bar = styled(InsetSurface)`
-  padding: 0.5rem 0.6rem;
+  padding: 0.4rem 0.6rem;
 `;
 
 const Label = styled.div`
@@ -21,7 +21,7 @@ const Button = styled.a`
   background: ${({ theme }) => theme.palette.graybutton[0]};
   color: ${({ theme }) => theme.palette.primary[0]};
   border-radius: 12px;
-  padding: 0.45rem 0.65rem;
+  padding: 0.15rem 0.65rem;
   font-size: 0.85rem;
 
   &:hover {
@@ -48,7 +48,7 @@ const ResumeWindow = () => {
     <Stack $gap="0.75rem" style={{ height: "100%" }}>
       <Bar>
         <Row $justify="space-between" $align="center" $gap="0.5rem">
-          <Label>Resume PDF</Label>
+          <Label>PDF Viewer</Label>
 
           <Row $gap="0.5rem" style={{ justifyContent: "flex-end" }}>
             <Button href={PDF_URL} target="_blank" rel="noreferrer">
@@ -62,7 +62,7 @@ const ResumeWindow = () => {
       </Bar>
 
       <ViewerWrap>
-        <Iframe title="Resume PDF" src={PDF_URL} />
+        <Iframe title="Adam Boyd's Resume - PDF" src={PDF_URL} />
       </ViewerWrap>
     </Stack>
   );

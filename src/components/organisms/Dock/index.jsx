@@ -8,16 +8,18 @@ import { LINKEDIN_URL, GITHUB_URL } from "@constants/urls";
 /* ----------------------------- */
 
 const DockInner = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between; /* left group + right group */
   gap: 0.75rem;
 `;
 
 const Group = styled.div`
+  height: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 0.4rem;
   min-width: 0;
 `;
@@ -31,6 +33,8 @@ const RightGroup = styled(Group)`
 `;
 
 const Item = styled(DockItemBase)`
+  height: 100%;
+  align-self: stretch;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -43,9 +47,15 @@ const Dot = styled.span`
   height: 6px;
   border-radius: 999px;
   background: ${({ theme, $active }) =>
-    $active ? theme.palette.accent[0] : theme.palette.grays[7]};
+    $active ? theme.palette.active[0] : theme.palette.grays[4]};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 120ms ease-out, background 120ms ease-out;
+`;
+
+const Icon = styled.img`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
 `;
 
 const Label = styled.span`
@@ -54,17 +64,18 @@ const Label = styled.span`
 
 const Separator = styled.div`
   width: 1px;
-  height: 26px;
+  height: 28px;
   background: ${({ theme }) => theme.palette.grays[4]};
   opacity: 0.9;
   flex: 0 0 auto;
+  margin: 0.4rem 0 0 0.75rem;
 `;
 
 /* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
 
-const Dock = ({ minimizedWindows = [], activeId, onRestore }) => {
+const Dock = ({ openWindows = [], activeId, onRestore }) => {
   return (
     <DockShell>
       <DockInner>
@@ -78,7 +89,7 @@ const Dock = ({ minimizedWindows = [], activeId, onRestore }) => {
             title="GitHub"
             aria-label="GitHub"
           >
-            <Dot $visible />
+            <Icon src="/svg/github.svg" alt="GitHub" />
             <Label>GitHub</Label>
           </Item>
 
@@ -90,7 +101,7 @@ const Dock = ({ minimizedWindows = [], activeId, onRestore }) => {
             title="LinkedIn"
             aria-label="LinkedIn"
           >
-            <Dot $visible />
+            <Icon src="/svg/linkedin.svg" alt="LinkedIn" />
             <Label>LinkedIn</Label>
           </Item>
 
@@ -100,18 +111,19 @@ const Dock = ({ minimizedWindows = [], activeId, onRestore }) => {
             title="Open Resume"
             aria-label="Open Resume"
           >
-            <Dot $visible />
+            <Icon src="/svg/download.svg" alt="Resume" />
             <Label>Resume</Label>
           </Item>
-        </LeftGroup>
 
         {/* MIDDLE: Divider */}
         <Separator />
+        </LeftGroup>
 
-        {/* RIGHT: Open/minimized apps */}
+
+        {/* RIGHT: Open apps */}
         <RightGroup>
-          {minimizedWindows.length ? (
-            minimizedWindows.map((w) => {
+          {openWindows.length ? (
+            openWindows.map((w) => {
               const isActive = w.id === activeId;
 
               return (

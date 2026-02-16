@@ -265,7 +265,7 @@ export const WindowFrame = styled(Surface)`
 `;
 
 export const WindowHeader = styled.div`
-  height: 48px;
+  height: 40px;
 
   display: flex;
   align-items: center;
@@ -291,8 +291,8 @@ export const WindowControls = styled.div`
 `;
 
 export const WindowButton = styled.button`
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
 
   border: none;
   border-radius: 8px;
@@ -320,7 +320,7 @@ export const WindowButton = styled.button`
 `;
 
 export const WindowBody = styled.div`
-  height: calc(100% - 48px);
+  height: calc(100% - 40px);
   padding: 1rem;
   overflow: auto;
 
@@ -334,13 +334,28 @@ export const WindowBody = styled.div`
 
 export const FullscreenFrame = styled(WindowFrame)`
   position: fixed;
-  inset: 1rem 1rem 4.5rem 1rem;
+
+  /* exact UI chrome spacing */
+  top: 39px;       /* SystemBar height */
+  left: 0;
+  right: 0;
+  bottom: 58px;    /* DockArea height */
+
+  /* optional breathing room */
+  padding: 0.75rem;
 
   width: auto;
   height: auto;
   max-width: none;
   max-height: none;
+
+  border-radius: 0; /* fullscreen should feel edge-to-edge */
+
+   /* ✅ stop focus shrink/dim in fullscreen */
+  transform: none !important;
+  transition: box-shadow 140ms ease-out, outline-color 140ms ease-out;
 `;
+
 
 /* ----------------------------- */
 /* DOCK / HOTBAR */
@@ -352,7 +367,7 @@ export const DockArea = styled.div`
   right: 0;
   bottom: 0;
 
-  height: 50px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -370,6 +385,10 @@ export const DockArea = styled.div`
     rgba(11, 15, 20, 0.35) 45%,
     rgba(11, 15, 20, 0.6) 100%
   );
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 `;
 
 
@@ -381,48 +400,60 @@ export const Dock = styled.div`
   height: 40px;
 
   display: flex;
-  align-items: center;
+  align-items: stretch;         /* ← allow items to stretch */
   justify-content: center;
 
-  padding: 0.55rem 0.9rem;
+  padding: 0 0.6rem;            /* ← NO vertical padding */
 
-  background: ${({ theme }) => theme.palette.grays[1]};
+  background: rgba(15, 22, 32, 0.55); /* use rgba, not shadow[0] */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
   border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  border-radius: 18px 18px 1px 1px;
-
-  backdrop-filter: blur(10px);
+  border-radius: 10px;
 
   box-shadow: 0 20px 50px ${({ theme }) => theme.palette.shadow[4]};
 `;
 
 
 
+
 export const DockItem = styled.button`
-  border: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  border: 1px solid transparent;
   background: transparent;
 
-  padding: 0.45rem 0.8rem;
-  border-radius: 10px;
+  padding: 0 0.9rem;
+  border-radius: 2px;          /* smaller than Dock radius */
 
   color: ${({ theme }) => theme.palette.secondary[0]};
   cursor: pointer;
 
-  transition: background 120ms ease-out, color 120ms ease-out;
+  transition:
+    background 120ms ease-out,
+    color 120ms ease-out,
+    border-color 120ms ease-out,
+    box-shadow 160ms ease-out;
 
   &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
+    background: ${({ theme }) => theme.palette.light[5]};
     color: ${({ theme }) => theme.palette.primary[0]};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
   }
 
   ${({ theme, $active }) =>
     $active &&
     `
-      background: ${theme.palette.grays[6]};
+      background: ${theme.palette.light[0]};
       color: ${theme.palette.primary[0]};
+      border-color: ${theme.palette.light[0]};
+
+      box-shadow:
+        inset 0 0 0 1px ${theme.palette.light[0]},
+        0 0 8px ${theme.palette.accent[0]}23;
     `}
 `;
+
+

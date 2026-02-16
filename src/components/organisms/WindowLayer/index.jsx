@@ -24,7 +24,8 @@ const WindowLayer = ({
   return (
     <>
       {windows.map((w) => {
-        const Frame = w.state === "fullscreen" ? FullscreenFrame : WindowFrame;
+        const isFullscreen = w.state === "fullscreen";
+        const Frame = isFullscreen ? FullscreenFrame : WindowFrame;
         const isActive = w.id === activeId;
 
         const WindowComponent =
@@ -38,7 +39,7 @@ const WindowLayer = ({
             $isActive={isActive}
             $isMinimizing={minimizingIds.includes(w.id)}
             $isClosing={closingIds.includes(w.id)}
-            style={{ left: w.x, top: w.y }}
+            style={isFullscreen ? undefined : { left: w.x, top: w.y }}
             onPointerDownCapture={(e) => {
               e.stopPropagation();
               onFocus(w.id);

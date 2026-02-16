@@ -30,7 +30,7 @@ const DesktopIcons = ({ selectedId, setSelectedId, openWindow }) => {
         <DesktopIcon
           key={w.id}
           label={w.title}
-          icon={w.icon}
+          icon={w.iconSrc}
           selected={selectedId === w.id}
           onSelect={() => setSelectedId(w.id)}
           onOpen={() => openWindow(w.id)}

@@ -14,5 +14,37 @@
         "link": "https://boydhouse.com/alice",
         "github": "https://github.com/AdamRBoyd/AlicesFamilyHistories",
         "tags": ["Frontend", "Client"]
+    },
+    {
+        "imageSrc": "/images/projects/Boydhouse.jpg",
+        "title": "Boydhouse Main Website",
+        "description": "The main website for the Boydhouse family.",
+        "link": "https://boydhouse.com/",
+        "github": "",
+        "tags": ["Family", "Website", "Personal", "HTML"]
+    },
+    {
+        "imageSrc": "/images/projects/Github.png",
+        "title": "Etsy Grabber",
+        "description": "A tool to grab data from my Etsy shop for my website.",
+        "link": "",
+        "github": "https://github.com/AdamRBoyd/EtsyGrabber",
+        "tags": ["Nodejs", "Express","Personal"]
+    },
+    {
+        "imageSrc": "/images/projects/Github.png",
+        "title": "School Programming Assignments",
+        "description": "A repository of programming assignments from my time at school.",
+        "link": "",
+        "github": "https://github.com/AdamRBoyd/School_Programming_Assignments",
+        "tags": ["School", "Programming"]
+    },
+    {
+        "imageSrc": "/images/projects/Github.png",
+        "title": "Website Development Class Projects",
+        "description": "All the projects from my website development class.",
+        "link": "",
+        "github": "https://github.com/AdamRBoyd/Website_Development_Class",
+        "tags": ["School", "Web Development"]
     }
 ]

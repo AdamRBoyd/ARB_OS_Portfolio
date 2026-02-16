@@ -9,7 +9,7 @@ export const WINDOW_META = [
   {
     id: WINDOW_IDS.ABOUT,
     title: "Adam Boyd",
-    icon: "👤",
+    iconSrc: "/images/icons/About.png",
     size: "sm",
 
     defaultOpen: true,
@@ -22,7 +22,7 @@ export const WINDOW_META = [
   {
     id: WINDOW_IDS.PROJECTS,
     title: "Projects",
-    icon: "🗂️",
+    iconSrc: "/images/icons/Projects.png",
     size: "md",
 
     defaultOpen: true,
@@ -35,7 +35,7 @@ export const WINDOW_META = [
   {
     id: WINDOW_IDS.PLAYGROUND,
     title: "Playground",
-    icon: "🧪",
+    iconSrc: "/images/icons/Playground.png",
     size: "md",
 
     defaultOpen: true,
@@ -48,7 +48,7 @@ export const WINDOW_META = [
   {
     id: WINDOW_IDS.RESUME,
     title: "Resume",
-    icon: "📄",
+    iconSrc: "/images/icons/Resume.png",
     size: "sm",
 
     defaultOpen: true,

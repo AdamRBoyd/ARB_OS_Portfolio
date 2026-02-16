@@ -42,7 +42,7 @@ const DesktopPage = () => {
 
         <DockArea>
           <Dock
-            minimizedWindows={wm.minimizedWindows}
+            openWindows={wm.openWindows}
             activeId={wm.activeId}
             onRestore={wm.openOrFocus}
           />
