@@ -1,22 +1,25 @@
 [
     {
         "imageSrc": "/images/projects/AnvilandEmberMetalworks.jpg",
+        "previewSrc": "/images/projects/AnvilandEmberMetalworks.jpg",
         "title": "Anvil and Ember Metalworks",
         "description": "My custom jewelry business website.",
         "link": "http://anvilandembermetalworks.com",
         "github": "https://github.com/AdamRBoyd/AnvilandEmber-Website",
-        "tags": ["Frontend", "Business"]
+        "tags": ["Frontend", "Business", "Personal"]
     },
     {
         "imageSrc": "/images/projects/AlicesWebsite.jpg",
+        "previewSrc": "/images/projects/AlicesWebsite.jpg",
         "title": "Alice's Family Histories",
         "description": "A genealogy website for Alice Boyd.",
         "link": "https://boydhouse.com/alice",
         "github": "https://github.com/AdamRBoyd/AlicesFamilyHistories",
-        "tags": ["Frontend", "Client"]
+        "tags": ["Frontend", "Client", "Family"]
     },
     {
         "imageSrc": "/images/projects/Boydhouse.jpg",
+        "previewSrc": "/images/projects/Boydhouse.jpg",
         "title": "Boydhouse Main Website",
         "description": "The main website for the Boydhouse family.",
         "link": "https://boydhouse.com/",
@@ -25,6 +28,7 @@
     },
     {
         "imageSrc": "/images/projects/Github.png",
+        "previewSrc": "/images/projects/GitHub_Long.png",
         "title": "Etsy Grabber",
         "description": "A tool to grab data from my Etsy shop for my website.",
         "link": "",
@@ -33,18 +37,20 @@
     },
     {
         "imageSrc": "/images/projects/Github.png",
+        "previewSrc": "/images/projects/GitHub_Long.png",
         "title": "School Programming Assignments",
         "description": "A repository of programming assignments from my time at school.",
         "link": "",
         "github": "https://github.com/AdamRBoyd/School_Programming_Assignments",
-        "tags": ["School", "Programming"]
+        "tags": ["School", "Programming", "Personal"]
     },
     {
         "imageSrc": "/images/projects/Github.png",
+        "previewSrc": "/images/projects/GitHub_Long.png",
         "title": "Website Development Class Projects",
         "description": "All the projects from my website development class.",
         "link": "",
         "github": "https://github.com/AdamRBoyd/Website_Development_Class",
-        "tags": ["School", "Web Development"]
+        "tags": ["School", "Web Development", "Personal"]
     }
 ]

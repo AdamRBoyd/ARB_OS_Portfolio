@@ -4,22 +4,24 @@ import useWindowManager from "@state/useWindowManager";
 import {
   DesktopShell,
   DesktopContent,
-  SystemBar,
   DockArea,
 } from "@primitives";
 
-import { DesktopIcons, WindowLayer, Dock } from "@organisms";
+import { DesktopIcons, WindowLayer, Dock, SystemBar } from "@organisms";
+import { SystemTitle } from "../../primitives";
 
 const DesktopPage = () => {
   const wm = useWindowManager();
   const [selectedIconId, setSelectedIconId] = useState(null);
+  const activeTitle = wm.activeId ? wm.windows[wm.activeId]?.title : "Desktop";
 
   return (
     <DesktopShell onPointerDown={() => setSelectedIconId(null)}>
       <DesktopContent>
-        <SystemBar>
-          <div>Adam Boyd</div>
-        </SystemBar>
+        <SystemBar
+          activeTitle={activeTitle}
+          onOpenResumeWindow={() => wm.openOrFocus("resume")}
+        />
 
         <DesktopIcons
           selectedId={selectedIconId}

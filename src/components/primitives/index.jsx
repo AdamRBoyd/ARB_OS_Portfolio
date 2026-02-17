@@ -96,10 +96,10 @@ export const SystemBar = styled.div`
 export const SystemIdentity = styled.div`
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
+  gap: 0.8rem;
 
   color: ${({ theme }) => theme.palette.primary[0]};
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.2px;
 `;

@@ -5,8 +5,10 @@ import { Stack, Row, Grid, InsetSurface } from "@primitives";
 const Shell = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 130px 1fr 340px;
   gap: 1rem;
+
+  grid-template-columns: ${({ $fullscreen }) =>
+    $fullscreen ? "220px 420px 1fr" : "130px 280px 1fr"};
 `;
 
 const Sidebar = styled(InsetSurface)`
@@ -64,7 +66,7 @@ const Card = styled(InsetSurface)`
 `;
 
 const Thumb = styled.img`
-  width: 100%;
+  width: 110px;
   height: 110px;
   object-fit: cover;
   border-radius: 10px;
@@ -82,7 +84,7 @@ const Desc = styled.div`
 
 const LargePreview = styled.img`
   width: 100%;
-  height: 160px;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
 `;
@@ -101,10 +103,12 @@ const Button = styled.button`
   }
 `;
 
-const ProjectsWindow = ({ actions }) => {
+const ProjectsWindow = ({ actions, window: win }) => {
   const [projects, setProjects] = useState([]);
   const [selectedKey, setSelectedKey] = useState(null);
   const [filter, setFilter] = useState("All");
+
+  const isFullscreen = win?.state === "fullscreen";
 
   /* ----------------------------- */
   /* FILTER DERIVATION */
@@ -161,7 +165,7 @@ const ProjectsWindow = ({ actions }) => {
   }, []);
 
   return (
-    <Shell>
+    <Shell $fullscreen={isFullscreen}>
       <Sidebar>
         <Stack $gap="0.5rem">
           <Small>Filters</Small>
@@ -179,7 +183,7 @@ const ProjectsWindow = ({ actions }) => {
       </Sidebar>
 
       <Main>
-        <Grid $cols="repeat(2, minmax(0, 1fr))">
+        <Grid $cols={isFullscreen ? "repeat(3, minmax(0, 1fr))" : "repeat(2, minmax(0, 1fr))"}>
           {filtered.map((p) => (
             <Card
               key={p.title}
@@ -190,7 +194,7 @@ const ProjectsWindow = ({ actions }) => {
               }
             >
               <Stack $gap="0.45rem">
-                {p.imageSrc && <Thumb src={p.imageSrc} alt={p.title} />}
+                {p.imageSrc && <Thumb src={p.imageSrc} alt={p.title} $fullscreen={isFullscreen} />}
                 <Title>{p.title}</Title>
               </Stack>
             </Card>
@@ -203,8 +207,8 @@ const ProjectsWindow = ({ actions }) => {
           <Small>No project selected</Small>
         ) : (
           <>
-            {selected.imageSrc && (
-              <LargePreview src={selected.imageSrc} alt={selected.title} />
+            {selected.previewSrc && (
+              <LargePreview src={selected.previewSrc} alt={selected.title} />
             )}
 
             <Title>{selected.title}</Title>
@@ -212,7 +216,7 @@ const ProjectsWindow = ({ actions }) => {
 
             <Row $gap="0.5rem" style={{ justifyContent: "flex-start" }}>
               {selected.github && (
-                <Button onClick={() => window.open(selected.github)}>
+                <Button onClick={() => window.open(selected.github, "_blank", "noopener,noreferrer")}>
                   GitHub
                 </Button>
               )}
