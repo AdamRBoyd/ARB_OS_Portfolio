@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   SystemBar as Bar,
   SystemIdentity,
@@ -7,8 +7,43 @@ import {
   SystemPill,
 } from "@primitives";
 
+import useFakeSystemStatus from "@state/useFakeSystemStatus";
+import { WifiIcon, BatteryIcon, VolumeIcon, SystemIcon } from "@atoms/system/SystemIcons";
+import CalendarPopover from "../../atoms/system/CalendarPopover";
+
 const formatTime = (d) =>
   d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+const Cluster = {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.75rem",
+};
+
+const Clickable = ({ onClick, title, children }) => (
+  <span
+    onClick={onClick}
+    title={title}
+    style={{
+      display: "inline-flex",
+      alignItems: "center",
+      cursor: "pointer",
+    }}
+  >
+    {children}
+  </span>
+);
+
+const Divider = () => (
+  <span style={{
+    width: 1,
+    height: 18,
+    background: "rgba(255,255,255,0.08)"
+  }} />
+);
+
 
 const TopSystemBar = ({
   name = "Adam Boyd",
@@ -23,6 +58,28 @@ const TopSystemBar = ({
   }, []);
 
   const timeText = useMemo(() => formatTime(now), [now]);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    if (!calendarOpen) return;
+
+    const onPointerDown = (e) => {
+      // if click is NOT inside the calendar popover, close it
+      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+        setCalendarOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [calendarOpen]);
+
+  const { status, toggleMute, toggleCharging, cycleWifi } = useFakeSystemStatus();
+  const wifiLevel = clamp(status?.wifi?.level ?? 4, 1, 4);
+  const battLevel = clamp(status?.power?.level ?? 85, 0, 100);
+  const charging = Boolean(status?.power?.charging);
+  const muted = Boolean(status?.sound?.muted);
 
   return (
     <Bar>
@@ -34,14 +91,64 @@ const TopSystemBar = ({
 
       {/* CENTER */}
       <SystemTitle title="Active window">
-        <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: 320 }}>
+        <span
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: 320,
+            display: "inline-block",
+            verticalAlign: "middle",
+          }}
+        >
           {activeTitle || "Desktop"}
         </span>
       </SystemTitle>
 
       {/* RIGHT */}
       <SystemRight>
-        <SystemPill title="Time">{timeText}</SystemPill>
+        <SystemPill>
+          <div style={Cluster}>
+
+            <Clickable
+              onClick={cycleWifi}
+              title={`Wi-Fi (fake): ${wifiLevel}/4`}
+            >
+              <WifiIcon level={wifiLevel} />
+            </Clickable>
+            <Divider />
+            <Clickable
+              onClick={toggleCharging}
+              title={`Power (fake): ${battLevel}%`}
+            >
+              <BatteryIcon level={battLevel} charging={charging} />
+              <span style={{ marginLeft: 4 }}>{battLevel}%</span>
+            </Clickable>
+            <Divider />
+            <Clickable
+              onClick={toggleMute}
+              title={muted ? "Muted" : "Sound On"}
+            >
+              <VolumeIcon muted={muted} />
+            </Clickable>
+            <Divider />
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                setCalendarOpen(v => !v);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {timeText}
+              {calendarOpen && (
+                <div ref={calendarRef}>
+                  <CalendarPopover onClose={() => setCalendarOpen(false)} />
+                </div>
+              )}
+            </span>
+
+          </div>
+        </SystemPill>
       </SystemRight>
     </Bar>
   );
