@@ -1,0 +1,155 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import styled from "styled-components";
+import { PROGRAMS } from "@constants/programs";
+
+const Panel = styled.div`
+  position: absolute;
+  left: 12px;
+  bottom: 62px; /* sits above your dock */
+  width: 340px;
+  max-height: min(520px, calc(100vh - 120px));
+  overflow: hidden;
+
+  background: ${({ theme }) => theme.palette.grays[1]};
+  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+  border-radius: 14px;
+
+  box-shadow: 0 18px 44px ${({ theme }) => theme.palette.shadow[5]};
+  z-index: 1600;
+
+  animation: fadeIn 120ms ease-out;
+`;
+
+const Body = styled.div`
+  padding: 0.75rem 0.8rem 0.9rem;
+`;
+
+const Search = styled.input`
+  width: 90%;
+  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+  background: ${({ theme }) => theme.palette.grays[2]};
+  color: ${({ theme }) => theme.palette.primary[0]};
+  border-radius: 12px;
+  padding: 0.55rem 0.65rem;
+  outline: none;
+
+  &:focus {
+    border-color: ${({ theme }) => theme.palette.accent[0]};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
+  }
+`;
+
+const Group = styled.div`
+  margin-top: 0.85rem;
+`;
+
+const GroupTitle = styled.div`
+  font-size: 0.78rem;
+  color: ${({ theme }) => theme.palette.tertiary[0]};
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0.2rem 0 0.4rem;
+`;
+
+const Item = styled.button`
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: ${({ theme }) => theme.palette.primary[0]};
+  border-radius: 12px;
+  padding: 0.55rem 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  &:hover {
+    background: ${({ theme }) => theme.palette.grays[5]};
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
+
+const Icon = styled.div`
+  width: 26px;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+`;
+
+const Label = styled.div`
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
+
+export default function StartMenu({ onClose, onLaunch }) {
+  const ref = useRef(null);
+  const [q, setQ] = useState("");
+
+  useEffect(() => {
+    const onPointerDown = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) onClose?.();
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose?.();
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onClose]);
+
+  const filtered = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return PROGRAMS;
+    return PROGRAMS.filter((p) => p.title.toLowerCase().includes(term));
+  }, [q]);
+
+  const grouped = useMemo(() => {
+    const map = new Map();
+    filtered.forEach((p) => {
+      const g = p.group || "Programs";
+      if (!map.has(g)) map.set(g, []);
+      map.get(g).push(p);
+    });
+    return Array.from(map.entries());
+  }, [filtered]);
+
+  return (
+    <Panel ref={ref} onPointerDown={(e) => e.stopPropagation()}>
+      <Body>
+        <Search
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search programs…"
+          aria-label="Search programs"
+          autoFocus
+        />
+
+        {grouped.map(([group, items]) => (
+          <Group key={group}>
+            <GroupTitle>{group}</GroupTitle>
+            {items.map((p) => (
+              <Item
+                key={p.id}
+                onClick={() => {
+                  onLaunch?.(p.id);
+                  onClose?.();
+                }}
+                title={`Open ${p.title}`}
+              >
+                <Icon>{p.icon}</Icon>
+                <Label>{p.title}</Label>
+              </Item>
+            ))}
+          </Group>
+        ))}
+      </Body>
+    </Panel>
+  );
+}

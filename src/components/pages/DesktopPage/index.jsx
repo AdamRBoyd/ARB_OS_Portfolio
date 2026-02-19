@@ -8,15 +8,21 @@ import {
 } from "@primitives";
 
 import { DesktopIcons, WindowLayer, Dock, SystemBar } from "@organisms";
-import { SystemTitle } from "../../primitives";
+import { StartMenu } from "@molecules";
 
 const DesktopPage = () => {
   const wm = useWindowManager();
   const [selectedIconId, setSelectedIconId] = useState(null);
   const activeTitle = wm.activeId ? wm.windows[wm.activeId]?.title : "Desktop";
+  const [startOpen, setStartOpen] = useState(false);
 
   return (
-    <DesktopShell onPointerDown={() => setSelectedIconId(null)}>
+    <DesktopShell
+      onPointerDown={() => {
+        setSelectedIconId(null);
+        setStartOpen(false);
+      }}
+    >
       <DesktopContent>
         <SystemBar
           activeTitle={activeTitle}
@@ -39,18 +45,30 @@ const DesktopPage = () => {
           onToggleFullscreen={wm.toggleFullscreen}
           onClose={wm.closeWindow}
           onOpenUrl={wm.openUrlWindow}
-          onAnyInteraction={() => setSelectedIconId(null)} // optional hook if you want it
+          onAnyInteraction={() => setSelectedIconId(null)}
         />
+
+        {/* Start Menu */}
+        {startOpen && (
+          <StartMenu
+            onClose={() => setStartOpen(false)}
+            onLaunch={(id) => wm.openOrFocus(id)}
+          />
+        )}
+
 
         <DockArea>
           <Dock
             openWindows={wm.openWindows}
             activeId={wm.activeId}
             onRestore={wm.openOrFocus}
+            startOpen={startOpen}
+            onToggleStart={() => setStartOpen((v) => !v)}
+            onCloseStart={() => setStartOpen(false)}
           />
         </DockArea>
       </DesktopContent>
-    </DesktopShell>
+    </DesktopShell >
   );
 };
 

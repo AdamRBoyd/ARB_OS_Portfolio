@@ -1,7 +1,6 @@
 export const WINDOW_IDS = {
   ABOUT: "about",
   PROJECTS: "projects",
-  PLAYGROUND: "playground",
   RESUME: "resume",
 };
 
@@ -18,7 +17,6 @@ export const WINDOW_META = [
     tags: ["system"],
     shortcut: "1",
   },
-
   {
     id: WINDOW_IDS.PROJECTS,
     title: "Projects",
@@ -31,20 +29,6 @@ export const WINDOW_META = [
     tags: ["work"],
     shortcut: "2",
   },
-
-  {
-    id: WINDOW_IDS.PLAYGROUND,
-    title: "Playground",
-    iconSrc: "/images/icons/Playground.png",
-    size: "md",
-
-    defaultOpen: true,
-    defaultState: "minimized",
-
-    tags: ["experiments"],
-    shortcut: "3",
-  },
-
   {
     id: WINDOW_IDS.RESUME,
     title: "Resume",
