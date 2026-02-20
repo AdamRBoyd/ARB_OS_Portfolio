@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Dock as DockShell, DockItem as DockItemBase, SystemPill } from "@primitives";
+import { Dock as DockShell, DockItem as DockItemBase } from "@primitives";
 
 import { LINKEDIN_URL, GITHUB_URL } from "@constants/urls";
 
@@ -12,7 +12,7 @@ const DockInner = styled.div`
   width: 100%;
   display: flex;
   align-items: stretch;
-  justify-content: space-between; /* left group + right group */
+  justify-content: flex-start; /* left group + right group */
   gap: 0.75rem;
 `;
 
@@ -20,12 +20,13 @@ const Group = styled.div`
   height: 100%;
   display: flex;
   align-items: stretch;
-  gap: 0.2rem;
+  gap: 0.1rem;
   min-width: 0;
 `;
 
 const LeftGroup = styled(Group)`
   justify-content: flex-start;
+
 `;
 
 const RightGroup = styled(Group)`
@@ -43,17 +44,17 @@ const Item = styled(DockItemBase)`
 `;
 
 const StartButton = styled.button`
-  height: 80%;
+  height: 100%;
   display: inline-flex;
   align-items: center;
   align-self: center;
 
-  border-radius: 999px;
+  border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.palette.grays[4]};;
   background: ${({ theme }) => theme.palette.grays[2]};
 
-  padding: 0 1rem;
-  margin-right: 0.5rem;
+  padding: 0 1.5rem;
+  margin-right: 0.75rem;
 
   color: ${({ theme }) => theme.palette.secondary[0]};
   cursor: pointer;
@@ -82,20 +83,10 @@ const StartButton = styled.button`
     `}
 `;
 
-const Dot = styled.span`
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: ${({ theme, $active }) =>
-    $active ? theme.palette.active[0] : theme.palette.grays[4]};
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transition: opacity 120ms ease-out, background 120ms ease-out;
-`;
-
 const Icon = styled.img`
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
 `;
 
 const Label = styled.span`
@@ -104,16 +95,17 @@ const Label = styled.span`
 
 const StartLabel = styled(Label)`
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
 `;
 
 const Separator = styled.div`
   width: 1px;
-  height: 28px;
+  height: 70%;
   background: ${({ theme }) => theme.palette.grays[4]};
   opacity: 0.9;
   flex: 0 0 auto;
-  margin: 0.4rem 0 0 0.75rem;
+  align-self: center;
+  margin: 0 0.25rem 0 1rem;
 `;
 
 /* ----------------------------- */
@@ -160,7 +152,7 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
             title="LinkedIn"
             aria-label="LinkedIn"
           >
-            <Icon src="/svg/linkedin.svg" alt="LinkedIn" />
+            <Icon src="/svg/linkedinColor.svg" alt="LinkedIn" />
             <Label>LinkedIn</Label>
           </Item>
 
@@ -170,7 +162,7 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
             title="Open Resume"
             aria-label="Open Resume"
           >
-            <Icon src="/svg/download.svg" alt="Resume" />
+            <Icon src="/svg/downloadColor.svg" alt="Resume" />
             <Label>Resume</Label>
           </Item>
 
@@ -193,15 +185,14 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
                   title={`Restore: ${w.title}`}
                   aria-label={`Restore ${w.title}`}
                 >
-                  <Dot $visible $active={isActive} />
+                  <Icon src={w.iconSrc} alt={`${w.title} icon`} />
                   <Label>{w.title}</Label>
                 </Item>
               );
             })
           ) : (
             <Item as="div" style={{ cursor: "default" }}>
-              <Dot $visible={false} />
-              <Label style={{ opacity: 0.7 }}>No open apps</Label>
+              <Label style={{ opacity: 0.45, paddingBottom: "0.25rem" }}>No open apps</Label>
             </Item>
           )}
         </RightGroup>

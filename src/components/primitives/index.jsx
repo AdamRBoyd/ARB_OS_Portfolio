@@ -368,11 +368,12 @@ export const DockArea = styled.div`
   bottom: 0;
 
   height: 56px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 
   /* allow clicks only on dock contents */
   pointer-events: none;
@@ -396,27 +397,23 @@ export const Dock = styled.div`
   pointer-events: auto;
 
   width: 100%;
-  max-width: 1100px;
-  height: 40px;
+  height: 48px;
 
   display: flex;
   align-items: stretch;         /* ← allow items to stretch */
   justify-content: center;
 
-  padding: 0 0.6rem;            /* ← NO vertical padding */
+  padding: 0;            /* ← NO vertical padding */
 
-  background: rgba(15, 22, 32, 0.55); /* use rgba, not shadow[0] */
+  background: transparent;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  border-radius: 10px;
+  border: transparent 1px solid;
+  border-radius: 999px;
 
   box-shadow: 0 20px 50px ${({ theme }) => theme.palette.shadow[4]};
 `;
-
-
-
 
 export const DockItem = styled.button`
   height: 100%;
@@ -426,8 +423,8 @@ export const DockItem = styled.button`
   border: 1px solid transparent;
   background: transparent;
 
-  padding: 0 0.9rem;
-  border-radius: 2px;          /* smaller than Dock radius */
+  padding: 0 0.5rem;
+  border-radius: 4px;          /* smaller than Dock radius */
 
   color: ${({ theme }) => theme.palette.secondary[0]};
   cursor: pointer;

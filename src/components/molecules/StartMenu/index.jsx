@@ -4,10 +4,10 @@ import { PROGRAMS } from "@constants/programs";
 
 const Panel = styled.div`
   position: absolute;
-  left: 12px;
+  left: 0.5rem;
   bottom: 62px; /* sits above your dock */
   width: 340px;
-  max-height: min(520px, calc(100vh - 120px));
+  max-height: min(600px, calc(100vh - 120px));
   overflow: hidden;
 
   background: ${({ theme }) => theme.palette.grays[1]};
@@ -18,6 +18,44 @@ const Panel = styled.div`
   z-index: 1600;
 
   animation: fadeIn 120ms ease-out;
+  
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+`;
+
+const Top = styled.div`
+  padding: 0.75rem 0.8rem;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.grays[4]};
+  background: ${({ theme }) => theme.palette.shadow[2]};
+`;
+
+const Scroller = styled.div`
+  padding: 0.35rem 0.8rem 0.85rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* makes it take remaining height and become scrollable */
+  flex: 1 1 auto;
+
+  /* optional: nicer scroll behavior */
+  -webkit-overflow-scrolling: touch;
+
+  /* optional: thin scrollbar (Firefox) */
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.palette.grays[6]} transparent;
+
+  /* optional: WebKit scrollbar */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.palette.grays[6]};
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
 `;
 
 const Body = styled.div`
@@ -25,9 +63,12 @@ const Body = styled.div`
 `;
 
 const Search = styled.input`
-  width: 90%;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+
   border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
+  background: ${({ theme }) => theme.palette.shadow[3]};
   color: ${({ theme }) => theme.palette.primary[0]};
   border-radius: 12px;
   padding: 0.55rem 0.65rem;
@@ -35,7 +76,6 @@ const Search = styled.input`
 
   &:focus {
     border-color: ${({ theme }) => theme.palette.accent[0]};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
   }
 `;
 
@@ -72,7 +112,7 @@ const Item = styled.button`
   }
 `;
 
-const Icon = styled.div`
+const Icon = styled.img`
   width: 26px;
   display: grid;
   place-items: center;
@@ -122,7 +162,7 @@ export default function StartMenu({ onClose, onLaunch }) {
 
   return (
     <Panel ref={ref} onPointerDown={(e) => e.stopPropagation()}>
-      <Body>
+      <Top>
         <Search
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -130,7 +170,8 @@ export default function StartMenu({ onClose, onLaunch }) {
           aria-label="Search programs"
           autoFocus
         />
-
+      </Top>
+      <Scroller>
         {grouped.map(([group, items]) => (
           <Group key={group}>
             <GroupTitle>{group}</GroupTitle>
@@ -143,13 +184,13 @@ export default function StartMenu({ onClose, onLaunch }) {
                 }}
                 title={`Open ${p.title}`}
               >
-                <Icon>{p.icon}</Icon>
+                <Icon src={p.icon} alt={`${p.title} icon`} />
                 <Label>{p.title}</Label>
               </Item>
             ))}
           </Group>
         ))}
-      </Body>
+      </Scroller>
     </Panel>
   );
 }

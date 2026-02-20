@@ -22,6 +22,7 @@ const makeInitialWindows = () => {
             id: w.id,
             title: w.title,
             size: w.size,
+            iconSrc: w.iconSrc,
 
             state: w.defaultState ?? "minimized",
             isOpen: w.defaultOpen ?? true,

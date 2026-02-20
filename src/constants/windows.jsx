@@ -1,41 +1,35 @@
-export const WINDOW_IDS = {
-  ABOUT: "about",
-  PROJECTS: "projects",
-  RESUME: "resume",
-};
-
 export const WINDOW_META = [
   {
-    id: WINDOW_IDS.ABOUT,
+    id: "about",
     title: "Adam Boyd",
     iconSrc: "/images/icons/About.png",
     size: "sm",
 
-    defaultOpen: true,
+    defaultOpen: false,
     defaultState: "minimized",
 
     tags: ["system"],
     shortcut: "1",
   },
   {
-    id: WINDOW_IDS.PROJECTS,
+    id: "projects",
     title: "Projects",
     iconSrc: "/images/icons/Projects.png",
-    size: "md",
+    size: "lg",
 
-    defaultOpen: true,
+    defaultOpen: false,
     defaultState: "minimized",
 
     tags: ["work"],
     shortcut: "2",
   },
   {
-    id: WINDOW_IDS.RESUME,
+    id: "resume",
     title: "Resume",
     iconSrc: "/images/icons/Resume.png",
-    size: "sm",
+    size: "md",
 
-    defaultOpen: true,
+    defaultOpen: false,
     defaultState: "minimized",
 
     tags: ["work"],

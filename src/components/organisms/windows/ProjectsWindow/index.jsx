@@ -4,11 +4,47 @@ import { Stack, Row, Grid, InsetSurface } from "@primitives";
 
 const Shell = styled.div`
   height: 100%;
+  min-height: 0;
   display: grid;
   gap: 1rem;
+  margin-right: -0.8rem; /* negate padding for overall size */
 
   grid-template-columns: ${({ $fullscreen }) =>
     $fullscreen ? "220px 420px 1fr" : "130px 280px 1fr"};
+
+  /* ✅ make the whole window scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* ✅ padding so bottom doesn't feel cut off */
+  padding: 0.2rem 0.4rem 0.2rem 0.2rem;          /* uniform interior spacing */
+  padding-bottom: 2rem;     /* extra room at bottom */
+
+  /* ✅ keep scrollbar + content inside rounded look */
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  /* optional nicer scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.palette.grays[6]} transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.palette.grays[6]};
+    border-radius: 999px;
+  }
+
+  /* optional: hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.palette.grays[7]};
+  }
 `;
 
 const Sidebar = styled(InsetSurface)`
@@ -75,11 +111,6 @@ const Thumb = styled.img`
 const Title = styled.div`
   font-weight: 600;
   color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Desc = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const LargePreview = styled.img`
