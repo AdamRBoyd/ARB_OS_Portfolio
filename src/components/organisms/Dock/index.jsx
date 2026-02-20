@@ -176,7 +176,7 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
           {openWindows.length ? (
             openWindows.map((w) => {
               const isActive = w.id === activeId;
-
+              const icon = w.iconSrc || "/images/icons/Default.png";
               return (
                 <Item
                   key={w.id}
@@ -185,7 +185,7 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
                   title={`Restore: ${w.title}`}
                   aria-label={`Restore ${w.title}`}
                 >
-                  <Icon src={w.iconSrc} alt={`${w.title} icon`} />
+                  <Icon src={icon} alt={`${w.title} icon`} />
                   <Label>{w.title}</Label>
                 </Item>
               );
