@@ -320,7 +320,7 @@ export const WindowButton = styled.button`
 `;
 
 export const WindowBody = styled.div`
-  height: calc(100% - 40px);
+  height: calc(100% - 60px);
   padding: 1rem;
   overflow: auto;
 

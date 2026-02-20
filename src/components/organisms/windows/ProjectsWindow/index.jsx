@@ -17,8 +17,8 @@ const Shell = styled.div`
   overflow-x: hidden;
 
   /* ✅ padding so bottom doesn't feel cut off */
-  padding: 0.2rem 0.4rem 0.2rem 0.2rem;          /* uniform interior spacing */
-  padding-bottom: 2rem;     /* extra room at bottom */
+  padding: 0.2rem 0.6rem 0.2rem 0.2rem;          /* uniform interior spacing */
+  padding-bottom: 1rem;     /* extra room at bottom */
 
   /* ✅ keep scrollbar + content inside rounded look */
   border-radius: 6px;
