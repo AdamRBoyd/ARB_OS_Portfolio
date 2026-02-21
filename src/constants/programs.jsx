@@ -1,20 +1,31 @@
-// src/constants/programs.js
+export const WINDOW_SIZE = {
+  sm: { w: 640, h: 440 },
+  md: { w: 820, h: 520 },
+  lg: { w: 980, h: 640 },
+};
+
+export const DESKTOP_ICONS = [
+  { id: "about", iconSrc: "/images/icons/About.png" },
+  { id: "projects", iconSrc: "/images/icons/Projects.png" },
+  { id: "resume", iconSrc: "/images/icons/Resume.png" },
+];
+
 export const PROGRAMS = [
-  { id: "projects", title: "Projects", icon: "images/icons/Projects.png", group: "Main" },
-  { id: "resume", title: "Resume", icon: "images/icons/Resume.png", group: "Main" },
-  { id: "about", title: "About", icon: "images/icons/About.png", group: "Main" },
+  { id: "about", title: "About Me", iconSrc: "images/icons/About.png", group: "Main", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "resume", title: "Resume", iconSrc: "images/icons/Resume.png", group: "Main", size: WINDOW_SIZE.md, noScroll: false, },
+  { id: "projects", title: "Projects", iconSrc: "images/icons/Projects.png", group: "Main", size: WINDOW_SIZE.lg, noScroll: false, },
 
   // Mini apps (add these windows later when you build them)
-  { id: "calculator", title: "Calculator", icon: "images/icons/Calculator.png", group: "Mini Apps" },
-  { id: "dictionary", title: "Dictionary", icon: "images/icons/Dictionary.png", group: "Mini Apps" },
-  { id: "todo", title: "To-Do List", icon: "images/icons/ToDo.png", group: "Mini Apps" },
-  { id: "weather", title: "Weather", icon: "images/icons/Weather.png", group: "Mini Apps" },
-  { id: "tasklog", title: "Task Log", icon: "images/icons/TaskLog.png", group: "Mini Apps" },
-  { id: "tictactoe", title: "Tic Tac Toe", icon: "images/icons/TicTacToe.png", group: "Mini Apps" },
-  { id: "workoutlog", title: "Workout Log", icon: "images/icons/WorkoutLog.png", group: "Mini Apps" },
-  { id: "gradientpicker", title: "Gradient Picker", icon: "images/icons/GradientPicker.png", group: "Mini Apps" },
-  { id: "recipebook", title: "Recipe Book", icon: "images/icons/RecipeBook.png", group: "Mini Apps" },
-  { id: "unitconverter", title: "Unit Converter", icon: "images/icons/UnitConverter.png", group: "Mini Apps" },
-  { id: "passwordgenerator", title: "Password Generator", icon: "images/icons/PasswordGenerator.png", group: "Mini Apps" },
-  { id: "tipcalculator", title: "Tip Calculator", icon: "images/icons/TipCalculator.png", group: "Mini Apps" },
+  { id: "calculator", title: "Calculator", iconSrc: "images/icons/Calculator.png", group: "Mini Apps", size: { w: 420, h: 580 }, noScroll: true, },
+  { id: "dictionary", title: "Dictionary", iconSrc: "images/icons/Dictionary.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "todo", title: "To-Do List", iconSrc: "images/icons/ToDo.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "weather", title: "Weather", iconSrc: "images/icons/Weather.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "tasklog", title: "Task Log", iconSrc: "images/icons/TaskLog.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "tictactoe", title: "Tic Tac Toe", iconSrc: "images/icons/TicTacToe.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "workoutlog", title: "Workout Log", iconSrc: "images/icons/WorkoutLog.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "gradientpicker", title: "Gradient Picker", iconSrc: "images/icons/GradientPicker.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "recipebook", title: "Recipe Book", iconSrc: "images/icons/RecipeBook.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "unitconverter", title: "Unit Converter", iconSrc: "images/icons/UnitConverter.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "passwordgenerator", title: "Password Generator", iconSrc: "images/icons/PasswordGenerator.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "tipcalculator", title: "Tip Calculator", iconSrc: "images/icons/TipCalculator.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
 ];

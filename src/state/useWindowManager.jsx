@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useRef } from "react";
-import { WINDOW_META } from "@constants/windows";
+import { PROGRAMS } from "@constants/programs";
 
 /**
  * Window states:
@@ -17,7 +17,7 @@ const START_Y = 80;
 const makeInitialWindows = () => {
     const windows = {};
 
-    WINDOW_META.forEach((w, i) => {
+    PROGRAMS.forEach((w, i) => {
         windows[w.id] = {
             id: w.id,
             title: w.title,
@@ -25,7 +25,7 @@ const makeInitialWindows = () => {
             iconSrc: w.iconSrc,
 
             state: w.defaultState ?? "minimized",
-            isOpen: w.defaultOpen ?? true,
+            isOpen: w.defaultOpen ?? false,
 
             x: START_X + i * SPAWN_OFFSET_X,
             y: START_Y + i * SPAWN_OFFSET_Y,
@@ -99,8 +99,8 @@ export default function useWindowManager(initialWindows = DEFAULT_WINDOWS) {
                 const nextX = cursor.x + SPAWN_OFFSET_X;
                 const nextY = cursor.y + SPAWN_OFFSET_Y;
 
-                const sizeWidth = w.size === "lg" ? 980 : w.size === "sm" ? 640 : 820;
-                const sizeHeight = w.size === "lg" ? 640 : w.size === "sm" ? 440 : 520;
+                const sizeWidth = w.size?.w ?? 950;
+                const sizeHeight = w.size?.h ?? 520;
 
                 const clamped = clampToViewport(nextX, nextY, sizeWidth, sizeHeight);
 

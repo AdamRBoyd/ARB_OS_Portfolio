@@ -217,17 +217,16 @@ const windowClose = keyframes`
 
 export const WindowFrame = styled(Surface)`
   position: absolute;
-  
-  width: ${({ $size }) =>
-    $size === "lg" ? "980px" : $size === "sm" ? "640px" : "820px"};
 
-  height: ${({ $size }) =>
-    $size === "lg" ? "640px" : $size === "sm" ? "440px" : "520px"};
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  width: ${({ $w }) => `${$w}px`};
+  height: ${({ $h }) => `${$h}px`};
 
   max-width: calc(100vw - 2rem);
   max-height: calc(100vh - 5.5rem);
-
-  overflow: hidden;
 
   animation: ${({ $isMinimizing, $isClosing }) =>
     $isMinimizing
@@ -320,9 +319,11 @@ export const WindowButton = styled.button`
 `;
 
 export const WindowBody = styled.div`
-  height: calc(100% - 60px);
+  flex: 1;                /* ✅ fills remaining space */
+  min-height: 0;          /* ✅ allows inner content to shrink without forcing scrollbars */
   padding: 1rem;
-  overflow: auto;
+  
+  overflow: ${({ $noScroll }) => ($noScroll ? "hidden" : "auto")};
 
   background: ${({ theme }) => theme.palette.grays[1]};
   color: ${({ theme }) => theme.palette.primary[0]};

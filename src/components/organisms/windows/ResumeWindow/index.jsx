@@ -32,7 +32,6 @@ const Button = styled.a`
 const ViewerWrap = styled.div`
   flex: 1;
   min-height: 0;
-  margin-bottom: 1rem;
 `;
 
 const Iframe = styled.iframe`

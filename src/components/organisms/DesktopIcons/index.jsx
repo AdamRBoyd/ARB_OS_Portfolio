@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { WINDOW_META } from "@constants/windows";
+import { PROGRAMS, DESKTOP_ICONS } from "@constants/programs";
 import { Stack } from "@primitives";
 import DesktopIcon from "@molecules/DesktopIcon";
 
 const DesktopIcons = ({ selectedId, setSelectedId, openWindow }) => {
-  // Optional keyboard support: Enter opens selected, Escape clears
+  const windowsById = Object.fromEntries(PROGRAMS.map(w => [w.id, w]));
+
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === "Escape") setSelectedId(null);
@@ -26,16 +27,20 @@ const DesktopIcons = ({ selectedId, setSelectedId, openWindow }) => {
         e.stopPropagation();
       }}
     >
-      {WINDOW_META.map((w) => (
-        <DesktopIcon
-          key={w.id}
-          label={w.title}
-          icon={w.iconSrc}
-          selected={selectedId === w.id}
-          onSelect={() => setSelectedId(w.id)}
-          onOpen={() => openWindow(w.id)}
-        />
-      ))}
+      {DESKTOP_ICONS.map((icon) => {
+        const w = windowsById[icon.id];
+        if (!w) return null;
+        return (
+          <DesktopIcon
+            key={w.id}
+            label={w.title}
+            icon={w.iconSrc}
+            selected={selectedId === w.id}
+            onSelect={() => setSelectedId(w.id)}
+            onOpen={() => openWindow(w.id)}
+          />
+        );
+      })}
     </Stack>
   );
 };

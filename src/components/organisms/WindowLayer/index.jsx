@@ -36,6 +36,8 @@ const WindowLayer = ({
           <Frame
             key={w.id}
             $size={w.size}
+            $w={w.size?.w ?? 950}
+            $h={w.size?.h ?? 520}
             $isActive={isActive}
             $isMinimizing={minimizingIds.includes(w.id)}
             $isClosing={closingIds.includes(w.id)}
@@ -82,7 +84,7 @@ const WindowLayer = ({
             </WindowHeader>
 
 
-            <WindowBody>
+            <WindowBody $noScroll={w.noScroll}>
               {WindowComponent ? (
                 <WindowComponent
                   window={w}
