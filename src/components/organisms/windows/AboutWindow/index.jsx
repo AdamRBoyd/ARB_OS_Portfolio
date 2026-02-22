@@ -84,7 +84,7 @@ const AboutWindow = () => {
         <ContentLine>
           Alongside software development, I design and produce handcrafted jewelry through{" "}
           <ContentLink
-            href="https://www.anvilandembermetalworks.com"
+            href="http://anvilandember.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
