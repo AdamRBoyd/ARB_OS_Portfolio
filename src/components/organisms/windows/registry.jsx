@@ -3,6 +3,7 @@ import ProjectsWindow from "./ProjectsWindow";
 import ResumeWindow from "./ResumeWindow";
 import BrowserWindow from "./BrowserWindow";
 import CalculatorWindow from "./CalculatorWindow";
+import TipCalculatorWindow from "./TipCalculatorWindow";
 
 export const WINDOW_COMPONENTS = {
   about: AboutWindow,
@@ -10,4 +11,5 @@ export const WINDOW_COMPONENTS = {
   resume: ResumeWindow,
   browser: BrowserWindow,
   calculator: CalculatorWindow,
+  tipcalculator: TipCalculatorWindow,
 };
