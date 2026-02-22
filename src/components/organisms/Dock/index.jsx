@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Dock as DockShell, DockItem as DockItemBase } from "@primitives";
 
 import { LINKEDIN_URL, GITHUB_URL } from "@constants/urls";
+import { Divider } from "@atoms";
 
 /* ----------------------------- */
 /* STYLES */
@@ -98,16 +99,6 @@ const StartLabel = styled(Label)`
   font-size: 1.1rem;
 `;
 
-const Separator = styled.div`
-  width: 1px;
-  height: 70%;
-  background: ${({ theme }) => theme.palette.grays[4]};
-  opacity: 0.9;
-  flex: 0 0 auto;
-  align-self: center;
-  margin: 0 0.25rem 0 1rem;
-`;
-
 /* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
@@ -118,19 +109,19 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
       <DockInner>
         {/* LEFT: Permanent links */}
         <LeftGroup>
-            <StartButton
-              as="button"
-              $active={startOpen}
-              onPointerDown={(e) => e.stopPropagation()}
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleStart?.();
-              }}
-              title="Start"
-              aria-label="Start"
-            >
-              <StartLabel>Start</StartLabel>
-            </StartButton>
+          <StartButton
+            as="button"
+            $active={startOpen}
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleStart?.();
+            }}
+            title="Start"
+            aria-label="Start"
+          >
+            <StartLabel>Start</StartLabel>
+          </StartButton>
 
           <Item
             as="a"
@@ -166,10 +157,10 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
             <Label>Resume</Label>
           </Item>
 
-          {/* MIDDLE: Divider */}
-          <Separator />
         </LeftGroup>
 
+        {/* MIDDLE: Divider */}
+        <Divider />
 
         {/* RIGHT: Open apps */}
         <RightGroup>

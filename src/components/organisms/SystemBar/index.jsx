@@ -10,6 +10,7 @@ import {
 import useFakeSystemStatus from "@state/useFakeSystemStatus";
 import { WifiIcon, BatteryIcon, VolumeIcon, SystemIcon } from "@atoms/system/SystemIcons";
 import CalendarPopover from "../../atoms/system/CalendarPopover";
+import { Divider } from "@atoms";
 
 const formatTime = (d) =>
   d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -35,15 +36,6 @@ const Clickable = ({ onClick, title, children }) => (
     {children}
   </span>
 );
-
-const Divider = () => (
-  <span style={{
-    width: 1,
-    height: 18,
-    background: "rgba(255,255,255,0.08)"
-  }} />
-);
-
 
 const TopSystemBar = ({
   name = "Adam Boyd",
@@ -116,7 +108,7 @@ const TopSystemBar = ({
             >
               <WifiIcon level={wifiLevel} />
             </Clickable>
-            <Divider />
+            <Divider height="1.2rem" />
             <Clickable
               onClick={toggleCharging}
               title={`Power (fake): ${battLevel}%`}
@@ -124,14 +116,14 @@ const TopSystemBar = ({
               <BatteryIcon level={battLevel} charging={charging} />
               <span style={{ marginLeft: 4 }}>{battLevel}%</span>
             </Clickable>
-            <Divider />
+            <Divider height="1.2rem" />
             <Clickable
               onClick={toggleMute}
               title={muted ? "Muted" : "Sound On"}
             >
               <VolumeIcon muted={muted} />
             </Clickable>
-            <Divider />
+            <Divider height="1.2rem" />
             <span
               onClick={(e) => {
                 e.stopPropagation();
