@@ -1,0 +1,26 @@
+# -----------------------------------
+# adamboyd.dev - Apache/cPanel
+# - Force HTTPS
+# - Redirect www -> non-www
+# - React Router SPA fallback (e.g. /resume)
+# -----------------------------------
+
+RewriteEngine On
+
+# 1) Canonical host: adamboyd.dev (redirect www to root)
+RewriteCond %{HTTP_HOST} ^www\.adamboyd\.dev$ [NC]
+RewriteRule ^ https://adamboyd.dev%{REQUEST_URI} [L,R=301]
+
+# 2) Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 3) SPA fallback: serve index.html for all non-file/non-dir requests
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^ index.html [L]
+
+# 4) Prevent directory listings (optional safety)
+Options -Indexes
