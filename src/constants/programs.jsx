@@ -11,14 +11,14 @@ export const DESKTOP_ICONS = [
 ];
 
 export const PROGRAMS = [
-  { id: "about", title: "About Me", iconSrc: "images/icons/About.png", group: "Main", size: WINDOW_SIZE.sm, noScroll: false, },
+  { id: "about", title: "About Me", iconSrc: "images/icons/About.png", group: "Main", size: WINDOW_SIZE.sm, noScroll: false, defaultOpen: true, defaultState: "normal", },
   { id: "resume", title: "Resume", iconSrc: "images/icons/Resume.png", group: "Main", size: WINDOW_SIZE.md, noScroll: false, },
   { id: "projects", title: "Projects", iconSrc: "images/icons/Projects.png", group: "Main", size: WINDOW_SIZE.lg, noScroll: false, },
 
   // Mini apps (add these windows later when you build them)
   { id: "calculator", title: "Calculator", iconSrc: "images/icons/Calculator.png", group: "Mini Apps", size: { w: 420, h: 580 }, noScroll: true, },
   { id: "tipcalculator", title: "Tip Calculator", iconSrc: "images/icons/TipCalculator.png", group: "Mini Apps", size: { w: 330, h: 580 }, noScroll: false, },
-  { id: "gradientpicker", title: "Gradient Picker", iconSrc: "images/icons/GradientPicker.png", group: "Mini Apps", size: { w: 520, h: 520 }, noScroll: false, defaultOpen: true, defaultState: "normal", },
+  { id: "gradientpicker", title: "Gradient Picker", iconSrc: "images/icons/GradientPicker.png", group: "Mini Apps", size: { w: 520, h: 520 }, noScroll: false, },
   { id: "dictionary", title: "Dictionary", iconSrc: "images/icons/Dictionary.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "todo", title: "To-Do List", iconSrc: "images/icons/ToDo.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "weather", title: "Weather", iconSrc: "images/icons/Weather.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },

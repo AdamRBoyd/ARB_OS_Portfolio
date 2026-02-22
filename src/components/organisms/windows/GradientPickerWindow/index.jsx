@@ -57,10 +57,28 @@ const ColorInput = styled.input`
     width: 100%;
     height: 2.5rem;
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    border-radius: 4px;
-    background: ${({ theme }) => theme.palette.grays[0]};
-    color: ${({ theme }) => theme.palette.grays[9]};
-    font-size: 0.9rem;
+    border-radius: 8px;
+    background: transparent;
+    padding: 0;                 /* important */
+    overflow: hidden;           /* important */
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.palette.grays[3]};
+    
+    appearance: none;
+    -webkit-appearance: none;   /* removes default weirdness */
+
+    &::-webkit-color-swatch-wrapper {
+        padding: 0;               /* removes inset gap */
+    }
+
+    &::-webkit-color-swatch {
+        border: none;             /* remove inner border */
+        border-radius: 8px;       /* ← rounded corners */
+    }
+
+    &::-moz-color-swatch {
+        border: none;
+        border-radius: 8px;
+    }
 `;
 
 const DegreeRow = styled.div`
@@ -209,27 +227,27 @@ const GradientPickerWindow = () => {
             </Stack>
             <GradientPreview style={{ background: gradientCss }} />
             <ColorPickerRow>
-                <ColorInput 
-                type="color" 
-                value={color1} 
-                onChange={(e) => setColor1(e.target.value)} 
-                title="Color 1" />
+                <ColorInput
+                    type="color"
+                    value={color1}
+                    onChange={(e) => setColor1(e.target.value)}
+                    title="Color 1" />
                 <ColorLabel>Color Selection</ColorLabel>
-                <ColorInput 
-                type="color" 
-                value={color2} 
-                onChange={(e) => setColor2(e.target.value)} 
-                title="Color 2" />
+                <ColorInput
+                    type="color"
+                    value={color2}
+                    onChange={(e) => setColor2(e.target.value)}
+                    title="Color 2" />
             </ColorPickerRow>
             <DegreeRow>
                 <DegreeLabel>Degree</DegreeLabel>
-                <DegreeInput 
-                type="range" 
-                min="0" 
-                max="180" 
-                value={degree} 
-                onChange={(e) => setDegree(Number(e.target.value))} 
-                title="Fade degree"/>
+                <DegreeInput
+                    type="range"
+                    min="0"
+                    max="180"
+                    value={degree}
+                    onChange={(e) => setDegree(Number(e.target.value))}
+                    title="Fade degree" />
             </DegreeRow>
             <GradientResult>
                 {gradientCss}
