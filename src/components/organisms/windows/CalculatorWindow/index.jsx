@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { InsetSurface, Stack } from "@primitives";
+import { evaluate } from "mathjs";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -10,7 +11,7 @@ const Shell = styled(InsetSurface)`
   min-height: 0;
   min-width: 0;
 
-  height: 100%;              /* ✅ THIS is the key change */
+  height: 100%;
 
   display: grid;
   grid-template-rows: auto 1fr;
@@ -187,25 +188,26 @@ const CalculatorWindow = () => {
   };
 
   const equals = () => {
-    const exp = calculation.trim();
-    if (!exp) return;
+  const exp = calculation.trim();
+  if (!exp) return;
 
-    try {
-      // eslint-disable-next-line no-eval
-      const total = eval(exp);
+  try {
+    // optional: hard-allow only what your UI can produce
+    if (!/^[0-9+\-*/().\s]+$/.test(exp)) throw new Error("Bad chars");
 
-      // handle weird results cleanly
-      const next =
-        typeof total === "number" && Number.isFinite(total)
-          ? String(total)
-          : "Error";
+    const total = evaluate(exp);
 
-      setResult(next);
-      setCalculation(next === "Error" ? exp : next);
-    } catch {
-      setResult("Error");
-    }
-  };
+    const next =
+      typeof total === "number" && Number.isFinite(total)
+        ? String(total)
+        : "Error";
+
+    setResult(next);
+    setCalculation(next === "Error" ? exp : next);
+  } catch {
+    setResult("Error");
+  }
+};
 
   return (
     <Shell>

@@ -61,15 +61,13 @@ const Input = styled.input`
   padding: 0.55rem 0.65rem;
   outline: none;
 
-  /* Remove spinner in Chrome / WebKit */
+  /* Remove spinner */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
-  /* Remove spinner in Firefox */
-  -moz-appearance: textfield;
+  appearance: textfield;
 
   &:focus {
     border-color: ${({ theme }) => theme.palette.accent[0]};
