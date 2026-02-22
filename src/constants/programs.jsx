@@ -11,7 +11,7 @@ export const DESKTOP_ICONS = [
 ];
 
 export const PROGRAMS = [
-  { id: "about", title: "About Me", iconSrc: "images/icons/About.png", group: "Main", size: WINDOW_SIZE.sm, noScroll: false, defaultOpen: true, defaultState: "normal", },
+  { id: "about", title: "About Me", iconSrc: "images/icons/About.png", group: "Main", size: { w: 640, h: 480 }, noScroll: false, defaultOpen: true, defaultState: "normal", },
   { id: "resume", title: "Resume", iconSrc: "images/icons/Resume.png", group: "Main", size: WINDOW_SIZE.md, noScroll: false, },
   { id: "projects", title: "Projects", iconSrc: "images/icons/Projects.png", group: "Main", size: WINDOW_SIZE.lg, noScroll: false, },
 
