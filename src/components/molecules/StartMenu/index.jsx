@@ -84,11 +84,20 @@ const Group = styled.div`
 `;
 
 const GroupTitle = styled.div`
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   color: ${({ theme }) => theme.palette.tertiary[0]};
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0.2rem 0 0.4rem;
+`;
+
+const SubGroupTitle = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: ${({ theme }) => theme.palette.tertiary[0]};
+  opacity: 0.9;
 `;
 
 const Item = styled.button`
@@ -151,13 +160,26 @@ export default function StartMenu({ onClose, onLaunch }) {
   }, [q]);
 
   const grouped = useMemo(() => {
-    const map = new Map();
+    // Map<groupName, Map<subgroupName, Program[]>>
+    const groups = new Map();
+
     filtered.forEach((p) => {
-      const g = p.group || "Programs";
-      if (!map.has(g)) map.set(g, []);
-      map.get(g).push(p);
+      const group = p.group || "Programs";
+      const subgroup = p.subgroup || "General";
+
+      if (!groups.has(group)) groups.set(group, new Map());
+      const subMap = groups.get(group);
+
+      if (!subMap.has(subgroup)) subMap.set(subgroup, []);
+      subMap.get(subgroup).push(p);
     });
-    return Array.from(map.entries());
+
+    // Convert to arrays for rendering:
+    // [ [groupName, [ [subgroupName, items], ... ] ], ... ]
+    return Array.from(groups.entries()).map(([groupName, subMap]) => [
+      groupName,
+      Array.from(subMap.entries()),
+    ]);
   }, [filtered]);
 
   return (
@@ -172,21 +194,28 @@ export default function StartMenu({ onClose, onLaunch }) {
         />
       </Top>
       <Scroller>
-        {grouped.map(([group, items]) => (
+        {grouped.map(([group, subgroups]) => (
           <Group key={group}>
             <GroupTitle>{group}</GroupTitle>
-            {items.map((p) => (
-              <Item
-                key={p.id}
-                onClick={() => {
-                  onLaunch?.(p.id);
-                  onClose?.();
-                }}
-                title={`Open ${p.title}`}
-              >
-                <Icon src={p.iconSrc} alt={`${p.title} icon`} />
-                <Label>{p.title}</Label>
-              </Item>
+
+            {subgroups.map(([subgroup, items]) => (
+              <div key={`${group}:${subgroup}`}>
+                {subgroup !== "General" && <SubGroupTitle>{subgroup}</SubGroupTitle>}
+
+                {items.map((p) => (
+                  <Item
+                    key={p.id}
+                    onClick={() => {
+                      onLaunch?.(p.id);
+                      onClose?.();
+                    }}
+                    title={`Open ${p.title}`}
+                  >
+                    <Icon src={p.iconSrc} alt={`${p.title} icon`} />
+                    <Label>{p.title}</Label>
+                  </Item>
+                ))}
+              </div>
             ))}
           </Group>
         ))}
