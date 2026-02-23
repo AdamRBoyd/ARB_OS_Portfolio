@@ -215,6 +215,18 @@ const ButtonIcon = styled.img`
     }
 `;
 
+const DimmableIcon = styled(ButtonIcon)`
+    opacity: ${({ $completed }) => ($completed ? 0.35 : 0.6)};
+    filter: ${({ $completed }) =>
+        $completed ? "grayscale(1) brightness(0.6)" : "none"};
+
+    transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+
+    &:hover {
+        opacity: ${({ $completed }) => ($completed ? 0.35 : 1)};
+      }
+`;
+
 const Hint = styled.div`
     font-size: 0.8rem;
     color: ${({ theme }) => theme.palette.tertiary[0]};
@@ -309,13 +321,14 @@ const ToDoWindow = () => {
                         >
                             {todo.item}
                             <ButtonContainer>
-                                <ButtonIcon
+                                <DimmableIcon
                                     src="/svg/edit.svg"
                                     alt="Edit"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         handleEditItem(i);
                                     }}
+                                    $completed={todo.completed}
                                 />
                                 <ButtonIcon
                                     src="/svg/delete.svg"
