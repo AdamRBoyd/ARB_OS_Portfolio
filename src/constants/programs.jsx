@@ -20,6 +20,9 @@ export const PROGRAMS = [
   { id: "tipcalculator", title: "Tip Calculator", iconSrc: "images/icons/TipCalculator.png", group: "Mini Apps", size: { w: 330, h: 580 }, noScroll: true, },
   { id: "gradientpicker", title: "Gradient Picker", iconSrc: "images/icons/GradientPicker.png", group: "Mini Apps", size: { w: 520, h: 520 }, noScroll: true, },
   { id: "todo", title: "To-Do List", iconSrc: "images/icons/ToDo.png", group: "Mini Apps", size: { w: 620, h: 680 }, noScroll: false, },
+  { id: "passwordgenerator", title: "Password Generator", iconSrc: "images/icons/PasswordGenerator.png", group: "Mini Apps", size: { w: 420, h: 480 }, noScroll: true, },
+  
+  // Future mini apps
   { id: "dictionary", title: "Dictionary", iconSrc: "images/icons/Dictionary.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "weather", title: "Weather", iconSrc: "images/icons/Weather.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "tasklog", title: "Task Log", iconSrc: "images/icons/TaskLog.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
@@ -27,5 +30,4 @@ export const PROGRAMS = [
   { id: "workoutlog", title: "Workout Log", iconSrc: "images/icons/WorkoutLog.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "recipebook", title: "Recipe Book", iconSrc: "images/icons/RecipeBook.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
   { id: "unitconverter", title: "Unit Converter", iconSrc: "images/icons/UnitConverter.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
-  { id: "passwordgenerator", title: "Password Generator", iconSrc: "images/icons/PasswordGenerator.png", group: "Mini Apps", size: WINDOW_SIZE.sm, noScroll: false, },
 ];
