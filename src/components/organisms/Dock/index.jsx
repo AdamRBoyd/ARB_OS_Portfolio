@@ -167,7 +167,7 @@ const Dock = ({ openWindows = [], activeId, onRestore, startOpen, onToggleStart 
           {openWindows.length ? (
             openWindows.map((w) => {
               const isActive = w.id === activeId;
-              const icon = w.iconSrc || "/images/icons/Default.png";
+              const icon = w.iconSrc ? `/images/icons/${w.iconSrc}` : "/images/icons/Default.png";
               return (
                 <Item
                   key={w.id}

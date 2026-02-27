@@ -211,7 +211,7 @@ export default function StartMenu({ onClose, onLaunch }) {
                     }}
                     title={`Open ${p.title}`}
                   >
-                    <Icon src={p.iconSrc} alt={`${p.title} icon`} />
+                    <Icon src={`/images/icons/${p.iconSrc}`} alt={`${p.title} icon`} />
                     <Label>{p.title}</Label>
                   </Item>
                 ))}

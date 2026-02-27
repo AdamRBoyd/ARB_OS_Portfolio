@@ -1,7 +1,11 @@
 import { useEffect } from "react";
-import { PROGRAMS, DESKTOP_ICONS } from "@constants/programs";
+import { PROGRAMS } from "@constants/programs";
 import { Stack } from "@primitives";
 import DesktopIcon from "@molecules/DesktopIcon";
+
+const DESKTOP_ICONS = PROGRAMS
+  .filter((p) => p.desktop)
+  .map(({ id, iconSrc, title }) => ({ id, iconSrc, title }));
 
 const DesktopIcons = ({ selectedId, setSelectedId, openWindow }) => {
   const windowsById = Object.fromEntries(PROGRAMS.map(w => [w.id, w]));
@@ -34,7 +38,7 @@ const DesktopIcons = ({ selectedId, setSelectedId, openWindow }) => {
           <DesktopIcon
             key={w.id}
             label={w.title}
-            icon={w.iconSrc}
+            icon={`/images/icons/${w.iconSrc}`}
             selected={selectedId === w.id}
             onSelect={() => setSelectedId(w.id)}
             onOpen={() => openWindow(w.id)}
