@@ -103,6 +103,18 @@ export const PROGRAMS = [
     desktop: false,
     home: { ax: 0.58, ay: 0.48 }, // lower right-center
   },
+  
+  {
+    id: "unitconverter",
+    title: "Unit Converter",
+    iconSrc: "UnitConverter.png",
+    group: "Mini Apps",
+    subgroup: "Utilities",
+    size: { w: 430, h: 560 },
+    noScroll: false,
+    desktop: false,
+    home: { ax: 0.50, ay: 0.32 },
+  },
 
   // ---------------- FUTURE MINI APPS ----------------
 
@@ -178,15 +190,4 @@ export const PROGRAMS = [
     home: { ax: 0.78, ay: 0.56 },
   },
 
-  {
-    id: "unitconverter",
-    title: "Unit Converter",
-    iconSrc: "UnitConverter.png",
-    group: "Mini Apps",
-    subgroup: "Utilities",
-    size: WINDOW_SIZE.sm,
-    noScroll: false,
-    desktop: false,
-    home: { ax: 0.50, ay: 0.32 },
-  },
 ];

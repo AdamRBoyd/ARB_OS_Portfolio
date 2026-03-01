@@ -7,6 +7,7 @@ import TipCalculatorWindow from "./TipCalculatorWindow";
 import GradientPickerWindow from "./GradientPickerWindow";
 import ToDoWindow from "./ToDoWindow";
 import PasswordGeneratorWindow from "./PasswordGeneratorWindow";
+import UnitConverterWindow from "./UnitConverterWindow";
 
 export const WINDOW_COMPONENTS = {
   about: AboutWindow,
@@ -18,4 +19,5 @@ export const WINDOW_COMPONENTS = {
   gradientpicker: GradientPickerWindow,
   todo: ToDoWindow,
   passwordgenerator: PasswordGeneratorWindow,
+  unitconverter: UnitConverterWindow,
 };
