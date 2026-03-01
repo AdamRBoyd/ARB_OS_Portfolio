@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useWindowManager from "@state/useWindowManager";
 
 import {
@@ -9,12 +9,38 @@ import {
 
 import { DesktopIcons, WindowLayer, Dock, SystemBar } from "@organisms";
 import { StartMenu } from "@molecules";
+import PowerOffOverlay from "@atoms/system/PowerOffOverlay"; // adjust path
+
+const POWER_KEY = "os_powered_off";
 
 const DesktopPage = () => {
   const wm = useWindowManager();
   const [selectedIconId, setSelectedIconId] = useState(null);
   const activeTitle = wm.activeId ? wm.windows[wm.activeId]?.title : "Desktop";
   const [startOpen, setStartOpen] = useState(false);
+
+  const [poweredOff, setPoweredOff] = useState(() => {
+    sessionStorage.removeItem(POWER_KEY);  // ✅ restart on reload
+    return false;
+  });
+
+  // ✅ Lock scrolling while powered off
+  useEffect(() => {
+    if (!poweredOff) return;
+
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [poweredOff]);
+
+  const handlePowerOff = () => {
+    sessionStorage.setItem(POWER_KEY, "1");
+    setStartOpen(false);
+    setSelectedIconId(null);
+    setPoweredOff(true);
+  };
 
   return (
     <DesktopShell
@@ -53,9 +79,9 @@ const DesktopPage = () => {
           <StartMenu
             onClose={() => setStartOpen(false)}
             onLaunch={(id) => wm.openOrFocus(id)}
+            onPowerOff={handlePowerOff}
           />
         )}
-
 
         <DockArea>
           <Dock
@@ -67,8 +93,11 @@ const DesktopPage = () => {
             onCloseStart={() => setStartOpen(false)}
           />
         </DockArea>
+
+        {/* ✅ Overlay LAST so it sits above everything */}
+        {poweredOff && <PowerOffOverlay />}
       </DesktopContent>
-    </DesktopShell >
+    </DesktopShell>
   );
 };
 

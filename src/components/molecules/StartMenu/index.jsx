@@ -58,10 +58,6 @@ const Scroller = styled.div`
   }
 `;
 
-const Body = styled.div`
-  padding: 0.75rem 0.8rem 0.9rem;
-`;
-
 const Search = styled.input`
   box-sizing: border-box;
   width: 100%;
@@ -133,7 +129,48 @@ const Label = styled.div`
   font-weight: 500;
 `;
 
-export default function StartMenu({ onClose, onLaunch }) {
+const Footer = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.palette.grays[4]};
+  background: ${({ theme }) => theme.palette.shadow[3]};
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+const PowerButton = styled.button`
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+
+  border: 1px solid transparent;
+  background: transparent;
+  color: ${({ theme }) => theme.palette.primary[0]};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  transition: background 120ms ease-out, transform 90ms ease-out;
+
+  &:hover {
+    background: ${({ theme }) => theme.palette.grays[3]};
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+`;
+
+const PowerIcon = styled.img`
+  width: 34px;
+  height: 34px;
+`;
+
+export default function StartMenu({ onClose, onLaunch, onPowerOff }) {
   const ref = useRef(null);
   const [q, setQ] = useState("");
 
@@ -220,6 +257,19 @@ export default function StartMenu({ onClose, onLaunch }) {
           </Group>
         ))}
       </Scroller>
+      <Footer>
+        Shutdown
+        <PowerButton
+          onClick={() => {
+            onPowerOff?.();
+            onClose?.();
+          }}
+          title="Shutdown"
+          aria-label="Shutdown"
+        >
+          <PowerIcon src="/images/icons/Power.png" alt="Power icon" />
+        </PowerButton>
+      </Footer>
     </Panel>
   );
 }
