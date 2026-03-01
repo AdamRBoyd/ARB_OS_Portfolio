@@ -63,8 +63,20 @@ const TopSystemBar = ({
       }
     };
 
+    const onKeyDown = (e) => {
+      if (e.key === "Escape" && calendarOpen) {
+        e.stopPropagation();
+        setCalendarOpen(false);
+      }
+    };
+
     document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [calendarOpen]);
 
   const { status, toggleMute, toggleCharging, cycleWifi } = useFakeSystemStatus();
@@ -125,8 +137,8 @@ const TopSystemBar = ({
             </Clickable>
             <Divider height="1.2rem" />
             <span
+              onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => {
-                e.stopPropagation();
                 setCalendarOpen(v => !v);
               }}
               style={{ cursor: "pointer" }}
