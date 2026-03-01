@@ -1,7 +1,7 @@
 export const WINDOW_SIZE = {
   sm: { w: 640, h: 440 },
   md: { w: 820, h: 520 },
-  lg: { w: 980, h: 640 },
+  lg: { w: 980, h: 560 },
 };
 
 export const PROGRAMS = [
@@ -50,7 +50,7 @@ export const PROGRAMS = [
     iconSrc: "Calculator.png",
     group: "Mini Apps",
     subgroup: "Utilities",
-    size: { w: 420, h: 580 },
+    size: { w: 420, h: 560 },
     noScroll: true,
     desktop: false,
     home: { ax: 0.78, ay: 0.48 }, // bottom right
@@ -62,7 +62,7 @@ export const PROGRAMS = [
     iconSrc: "TipCalculator.png",
     group: "Mini Apps",
     subgroup: "Utilities",
-    size: { w: 330, h: 580 },
+    size: { w: 330, h: 560 },
     noScroll: true,
     desktop: false,
     home: { ax: 0.78, ay: 0.28 }, // right mid
@@ -86,7 +86,7 @@ export const PROGRAMS = [
     iconSrc: "ToDo.png",
     group: "Mini Apps",
     subgroup: "Productivity",
-    size: { w: 620, h: 680 },
+    size: { w: 620, h: 570 },
     noScroll: false,
     desktop: false,
     home: { ax: 0.18, ay: 0.32 }, // mid-left
