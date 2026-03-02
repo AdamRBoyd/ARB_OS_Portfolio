@@ -124,25 +124,19 @@ const BoardCell = styled.button`
 `;
 
 const TurnIndicator = styled.div`
-  font-size: 1.05rem;
-  color: ${({ theme }) => theme.palette.primary[0]};
+  font-size: 1.75rem;
+  color: ${({ theme, $status }) => $status.includes("Winner") || $status.includes("Draw") ? theme.palette.alert[0] : theme.palette.primary[0]};
   display: flex;
   justify-content: center;
+  margin-top: 0.75rem;
 `;
 
-const WinnerResetContainer = styled.div`
+const ResetContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 0.75rem;
   padding: 0.2rem 3rem;
-`;
-
-const WinnerIndicator = styled.div`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.alert[0]};
-  opacity: 0.95;
 `;
 
 const ResetButton = styled.button`
@@ -245,7 +239,7 @@ const TicTacToeWindow = () => {
                 <Subtitle>Three in a row wins. Click or use keyboard.</Subtitle>
             </Stack>
 
-            <TurnIndicator>{statusText}</TurnIndicator>
+            <TurnIndicator $status={statusText}>{statusText}</TurnIndicator>
 
             <BoardContainer>
                 {[0, 1, 2].map((r) => (
@@ -283,16 +277,11 @@ const TicTacToeWindow = () => {
                 ))}
             </BoardContainer>
 
-            <WinnerResetContainer>
-                {winner || isDraw ? (
-                    <WinnerIndicator>{statusText}</WinnerIndicator>
-                ) : (
-                    <div />
-                )}
+            <ResetContainer>
                 <ResetButton type="button" onClick={reset}>
                     Reset
                 </ResetButton>
-            </WinnerResetContainer>
+            </ResetContainer>
         </Shell>
     );
 };
