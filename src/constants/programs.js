@@ -124,10 +124,12 @@ export const PROGRAMS = [
     iconSrc: "TicTacToe.png",
     group: "Mini Apps",
     subgroup: "Games",
-    size: WINDOW_SIZE.sm,
+    size: { w: 420, h: 560 },
     noScroll: false,
     desktop: false,
     home: { ax: 0.50, ay: 0.56 },
+    defaultOpen: true,
+    defaultState: "window",
   },
 
   {
