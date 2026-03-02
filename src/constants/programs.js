@@ -128,8 +128,6 @@ export const PROGRAMS = [
     home: { ax: 0.50, ay: 0.56 },
   },
 
-  // ---------------- FUTURE MINI APPS ----------------
-
   {
     id: "workoutlog",
     title: "Workout Log",
@@ -140,10 +138,24 @@ export const PROGRAMS = [
     noScroll: false,
     desktop: false,
     home: { ax: 0.64, ay: 0.56 },
+  },
+
+  // ---------------- FUTURE MINI APPS ----------------
+  
+  {
+    id: "tasklog",
+    title: "Task Log",
+    iconSrc: "TaskLog.png",
+    group: "Mini Apps",
+    subgroup: "Productivity",
+    size: { w: 920, h: 560 },
+    noScroll: false,
+    desktop: false,
+    home: { ax: 0.36, ay: 0.28 },
     defaultOpen: true,
     defaultState: "window",
   },
-  
+
   {
     id: "dictionary",
     title: "Dictionary",
@@ -166,18 +178,6 @@ export const PROGRAMS = [
     noScroll: false,
     desktop: false,
     home: { ax: 0.22, ay: 0.56 },
-  },
-
-  {
-    id: "tasklog",
-    title: "Task Log",
-    iconSrc: "TaskLog.png",
-    group: "Mini Apps",
-    subgroup: "Productivity",
-    size: WINDOW_SIZE.sm,
-    noScroll: false,
-    desktop: false,
-    home: { ax: 0.36, ay: 0.28 },
   },
 
   {

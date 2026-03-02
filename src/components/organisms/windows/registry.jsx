@@ -10,6 +10,7 @@ import PasswordGeneratorWindow from "./PasswordGeneratorWindow";
 import UnitConverterWindow from "./UnitConverterWindow";
 import TicTacToeWindow from "./TicTacToeWindow";
 import WorkoutLogWindow from "./WorkoutLogWindow";
+import TaskLogWindow from "./TaskLogWindow";
 
 export const WINDOW_COMPONENTS = {
   about: AboutWindow,
@@ -24,4 +25,5 @@ export const WINDOW_COMPONENTS = {
   unitconverter: UnitConverterWindow,
   tictactoe: TicTacToeWindow,
   workoutlog: WorkoutLogWindow,
+  tasklog: TaskLogWindow,
 };
