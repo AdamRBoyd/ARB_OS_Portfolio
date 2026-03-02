@@ -136,10 +136,12 @@ export const PROGRAMS = [
     iconSrc: "WorkoutLog.png",
     group: "Mini Apps",
     subgroup: "Productivity",
-    size: WINDOW_SIZE.sm,
+    size: { w: 920, h: 560 },
     noScroll: false,
     desktop: false,
     home: { ax: 0.64, ay: 0.56 },
+    defaultOpen: true,
+    defaultState: "window",
   },
   
   {
