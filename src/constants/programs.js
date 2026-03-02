@@ -116,8 +116,6 @@ export const PROGRAMS = [
     home: { ax: 0.50, ay: 0.32 },
   },
 
-  // ---------------- FUTURE MINI APPS ----------------
-
   {
     id: "tictactoe",
     title: "Tic Tac Toe",
@@ -128,9 +126,9 @@ export const PROGRAMS = [
     noScroll: false,
     desktop: false,
     home: { ax: 0.50, ay: 0.56 },
-    defaultOpen: true,
-    defaultState: "window",
   },
+
+  // ---------------- FUTURE MINI APPS ----------------
 
   {
     id: "workoutlog",
