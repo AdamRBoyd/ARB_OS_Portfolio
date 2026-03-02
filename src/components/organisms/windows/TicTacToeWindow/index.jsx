@@ -234,7 +234,7 @@ const TicTacToeWindow = () => {
 
     return (
         <Shell>
-            <Stack gap="0.35rem">
+            <Stack $gap="0.35rem">
                 <Title>Tic Tac Toe</Title>
                 <Subtitle>Three in a row wins. Click or use keyboard.</Subtitle>
             </Stack>
