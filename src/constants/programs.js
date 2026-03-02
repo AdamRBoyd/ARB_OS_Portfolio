@@ -119,6 +119,30 @@ export const PROGRAMS = [
   // ---------------- FUTURE MINI APPS ----------------
 
   {
+    id: "tictactoe",
+    title: "Tic Tac Toe",
+    iconSrc: "TicTacToe.png",
+    group: "Mini Apps",
+    subgroup: "Games",
+    size: WINDOW_SIZE.sm,
+    noScroll: false,
+    desktop: false,
+    home: { ax: 0.50, ay: 0.56 },
+  },
+
+  {
+    id: "workoutlog",
+    title: "Workout Log",
+    iconSrc: "WorkoutLog.png",
+    group: "Mini Apps",
+    subgroup: "Productivity",
+    size: WINDOW_SIZE.sm,
+    noScroll: false,
+    desktop: false,
+    home: { ax: 0.64, ay: 0.56 },
+  },
+  
+  {
     id: "dictionary",
     title: "Dictionary",
     iconSrc: "Dictionary.png",
@@ -152,30 +176,6 @@ export const PROGRAMS = [
     noScroll: false,
     desktop: false,
     home: { ax: 0.36, ay: 0.28 },
-  },
-
-  {
-    id: "tictactoe",
-    title: "Tic Tac Toe",
-    iconSrc: "TicTacToe.png",
-    group: "Mini Apps",
-    subgroup: "Games",
-    size: WINDOW_SIZE.sm,
-    noScroll: false,
-    desktop: false,
-    home: { ax: 0.50, ay: 0.56 },
-  },
-
-  {
-    id: "workoutlog",
-    title: "Workout Log",
-    iconSrc: "WorkoutLog.png",
-    group: "Mini Apps",
-    subgroup: "Productivity",
-    size: WINDOW_SIZE.sm,
-    noScroll: false,
-    desktop: false,
-    home: { ax: 0.64, ay: 0.56 },
   },
 
   {
