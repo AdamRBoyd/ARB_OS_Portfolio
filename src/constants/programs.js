@@ -148,7 +148,7 @@ export const PROGRAMS = [
     iconSrc: "TaskLog.png",
     group: "Mini Apps",
     subgroup: "Productivity",
-    size: { w: 920, h: 560 },
+    size: { w: 1020, h: 560 },
     noScroll: false,
     desktop: false,
     home: { ax: 0.36, ay: 0.28 },
