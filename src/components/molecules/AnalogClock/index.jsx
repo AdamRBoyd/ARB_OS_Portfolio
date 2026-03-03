@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import styled, { css } from "styled-components";
 
-const SIZE = 250;
+const SIZE = 190;
 
 const Wrap = styled.div`
   width: ${SIZE}px;
@@ -47,7 +47,7 @@ const Tick = styled.div`
 
   /* place tick towards the edge */
   ${({ $angle }) => css`
-    transform: rotate(${$angle}deg) translateY(-116px);
+    transform: rotate(${$angle}deg) translateY(-90px);
   `}
 `;
 
@@ -63,7 +63,7 @@ const Num = styled.div`
     transform:
       translate(-50%, -50%)
       rotate(${$angle}deg)
-      translateY(-90px)
+      translateY(-67px)
       rotate(-${$angle}deg);
   `}
 `;
@@ -78,26 +78,26 @@ const HandBase = styled.div`
 `;
 
 const HourHand = styled(HandBase)`
-  width: 5px;
-  height: 62px;
+  width: 4px;
+  height: 60px;
   background: ${({ theme }) => theme.palette.grays[0]};
 `;
 
 const MinuteHand = styled(HandBase)`
-  width: 4px;
-  height: 86px;
+  width: 3px;
+  height: 80px;
   background: ${({ theme }) => theme.palette.grays[0]};
 `;
 
 const SecondHand = styled(HandBase)`
-  width: 2px;
-  height: 96px;
+  width: 1px;
+  height: 80px;
   background: ${({ theme }) => theme.palette.alert[0]};
 `;
 
 const Cap = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
   background: ${({ theme }) => theme.palette.grays[0]};
   box-shadow: 0 0 0 2px ${({ theme }) => theme.palette.grays[2]};
