@@ -140,8 +140,6 @@ export const PROGRAMS = [
     home: { ax: 0.64, ay: 0.56 },
   },
 
-  // ---------------- FUTURE MINI APPS ----------------
-  
   {
     id: "tasklog",
     title: "Task Log",
@@ -152,10 +150,10 @@ export const PROGRAMS = [
     noScroll: false,
     desktop: false,
     home: { ax: 0.36, ay: 0.28 },
-    defaultOpen: true,
-    defaultState: "window",
   },
 
+  // ---------------- FUTURE MINI APPS ----------------
+  
   {
     id: "dictionary",
     title: "Dictionary",
