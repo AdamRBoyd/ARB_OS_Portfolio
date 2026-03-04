@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UnitCard from "@molecules/UnitCard";
 import styled from "styled-components";
-import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
+import { Stack, InsetWindowShell, Title, Subtitle } from "@primitives";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -9,16 +9,6 @@ import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
 
 const Shell = styled(InsetWindowShell)`
   grid-template-rows: auto auto 1fr;
-`;
-
-const Title = styled.div`
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const SelectWrapper = styled.div`

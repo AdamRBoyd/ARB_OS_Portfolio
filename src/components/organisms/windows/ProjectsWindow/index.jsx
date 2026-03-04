@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
-import { Stack, Row, Grid, InsetSurface } from "@primitives";
+import { Stack, Row, Grid, InsetSurface, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 const Shell = styled.div`
@@ -62,11 +62,6 @@ const Details = styled(InsetSurface)`
   gap: 0.75rem;
 `;
 
-const Small = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
-`;
-
 const FilterItem = styled(Button)`
   text-align: left;
 `;
@@ -94,11 +89,6 @@ const Thumb = styled.img`
   height: 110px;
   object-fit: cover;
   border-radius: 10px;
-`;
-
-const Title = styled.div`
-  font-weight: 600;
-  color: ${({ theme }) => theme.palette.primary[0]};
 `;
 
 const LargePreview = styled.img`
@@ -177,7 +167,7 @@ const ProjectsWindow = ({ actions, window: win }) => {
     <Shell $fullscreen={isFullscreen}>
       <Sidebar>
         <Stack $gap="0.5rem">
-          <Small>Filters</Small>
+          <Subtitle>Filters</Subtitle>
 
           {filters.map((f) => (
             <FilterItem
@@ -214,7 +204,7 @@ const ProjectsWindow = ({ actions, window: win }) => {
 
       <Details>
         {!selected ? (
-          <Small>No project selected</Small>
+          <Subtitle>No project selected</Subtitle>
         ) : (
           <>
             {selected.previewSrc && (
@@ -222,7 +212,7 @@ const ProjectsWindow = ({ actions, window: win }) => {
             )}
 
             <Title>{selected.title}</Title>
-            <Small>{selected.description}</Small>
+            <Subtitle>{selected.description}</Subtitle>
 
             <Row $gap="0.5rem" style={{ justifyContent: "flex-start" }}>
               {selected.github && (

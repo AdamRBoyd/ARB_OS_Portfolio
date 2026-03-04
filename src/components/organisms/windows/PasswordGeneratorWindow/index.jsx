@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { InsetSurface, Stack, Row, InsetWindowShell } from "@primitives";
+import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
@@ -14,16 +14,6 @@ const SYMBOLS = '!@#$%^&*_-+=';
 
 const Shell = styled(InsetWindowShell)`
     grid-template-rows: repeat(6, auto) 1fr;
-`;
-
-const Title = styled.div`
-    font-weight: 650;
-    color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-    font-size: 0.85rem;
-    color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const LengthLabel = styled.label`

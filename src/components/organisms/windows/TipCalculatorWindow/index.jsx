@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
-import { InsetSurface, Stack, Row, InsetWindowShell } from "@primitives";
+import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 /* ----------------------------- */
@@ -8,16 +8,6 @@ import { Button } from "@atoms";
 /* ----------------------------- */
 
 const Shell = styled(InsetWindowShell)`
-`;
-
-const Title = styled.div`
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const Form = styled.form`

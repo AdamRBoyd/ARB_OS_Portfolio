@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { InsetSurface, Stack, Row, InsetWindowShell } from "@primitives";
+import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 /* ----------------------------- */
@@ -9,16 +9,6 @@ import { Button } from "@atoms";
 
 const Shell = styled(InsetWindowShell)`
   grid-template-rows: auto auto auto auto 1fr;
-`;
-
-const Title = styled.div`
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const Form = styled.form`

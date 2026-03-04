@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 import { AnalogClock, DigitalClock } from "@molecules";
-import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
+import { InsetSurface, Stack, InsetWindowShell, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 const STORAGE_KEY = "taskLogTasks";
@@ -11,16 +11,6 @@ const STORAGE_KEY = "taskLogTasks";
 /* ----------------------------- */
 
 const Shell = styled(InsetWindowShell)`
-`;
-
-const Title = styled.div`
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const BodyContainer = styled.div`

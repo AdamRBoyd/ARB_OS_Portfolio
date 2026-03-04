@@ -1,21 +1,11 @@
 import styled from "styled-components";
-import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
+import { Stack, InsetWindowShell, Title, Subtitle } from "@primitives";
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
 const Shell = styled(InsetWindowShell)`
-`;
-
-const Title = styled.div`
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const Content = styled.div`

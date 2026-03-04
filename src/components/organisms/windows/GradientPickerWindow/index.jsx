@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
+import { InsetSurface, Stack, InsetWindowShell, Title, Subtitle } from "@primitives";
 import { Button } from "@atoms";
 
 /* ----------------------------- */
@@ -9,16 +9,6 @@ import { Button } from "@atoms";
 
 const Shell = styled(InsetWindowShell)`
     grid-template-rows: auto 1fr auto auto auto;
-`;
-
-const Title = styled.div`
-    font-weight: 650;
-    color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const Subtitle = styled.div`
-    font-size: 0.85rem;
-    color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const GradientPreview = styled(InsetSurface)`

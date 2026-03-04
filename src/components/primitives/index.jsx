@@ -178,7 +178,7 @@ export const InsetSurface = styled.div`
 `;
 
 /* ----------------------------- */
-/* WINDOW SHELLS */
+/* WINDOW COMPONENTS */
 /* ----------------------------- */
 
 export const InsetWindowShell = styled(InsetSurface)`
@@ -196,6 +196,16 @@ export const InsetWindowShell = styled(InsetSurface)`
 
   overflow: hidden;
   box-sizing: border-box;
+`;
+
+export const Title = styled.div`
+    font-weight: 650;
+    color: ${({ theme }) => theme.palette.primary[0]};
+`;
+
+export const Subtitle = styled.div`
+    font-size: 0.85rem;
+    color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 /* ----------------------------- */
