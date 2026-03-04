@@ -1,24 +1,11 @@
 import styled from "styled-components";
-import { InsetSurface, Stack } from "@primitives";
+import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetSurface)`
-  min-height: 0;
-  min-width: 0;
-  height: 100%;
-
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.9rem;
-
-  padding: 0.9rem;
-  border-radius: 12px;
-
-  overflow: hidden;
-  box-sizing: border-box;
+const Shell = styled(InsetWindowShell)`
 `;
 
 const Title = styled.div`

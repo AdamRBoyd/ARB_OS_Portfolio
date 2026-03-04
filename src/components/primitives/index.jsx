@@ -178,6 +178,27 @@ export const InsetSurface = styled.div`
 `;
 
 /* ----------------------------- */
+/* WINDOW SHELLS */
+/* ----------------------------- */
+
+export const InsetWindowShell = styled(InsetSurface)`
+  min-height: 0;
+  min-width: 0;
+
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.9rem;
+
+  padding: 0.9rem;
+  border-radius: 12px;
+
+  overflow: hidden;
+  box-sizing: border-box;
+`;
+
+/* ----------------------------- */
 /* WINDOW SYSTEM */
 /* ----------------------------- */
 

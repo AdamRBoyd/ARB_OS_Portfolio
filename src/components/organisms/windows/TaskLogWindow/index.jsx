@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 import { AnalogClock, DigitalClock } from "@molecules";
-import { InsetSurface, Stack, Row } from "@primitives";
+import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
 import { Button } from "@atoms";
 
 const STORAGE_KEY = "taskLogTasks";
@@ -10,20 +10,7 @@ const STORAGE_KEY = "taskLogTasks";
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetSurface)`
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
-
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.9rem;
-
-  padding: 0.9rem;
-  border-radius: 12px;
-
-  overflow: hidden;
-  box-sizing: border-box;
+const Shell = styled(InsetWindowShell)`
 `;
 
 const Title = styled.div`

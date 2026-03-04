@@ -1,26 +1,13 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
-import { InsetSurface, Stack, Row } from "@primitives";
+import { InsetSurface, Stack, Row, InsetWindowShell } from "@primitives";
 import { Button } from "@atoms";
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetSurface)`
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
-
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.9rem;
-
-  padding: 0.9rem;
-  border-radius: 12px;
-
-  overflow: hidden;
-  box-sizing: border-box;
+const Shell = styled(InsetWindowShell)`
 `;
 
 const Title = styled.div`

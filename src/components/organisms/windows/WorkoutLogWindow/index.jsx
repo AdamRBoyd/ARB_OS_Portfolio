@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
-import { InsetSurface, Stack } from "@primitives";
+import { InsetSurface, Stack, InsetWindowShell } from "@primitives";
 import { Button } from "@atoms";
 
 const WORKOUT_TYPES = ["Chest", "Back", "Shoulders", "Legs", "Arms", "Core", "Cardio"];
@@ -10,20 +10,8 @@ const STORAGE_KEY = "workoutLog";
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetSurface)`
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
-
-  display: grid;
+const Shell = styled(InsetWindowShell)`
   grid-template-rows: auto auto 1fr;
-  gap: 0.9rem;
-
-  padding: 0.9rem;
-  border-radius: 12px;
-
-  overflow: hidden;
-  box-sizing: border-box;
 `;
 
 const Title = styled.div`

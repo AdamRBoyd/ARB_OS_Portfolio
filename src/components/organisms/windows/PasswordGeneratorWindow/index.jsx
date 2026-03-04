@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { InsetSurface, Stack, Row } from "@primitives";
+import { InsetSurface, Stack, Row, InsetWindowShell } from "@primitives";
 import { Button } from "@atoms";
 
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
@@ -12,20 +12,8 @@ const SYMBOLS = '!@#$%^&*_-+=';
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetSurface)`
-    height: 100%;
-    min-height: 0;
-    min-width: 0;
-
-    display: grid;
+const Shell = styled(InsetWindowShell)`
     grid-template-rows: repeat(6, auto) 1fr;
-    gap: 0.9rem;
-
-    padding: 0.9rem;
-    border-radius: 12px;
-
-    overflow: hidden;
-    box-sizing: border-box;
 `;
 
 const Title = styled.div`
