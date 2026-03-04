@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import { Stack, Row, Grid, InsetSurface } from "@primitives";
+import { Button } from "@atoms";
 
 const Shell = styled.div`
   height: 100%;
@@ -66,20 +67,8 @@ const Small = styled.div`
   color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
-const FilterItem = styled.button`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme, $active }) =>
-    $active ? theme.palette.grays[6] : theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.primary[0]};
-  border-radius: 12px;
-  padding: 0.55rem 0.65rem;
+const FilterItem = styled(Button)`
   text-align: left;
-  cursor: pointer;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-  }
 `;
 
 const Card = styled(InsetSurface)`
@@ -119,18 +108,8 @@ const LargePreview = styled.img`
   border-radius: 12px;
 `;
 
-const Button = styled.button`
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.graybutton[0]};
-  color: ${({ theme }) => theme.palette.primary[0]};
-  border-radius: 12px;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-  }
+const NavButton = styled(Button)`
+  font-weight: 500;
 `;
 
 const ProjectsWindow = ({ actions, window: win }) => {
@@ -202,6 +181,7 @@ const ProjectsWindow = ({ actions, window: win }) => {
 
           {filters.map((f) => (
             <FilterItem
+              variant="secondary"
               key={f}
               $active={f === filter}
               onClick={() => setFilter(f)}
@@ -246,26 +226,26 @@ const ProjectsWindow = ({ actions, window: win }) => {
 
             <Row $gap="0.5rem" style={{ justifyContent: "flex-start" }}>
               {selected.github && (
-                <Button onClick={() => window.open(selected.github, "_blank", "noopener,noreferrer")}>
+                <NavButton onClick={() => window.open(selected.github, "_blank", "noopener,noreferrer")}>
                   GitHub
-                </Button>
+                </NavButton>
               )}
 
               {selected.link && (
                 <>
-                  <Button
+                  <NavButton
                     onClick={() =>
                       actions?.openUrlWindow?.(selected.link, selected.title)
                     }
                   >
                     Live Site
-                  </Button>
+                  </NavButton>
 
-                  <Button
+                  <NavButton
                     onClick={() => window.open(selected.link, "_blank", "noopener,noreferrer")}
                   >
                     Open in Browser ↗
-                  </Button>
+                  </NavButton>
                 </>
               )}
 

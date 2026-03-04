@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -139,37 +140,11 @@ const ResetContainer = styled.div`
   padding: 0.2rem 3rem;
 `;
 
-const ResetButton = styled.button`
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.secondary[0]};
-
-  border-radius: 12px;
+const ResetButton = styled(Button)`
   padding: 0.55rem 0.9rem;
-  cursor: pointer;
 
   font-weight: 650;
   font-size: 0.9rem;
-
-  transition:
-    background 120ms ease-out,
-    transform 90ms ease-out,
-    color 120ms ease-out,
-    border-color 120ms ease-out;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
 `;
 
 /* ----------------------------- */
@@ -278,7 +253,7 @@ const TicTacToeWindow = () => {
             </BoardContainer>
 
             <ResetContainer>
-                <ResetButton type="button" onClick={reset}>
+                <ResetButton type="button" variant="secondary" onClick={reset}>
                     Reset
                 </ResetButton>
             </ResetContainer>

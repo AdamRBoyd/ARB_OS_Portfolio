@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 import { AnalogClock, DigitalClock } from "@molecules";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 const STORAGE_KEY = "taskLogTasks";
 
@@ -130,14 +131,10 @@ const ButtonStyling = css`
   }
 `;
 
-const SubmitButton = styled.button`
-  ${ButtonStyling}
-  background: ${({ theme }) => theme.palette.grays[4]};
-  color: ${({ theme }) => theme.palette.primary[0]};
+const SubmitButton = styled(Button)`
 `;
 
-const ResetButton = styled.button`
-  ${ButtonStyling}
+const ResetButton = styled(Button)`
 `;
 
 /* ----------------------------- */
@@ -238,35 +235,7 @@ const DurationCell = styled(LineCell)`
   color: ${({ theme }) => theme.palette.accent[0]};
 `;
 
-const IconButton = styled.button`
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-
-  border: transparent;
-  background: ${({ theme }) => theme.palette.grays[2]};
-
-  display: grid;
-  place-items: center;
-
-  cursor: pointer;
-  opacity: 0.8;
-
-  transition: background 120ms ease-out, transform 90ms ease-out, opacity 120ms ease-out;
-
-  &:hover {
-    opacity: 1;
-    background: ${({ theme }) => theme.palette.grays[5]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
+const IconButton = styled(Button)`
 `;
 
 const ButtonIcon = styled.img`
@@ -403,8 +372,8 @@ const TaskLogWindow = () => {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
-                        <SubmitButton type="submit">Add Task</SubmitButton>
-                        <ResetButton type="button" onClick={resetForm}>Reset</ResetButton>
+                        <SubmitButton type="submit" variant="primary">Add Task</SubmitButton>
+                        <ResetButton type="button" variant="secondary" onClick={resetForm}>Reset</ResetButton>
                     </TaskForm>
 
                     <TaskList>
@@ -432,11 +401,11 @@ const TaskLogWindow = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <IconButton onClick={() => handleTaskCompletionToggle(task.id)}><ButtonIcon src="/svg/checkmark.svg" alt="Checkmark" /></IconButton>
+                                                <IconButton onClick={() => handleTaskCompletionToggle(task.id)} variant="icon"><ButtonIcon src="/svg/checkmark.svg" alt="Checkmark" /></IconButton>
                                                 <LineCell>--:--</LineCell>
                                             </>
                                         )}
-                                        <IconButton onClick={() => handleTaskDeletion(task.id)}><ButtonIcon src="/svg/delete.svg" alt="Delete" /></IconButton>
+                                        <IconButton onClick={() => handleTaskDeletion(task.id)} variant="icon"><ButtonIcon src="/svg/delete.svg" alt="Delete" /></IconButton>
                                     </TaskListLine>
                                 ))
                             )}

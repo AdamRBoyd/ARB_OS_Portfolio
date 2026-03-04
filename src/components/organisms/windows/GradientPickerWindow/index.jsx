@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -166,34 +167,7 @@ const GradientResult = styled(InsetSurface)`
     font-family: monospace;
 `;
 
-const CopyButton = styled.button`
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.grays[2]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-    line-height: 1;
-
-    transition: background 120ms ease-out, transform 90ms ease-out;
-
-    &:hover {
-        background: ${({ theme }) => theme.palette.grays[5]};
-    }
-
-    &:active {
-        transform: translateY(1px);
-    }
-
-    &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-        outline-offset: 2px;
-    }
+const CopyButton = styled(Button)`
 `;
 
 const ButtonIcon = styled.img`
@@ -251,7 +225,7 @@ const GradientPickerWindow = () => {
             </DegreeRow>
             <GradientResult>
                 {gradientCss}
-                <CopyButton onClick={copyToClipboard}>
+                <CopyButton onClick={copyToClipboard} variant="icon">
                     <ButtonIcon src="/svg/copy.svg" alt="Copy to clipboard" title="Copy to clipboard" />
                 </CopyButton>
             </GradientResult>

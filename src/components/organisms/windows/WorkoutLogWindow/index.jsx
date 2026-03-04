@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { InsetSurface, Stack } from "@primitives";
+import { Button } from "@atoms";
 
 const WORKOUT_TYPES = ["Chest", "Back", "Shoulders", "Legs", "Arms", "Core", "Cardio"];
 const STORAGE_KEY = "workoutLog";
@@ -134,42 +135,10 @@ const TypeOption = styled.option`
   color: ${({ theme }) => theme.palette.primary[0]};
 `;
 
-const ButtonStyling = css`
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: transparent;
-  color: ${({ theme }) => theme.palette.secondary[0]};
-
-  border-radius: 12px;
-  padding: 0.55rem 0.8rem;
-  cursor: pointer;
-
-  font-weight: 650;
-
-  transition: background 120ms ease-out, transform 90ms ease-out, color 120ms ease-out;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
+const SubmitButton = styled(Button)`
 `;
 
-const SubmitButton = styled.button`
-  ${ButtonStyling}
-  background: ${({ theme }) => theme.palette.grays[4]};
-  color: ${({ theme }) => theme.palette.primary[0]};
-`;
-
-const ResetButton = styled.button`
-  ${ButtonStyling}
+const ResetButton = styled(Button)`
 `;
 
 /* ----------------------------- */
@@ -240,19 +209,7 @@ const ListHeader = styled.div`
   z-index: 2;
 `;
 
-const ListHeaderTitle = styled.button`
-  ${ButtonStyling}
-  font-weight: 700;
-  background: transparent;
-  color: ${({ theme }) => theme.palette.secondary[0]};
-  border: none;
-  padding: 0;
-  justify-self: start;
-
-  &:hover {
-    color: ${({ theme }) => theme.palette.primary[0]};
-    background: transparent;
-  }
+const ListHeaderTitle = styled(Button)`
 `;
 
 const ActionsHeader = styled.div`
@@ -300,35 +257,7 @@ const ButtonContainer = styled.div`
   justify-self: end;
 `;
 
-const IconButton = styled.button`
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-
-  border: transparent;
-  background: ${({ theme }) => theme.palette.grays[2]};
-
-  display: grid;
-  place-items: center;
-
-  cursor: pointer;
-  opacity: 0.8;
-
-  transition: background 120ms ease-out, transform 90ms ease-out, opacity 120ms ease-out;
-
-  &:hover {
-    opacity: 1;
-    background: ${({ theme }) => theme.palette.grays[5]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
+const IconButton = styled(Button)`
 `;
 
 const ButtonIcon = styled.img`
@@ -501,8 +430,8 @@ const WorkoutLogWindow = () => {
               </TypeSelect>
             </Field>
 
-            <SubmitButton type="submit">{isEditing ? "Update Workout" : "Add Workout"}</SubmitButton>
-            <ResetButton type="button" onClick={resetForm}>
+            <SubmitButton type="submit" variant="primary">{isEditing ? "Update Workout" : "Add Workout"}</SubmitButton>
+            <ResetButton type="button" variant="secondary" onClick={resetForm}>
               {isEditing ? "Cancel" : "Reset"}
             </ResetButton>
           </WorkoutForm>
@@ -510,15 +439,15 @@ const WorkoutLogWindow = () => {
 
         <WorkoutListContainer>
           <ListHeader>
-            <ListHeaderTitle type="button" onClick={() => toggleSort("type")}>
+            <ListHeaderTitle type="button" onClick={() => toggleSort("type")} variant="header">
               Type {iconFor("type")}
             </ListHeaderTitle>
 
-            <ListHeaderTitle type="button" onClick={() => toggleSort("duration")}>
+            <ListHeaderTitle type="button" onClick={() => toggleSort("duration")} variant="header">
               Duration {iconFor("duration")}
             </ListHeaderTitle>
 
-            <ListHeaderTitle type="button" onClick={() => toggleSort("date")}>
+            <ListHeaderTitle type="button" onClick={() => toggleSort("date")} variant="header">
               Date {iconFor("date")}
             </ListHeaderTitle>
 
@@ -535,6 +464,7 @@ const WorkoutLogWindow = () => {
                 <ButtonContainer>
                   <IconButton
                     type="button"
+                    variant="icon"
                     title="Edit"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -546,6 +476,7 @@ const WorkoutLogWindow = () => {
 
                   <IconButton
                     type="button"
+                    variant="icon"
                     title="Delete"
                     onClick={(e) => {
                       e.stopPropagation();

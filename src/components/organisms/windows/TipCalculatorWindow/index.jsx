@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -80,32 +81,7 @@ const Input = styled.input`
   }
 `;
 
-const ResetButton = styled.button`
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: transparent;
-  color: ${({ theme }) => theme.palette.secondary[0]};
-
-  border-radius: 12px;
-  padding: 0.55rem 0.8rem;
-  cursor: pointer;
-
-  font-weight: 600;
-
-  transition: background 120ms ease-out, transform 90ms ease-out, color 120ms ease-out;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
+const ResetButton = styled(Button)`
 `;
 
 const Chips = styled.div`
@@ -115,33 +91,9 @@ const Chips = styled.div`
   flex-wrap: wrap;
 `;
 
-const Chip = styled.button`
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme, $active }) =>
-        $active ? theme.palette.grays[6] : theme.palette.grays[2]};
-  color: ${({ theme, $active }) =>
-        $active ? theme.palette.primary[0] : theme.palette.secondary[0]};
-
-  border-radius: 999px;
+const Chip = styled(Button)`
   padding: 0.35rem 1rem;
   font-size: 0.82rem;
-  cursor: pointer;
-
-  transition: background 120ms ease-out, border-color 120ms ease-out, transform 90ms ease-out;
-
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
-  }
 `;
 
 const SplitRow = styled(Row)`
@@ -155,33 +107,15 @@ const Stepper = styled(Row)`
   align-items: center;
 `;
 
-const StepBtn = styled.button`
+const StepBtn = styled(Button)`
   width: 30px;
   height: 25px;
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.primary[0]};
 
-  cursor: pointer;
-  display: grid;
-  place-items: center;
   font-weight: 800;
   line-height: 1;
-
-  transition: background 120ms ease-out, transform 90ms ease-out;
-
+  
   &:hover {
     background: ${({ theme }) => theme.palette.grays[5]};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-    outline-offset: 2px;
   }
 `;
 
@@ -342,6 +276,7 @@ const TipCalculatorWindow = () => {
                             <Chip
                                 key={p}
                                 type="button"
+                                variant="secondary"
                                 $active={String(p) === String(tipPercentage)}
                                 onClick={() => setTipPercentage(String(p))}
                                 title={`Set tip to ${p}%`}
@@ -370,7 +305,7 @@ const TipCalculatorWindow = () => {
                         </Label>
 
                         <Stepper aria-label="Split stepper">
-                            <StepBtn type="button" onClick={() => bumpSplit(-1)} title="Decrease split">
+                            <StepBtn type="button" onClick={() => bumpSplit(-1)} title="Decrease split" variant="icon">
                                 –
                             </StepBtn>
                             <SplitBadge
@@ -383,7 +318,7 @@ const TipCalculatorWindow = () => {
                                 value={split}
                                 onChange={(e) => setSplit(e.target.value)}
                             />
-                            <StepBtn type="button" onClick={() => bumpSplit(1)} title="Increase split">
+                            <StepBtn type="button" onClick={() => bumpSplit(1)} title="Increase split" variant="icon">
                                 +
                             </StepBtn>
                         </Stepper>
@@ -417,7 +352,7 @@ const TipCalculatorWindow = () => {
                     )}
                 </Results>
 
-                <ResetButton type="button" onClick={reset} title="Reset fields">
+                <ResetButton type="button" onClick={reset} title="Reset fields" variant="secondary">
                     Reset
                 </ResetButton>
             </Form>

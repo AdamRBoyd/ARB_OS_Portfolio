@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -94,33 +95,7 @@ const CloseIcon = styled.img`
     }
 `;
 
-const Button = styled.button`
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme, $active }) =>
-        $active ? theme.palette.grays[6] : theme.palette.grays[2]};
-    color: ${({ theme, $active }) =>
-        $active ? theme.palette.primary[0] : theme.palette.secondary[0]};
-
-    border-radius: 999px;
-    padding: 0.35rem 1rem;
-    font-size: 0.82rem;
-    cursor: pointer;
-
-    transition: background 120ms ease-out, border-color 120ms ease-out, transform 90ms ease-out;
-
-    &:hover {
-        background: ${({ theme }) => theme.palette.grays[5]};
-        color: ${({ theme }) => theme.palette.primary[0]};
-    }
-
-    &:active {
-        transform: translateY(1px);
-    }
-
-    &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-        outline-offset: 2px;
-    }
+const AddButton = styled(Button)`
 `;
 
 const ListContainer = styled(InsetSurface)`
@@ -197,26 +172,11 @@ const ButtonContainer = styled.div`
     margin-top: 0.5rem;
 `;
 
-const ButtonIcon = styled.img`
-    width: 18px;
-    height: 18px;
-    margin-left: 0.5rem;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s ease-in-out;
-
-    &:hover {
-        opacity: 1;
-    }
-
-    &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.palette.accent[0]};
-        outline-offset: 2px;
-    }
+const IconButton = styled(Button)`
 `;
 
-const DimmableIcon = styled(ButtonIcon)`
-    opacity: ${({ $completed }) => ($completed ? 0.35 : 0.6)};
+const DimmableIcon = styled(Button)`
+    opacity: ${({ $completed }) => ($completed ? 0.35 : 0.8)};
     filter: ${({ $completed }) =>
         $completed ? "grayscale(1) brightness(0.6)" : "none"};
 
@@ -225,6 +185,11 @@ const DimmableIcon = styled(ButtonIcon)`
     &:hover {
         opacity: ${({ $completed }) => ($completed ? 0.35 : 1)};
       }
+`;
+
+const ButtonIcon = styled.img`
+    width: 16px;
+    height: 16px;
 `;
 
 const Hint = styled.div`
@@ -307,7 +272,7 @@ const ToDoWindow = () => {
                     />
                     {item && (<CloseIcon src="/svg/close.svg" alt="Clear input" onClick={handleClearInput} />)}
                 </InputGroup>
-                <Button type="submit">{editing ? "Update" : "Add"}</Button>
+                <AddButton type="submit" variant="primary">{editing ? "Update" : "Add"}</AddButton>
             </Form>
             <Hint>Hint: Click on a task to mark it as completed.</Hint>
             <Title>Your Tasks:</Title>
@@ -322,22 +287,26 @@ const ToDoWindow = () => {
                             {todo.item}
                             <ButtonContainer>
                                 <DimmableIcon
-                                    src="/svg/edit.svg"
+                                    variant="icon"
                                     alt="Edit"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         handleEditItem(i);
                                     }}
                                     $completed={todo.completed}
-                                />
-                                <ButtonIcon
-                                    src="/svg/delete.svg"
+                                >
+                                    <ButtonIcon src="/svg/edit.svg" alt="" />
+                                </DimmableIcon>
+                                <IconButton
+                                    variant="icon"
                                     alt="Delete"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         handleDeleteItem(i);
                                     }}
-                                />
+                                >
+                                    <ButtonIcon src="/svg/delete.svg" alt="" />
+                                </IconButton>
                             </ButtonContainer>
                         </ListItem>
                     ))}

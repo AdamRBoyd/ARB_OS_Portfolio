@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { InsetSurface, Stack, Row } from "@primitives";
+import { Button } from "@atoms";
 
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
 const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -65,18 +66,8 @@ const IncludeOption = styled.label`
     gap: 0.5rem;
 `;
 
-const GenerateButton = styled.button`
+const GenerateButton = styled(Button)`
     padding: 0.65rem 1.2rem;
-    border: none;
-    background: ${({ theme }) => theme.palette.graybutton[0]};
-    color: #fff;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:hover {
-        background: ${({ theme }) => theme.palette.accent[0]}cc;
-    }
 `;
 
 const GeneratedTitle = styled(Title)`
@@ -120,16 +111,12 @@ const PasswordText = styled.div`
   user-select: text;
 `;
 
+const IconButton = styled(Button)`
+`;
+
 const ButtonIcon = styled.img`
     width: 16px;
     height: 16px;
-    cursor: pointer;
-    opacity: 0.75;
-    transition: opacity 0.2s ease-in-out;
-
-    &:hover {
-        opacity: 1;
-    }
 `;
 
 /* ----------------------------- */
@@ -207,7 +194,7 @@ const PasswordGeneratorWindow = () => {
                 </IncludeOption>
             </Row>
             <Row>
-                <GenerateButton onClick={generatePassword}>Generate Password</GenerateButton>
+                <GenerateButton variant="primary" onClick={generatePassword}>Generate Password</GenerateButton>
             </Row>
             <ResultContainer>
                 <GeneratedTitle>Generated Password:</GeneratedTitle>
@@ -218,12 +205,13 @@ const PasswordGeneratorWindow = () => {
                     >
                         {generatedPassword}
                     </PasswordText>
-                    <ButtonIcon
-                        src="/svg/copy.svg"
-                        alt="Copy to clipboard"
-                        title="Copy to clipboard"
-                        onClick={copyToClipboard}
-                    />
+                    <IconButton variant="icon" onClick={copyToClipboard}>
+                        <ButtonIcon
+                            src="/svg/copy.svg"
+                            alt="Copy to clipboard"
+                            title="Copy to clipboard"
+                        />
+                    </IconButton>
                 </PasswordContainer>
             </ResultContainer>
 
