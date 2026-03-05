@@ -1,9 +1,5 @@
 const MobilePage = () => {
-  return (
-    <div className="mobile-page">
-      MobilePage
-    </div>
-  );
+    return <div className="mobile-page">MobilePage</div>;
 };
 
 export default MobilePage;

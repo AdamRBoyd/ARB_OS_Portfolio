@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const ButtonStyles = css`
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
@@ -11,7 +11,10 @@ const ButtonStyles = css`
 
     font-weight: 650;
 
-    transition: background 120ms ease-out, transform 90ms ease-out, color 120ms ease-out;
+    transition:
+        background 120ms ease-out,
+        transform 90ms ease-out,
+        color 120ms ease-out;
 
     &:hover {
         background: ${({ theme }) => theme.palette.grays[5]};
@@ -74,26 +77,26 @@ const IconButton = styled.button`
     padding: 0;
 
     &:hover {
-    opacity: 1;
-    background: transparent;
-    color: ${({ theme }) => theme.palette.primary[0]};
-  }
+        opacity: 1;
+        background: transparent;
+        color: ${({ theme }) => theme.palette.primary[0]};
+    }
 `;
 
 const Button = ({ children, variant, ...props }) => {
     switch (variant) {
-        case "primary":
-            return (<PrimaryButton {...props}>{children}</PrimaryButton>);
-        case "secondary":
-            return (<SecondaryButton {...props}>{children}</SecondaryButton>);
-        case "tertiary":
-            return (<TertiaryButton {...props}>{children}</TertiaryButton>);
-        case "icon":
-            return (<IconButton {...props}>{children}</IconButton>);
-        case "header":
-            return (<HeaderButton {...props}>{children}</HeaderButton>);
+        case 'primary':
+            return <PrimaryButton {...props}>{children}</PrimaryButton>;
+        case 'secondary':
+            return <SecondaryButton {...props}>{children}</SecondaryButton>;
+        case 'tertiary':
+            return <TertiaryButton {...props}>{children}</TertiaryButton>;
+        case 'icon':
+            return <IconButton {...props}>{children}</IconButton>;
+        case 'header':
+            return <HeaderButton {...props}>{children}</HeaderButton>;
         default:
-            return (<PrimaryButton {...props}>{children}</PrimaryButton>);
+            return <PrimaryButton {...props}>{children}</PrimaryButton>;
     }
 };
 

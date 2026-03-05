@@ -1,7 +1,13 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { InsetSurface, Stack, InsetWindowShell, Title, Subtitle } from "@primitives";
-import { Button } from "@atoms";
+import { useState } from 'react';
+import styled from 'styled-components';
+import {
+    InsetSurface,
+    Stack,
+    InsetWindowShell,
+    Title,
+    Subtitle,
+} from '@primitives';
+import { Button } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -38,20 +44,20 @@ const ColorInput = styled.input`
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
     border-radius: 8px;
     background: transparent;
-    padding: 0;                 /* important */
-    overflow: hidden;           /* important */
+    padding: 0; /* important */
+    overflow: hidden; /* important */
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.palette.grays[3]};
-    
+
     appearance: none;
-    -webkit-appearance: none;   /* removes default weirdness */
+    -webkit-appearance: none; /* removes default weirdness */
 
     &::-webkit-color-swatch-wrapper {
-        padding: 0;               /* removes inset gap */
+        padding: 0; /* removes inset gap */
     }
 
     &::-webkit-color-swatch {
-        border: none;             /* remove inner border */
-        border-radius: 8px;       /* ← rounded corners */
+        border: none; /* remove inner border */
+        border-radius: 8px; /* ← rounded corners */
     }
 
     &::-moz-color-swatch {
@@ -72,66 +78,66 @@ const DegreeLabel = styled.label`
     font-size: 1rem;
     font-weight: 500;
     color: ${({ theme }) => theme.palette.tertiary[0]};
-    margin: 0 .5rem 0 0;
+    margin: 0 0.5rem 0 0;
 `;
 
 const DegreeInput = styled.input`
-  width: 100%;
-  background: transparent; /* important */
+    width: 100%;
+    background: transparent; /* important */
 
-  /* -------------------- */
-  /* WebKit (Chrome, Edge, Safari) */
-  /* -------------------- */
+    /* -------------------- */
+    /* WebKit (Chrome, Edge, Safari) */
+    /* -------------------- */
 
-  &::-webkit-slider-runnable-track {
-    height: 6px;
-    border-radius: 999px;
-    background: ${({ theme }) => theme.palette.grays[4]};
-  }
+    &::-webkit-slider-runnable-track {
+        height: 6px;
+        border-radius: 999px;
+        background: ${({ theme }) => theme.palette.grays[4]};
+    }
 
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
 
-    margin-top: -5px; /* centers thumb on track */
+        margin-top: -5px; /* centers thumb on track */
 
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: none;
 
-    background: ${({ theme }) => theme.palette.accent[0]};
-    cursor: pointer;
-  }
+        background: ${({ theme }) => theme.palette.accent[0]};
+        cursor: pointer;
+    }
 
-  /* -------------------- */
-  /* Firefox */
-  /* -------------------- */
+    /* -------------------- */
+    /* Firefox */
+    /* -------------------- */
 
-  &::-moz-range-track {
-    height: 6px;
-    border-radius: 999px;
-    background: ${({ theme }) => theme.palette.grays[4]};
-  }
+    &::-moz-range-track {
+        height: 6px;
+        border-radius: 999px;
+        background: ${({ theme }) => theme.palette.grays[4]};
+    }
 
-  &::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: none;
+    &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: none;
 
-    background: ${({ theme }) => theme.palette.accent[0]};
-    cursor: pointer;
-  }
+        background: ${({ theme }) => theme.palette.accent[0]};
+        cursor: pointer;
+    }
 
-  /* remove ugly focus outline in Firefox */
-  &::-moz-focus-outer {
-    border: 0;
-  }
+    /* remove ugly focus outline in Firefox */
+    &::-moz-focus-outer {
+        border: 0;
+    }
 `;
 
 const GradientResult = styled(InsetSurface)`
-    padding: 0.5rem .5rem 0.5rem 1.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
     margin: 0 1rem;
     border-radius: 12px;
     display: flex;
@@ -145,8 +151,7 @@ const GradientResult = styled(InsetSurface)`
     font-family: monospace;
 `;
 
-const CopyButton = styled(Button)`
-`;
+const CopyButton = styled(Button)``;
 
 const ButtonIcon = styled.img`
     width: 16px;
@@ -158,8 +163,8 @@ const ButtonIcon = styled.img`
 /* ----------------------------- */
 
 const GradientPickerWindow = () => {
-    const [color1, setColor1] = useState("#3d65e7");
-    const [color2, setColor2] = useState("#269256");
+    const [color1, setColor1] = useState('#3d65e7');
+    const [color2, setColor2] = useState('#269256');
     const [degree, setDegree] = useState(45);
     const gradientCss = `linear-gradient(${degree}deg, ${color1}, ${color2})`;
 
@@ -167,7 +172,7 @@ const GradientPickerWindow = () => {
         try {
             await navigator.clipboard.writeText(gradientCss);
         } catch (err) {
-            console.error("Failed to copy: ", err);
+            console.error('Failed to copy: ', err);
         }
     };
 
@@ -183,13 +188,15 @@ const GradientPickerWindow = () => {
                     type="color"
                     value={color1}
                     onChange={(e) => setColor1(e.target.value)}
-                    title="Color 1" />
+                    title="Color 1"
+                />
                 <ColorLabel>Color Selection</ColorLabel>
                 <ColorInput
                     type="color"
                     value={color2}
                     onChange={(e) => setColor2(e.target.value)}
-                    title="Color 2" />
+                    title="Color 2"
+                />
             </ColorPickerRow>
             <DegreeRow>
                 <DegreeLabel>Degree</DegreeLabel>
@@ -199,12 +206,17 @@ const GradientPickerWindow = () => {
                     max="180"
                     value={degree}
                     onChange={(e) => setDegree(Number(e.target.value))}
-                    title="Fade degree" />
+                    title="Fade degree"
+                />
             </DegreeRow>
             <GradientResult>
                 {gradientCss}
                 <CopyButton onClick={copyToClipboard} variant="icon">
-                    <ButtonIcon src="/svg/copy.svg" alt="Copy to clipboard" title="Copy to clipboard" />
+                    <ButtonIcon
+                        src="/svg/copy.svg"
+                        alt="Copy to clipboard"
+                        title="Copy to clipboard"
+                    />
                 </CopyButton>
             </GradientResult>
         </Shell>

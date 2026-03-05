@@ -1,9 +1,5 @@
 const WindowTemplate = () => {
-  return (
-    <div className="window-template">
-      WindowTemplate
-    </div>
-  );
+    return <div className="window-template">WindowTemplate</div>;
 };
 
 export default WindowTemplate;

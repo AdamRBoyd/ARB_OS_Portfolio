@@ -1,14 +1,21 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
-import { Button } from "@atoms";
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import {
+    InsetSurface,
+    Stack,
+    Row,
+    InsetWindowShell,
+    Title,
+    Subtitle,
+} from '@primitives';
+import { Button } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
 const Shell = styled(InsetWindowShell)`
-  grid-template-rows: auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto 1fr;
 `;
 
 const Form = styled.form`
@@ -34,7 +41,7 @@ const InputGroup = styled(Row)`
     &:focus-within {
         border-color: ${({ theme }) => theme.palette.accent[0]};
         box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-  }
+    }
 `;
 
 const Input = styled.input`
@@ -44,7 +51,7 @@ const Input = styled.input`
     color: inherit;
     font-size: 1rem;
 
-    outline: none; /* ✅ removes the browser focus ring */
+    outline: none;
     box-shadow: none;
 
     &:focus {
@@ -73,8 +80,7 @@ const CloseIcon = styled.img`
     }
 `;
 
-const AddButton = styled(Button)`
-`;
+const AddButton = styled(Button)``;
 
 const ListContainer = styled(InsetSurface)`
     padding: 0.85rem;
@@ -83,19 +89,15 @@ const ListContainer = styled(InsetSurface)`
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
     height: 100%;
     box-sizing: border-box;
-    
-    /* ✅ make the whole window scroll */
+
     overflow-y: auto;
     overflow-x: hidden;
 
-    /* ✅ padding so bottom doesn't feel cut off */
-    padding: 0.2rem 0.6rem 0.2rem 0.2rem;          /* uniform interior spacing */
+    padding: 0.2rem 0.6rem 0.2rem 0.2rem; /* uniform interior spacing */
 
-    /* ✅ keep scrollbar + content inside rounded look */
     border-radius: 6px;
     box-sizing: border-box;
 
-    /* optional nicer scrollbar */
     scrollbar-width: thin;
     scrollbar-color: ${({ theme }) => theme.palette.grays[6]} transparent;
 
@@ -112,7 +114,6 @@ const ListContainer = styled(InsetSurface)`
         border-radius: 999px;
     }
 
-    /* optional: hover */
     &::-webkit-scrollbar-thumb:hover {
         background: ${({ theme }) => theme.palette.grays[7]};
     }
@@ -150,19 +151,20 @@ const ButtonContainer = styled.div`
     margin-top: 0.5rem;
 `;
 
-const IconButton = styled(Button)`
-`;
+const IconButton = styled(Button)``;
 
 const DimmableIcon = styled(Button)`
     opacity: ${({ $completed }) => ($completed ? 0.35 : 0.8)};
     filter: ${({ $completed }) =>
-        $completed ? "grayscale(1) brightness(0.6)" : "none"};
+        $completed ? 'grayscale(1) brightness(0.6)' : 'none'};
 
-    transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+    transition:
+        opacity 0.2s ease-in-out,
+        filter 0.2s ease-in-out;
 
     &:hover {
         opacity: ${({ $completed }) => ($completed ? 0.35 : 1)};
-      }
+    }
 `;
 
 const ButtonIcon = styled.img`
@@ -181,14 +183,14 @@ const Hint = styled.div`
 /* ----------------------------- */
 
 const ToDoWindow = () => {
-    const local = localStorage.getItem("todoList");
+    const local = localStorage.getItem('todoList');
     const [todoList, setTodoList] = useState(local ? JSON.parse(local) : []);
-    const [item, setItem] = useState("");
+    const [item, setItem] = useState('');
     const [editing, setEditing] = useState(false);
     const [index, setIndex] = useState(null);
 
     useEffect(() => {
-        localStorage.setItem("todoList", JSON.stringify(todoList));
+        localStorage.setItem('todoList', JSON.stringify(todoList));
     }, [todoList]);
 
     const handleAddItem = (e) => {
@@ -205,7 +207,7 @@ const ToDoWindow = () => {
             const newList = [...todoList, { item: item, completed: false }];
             setTodoList(newList);
         }
-        setItem("");
+        setItem('');
     };
 
     const handleEditItem = (i) => {
@@ -222,14 +224,14 @@ const ToDoWindow = () => {
     };
 
     const handleClearInput = () => {
-        setItem("");
+        setItem('');
     };
 
     const handleItemClick = (id) => {
         setTodoList((prev) =>
             prev.map((t, i) =>
-                i === id ? { ...t, completed: !t.completed } : t
-            )
+                i === id ? { ...t, completed: !t.completed } : t,
+            ),
         );
     };
 
@@ -237,7 +239,9 @@ const ToDoWindow = () => {
         <Shell>
             <Stack $gap="0.2rem">
                 <Title>To-Do List</Title>
-                <Subtitle>Organize your tasks and boost your productivity!</Subtitle>
+                <Subtitle>
+                    Organize your tasks and boost your productivity!
+                </Subtitle>
             </Stack>
             <Form onSubmit={handleAddItem}>
                 <InputGroup>
@@ -248,9 +252,17 @@ const ToDoWindow = () => {
                         placeholder="Enter a task..."
                         title="Task description"
                     />
-                    {item && (<CloseIcon src="/svg/close.svg" alt="Clear input" onClick={handleClearInput} />)}
+                    {item && (
+                        <CloseIcon
+                            src="/svg/close.svg"
+                            alt="Clear input"
+                            onClick={handleClearInput}
+                        />
+                    )}
                 </InputGroup>
-                <AddButton type="submit" variant="primary">{editing ? "Update" : "Add"}</AddButton>
+                <AddButton type="submit" variant="primary">
+                    {editing ? 'Update' : 'Add'}
+                </AddButton>
             </Form>
             <Hint>Hint: Click on a task to mark it as completed.</Hint>
             <Title>Your Tasks:</Title>

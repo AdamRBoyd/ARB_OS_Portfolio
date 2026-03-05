@@ -1,7 +1,14 @@
-import styled from "styled-components";
-import { useState } from "react";
-import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
-import { Button } from "@atoms";
+import styled from 'styled-components';
+import { useState } from 'react';
+import {
+    InsetSurface,
+    Stack,
+    Row,
+    InsetWindowShell,
+    Title,
+    Subtitle,
+} from '@primitives';
+import { Button } from '@atoms';
 
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
 const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -30,7 +37,6 @@ const LengthLabel = styled.label`
         border-radius: 8px;
         text-align: center;
 
-        /* highlight ONLY if you want it */
         &:focus-within {
             border-color: ${({ theme }) => theme.palette.accent[0]};
             box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
@@ -52,45 +58,40 @@ const GeneratedTitle = styled(Title)`
     margin-top: 0.75rem;
 `;
 
-const ResultContainer = styled.div`
-`;
+const ResultContainer = styled.div``;
 
 const PasswordContainer = styled(InsetSurface)`
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
 
-  padding: 0.75rem 1rem;
-  margin-top: 0.5rem;
-  border-radius: 12px;
-  background: ${({ theme }) => theme.palette.grays[2]};
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    border-radius: 12px;
+    background: ${({ theme }) => theme.palette.grays[2]};
 
-  width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    box-sizing: border-box;
 
-  /* optional */
-  gap: 0.75rem;
+    /* optional */
+    gap: 0.75rem;
 `;
 
 const PasswordText = styled.div`
-  font-family: monospace;
-  font-size: 1.15rem;
-  color: ${({ theme }) => theme.palette.primary[0]};
+    font-family: monospace;
+    font-size: 1.15rem;
+    color: ${({ theme }) => theme.palette.primary[0]};
 
-  /* ✅ critical for ellipsis inside grid/flex layouts */
-  min-width: 0;
+    min-width: 0;
 
-  /* ✅ ellipsis */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-  /* optional: makes selecting feel nicer */
-  user-select: text;
+    user-select: text;
 `;
 
-const IconButton = styled(Button)`
-`;
+const IconButton = styled(Button)``;
 
 const ButtonIcon = styled.img`
     width: 16px;
@@ -106,7 +107,7 @@ const PasswordGeneratorWindow = () => {
     const [includeUpper, setIncludeUpper] = useState(false);
     const [includeNumbers, setIncludeNumbers] = useState(false);
     const [includeSymbols, setIncludeSymbols] = useState(false);
-    const [generatedPassword, setGeneratedPassword] = useState("");
+    const [generatedPassword, setGeneratedPassword] = useState('');
 
     const generatePassword = () => {
         let charset = ALPHA;
@@ -114,7 +115,7 @@ const PasswordGeneratorWindow = () => {
         if (includeNumbers) charset += NUMBERS;
         if (includeSymbols) charset += SYMBOLS;
 
-        let password = "";
+        let password = '';
         for (let i = 0; i < length; i++) {
             const randomIndex = Math.floor(Math.random() * charset.length);
             password += charset[randomIndex];
@@ -133,7 +134,8 @@ const PasswordGeneratorWindow = () => {
                 <Subtitle>Customize your password options below:</Subtitle>
             </Stack>
             <Row>
-                <LengthLabel>Length:
+                <LengthLabel>
+                    Length:
                     <input
                         type="number"
                         value={length}
@@ -172,7 +174,9 @@ const PasswordGeneratorWindow = () => {
                 </IncludeOption>
             </Row>
             <Row>
-                <GenerateButton variant="primary" onClick={generatePassword}>Generate Password</GenerateButton>
+                <GenerateButton variant="primary" onClick={generatePassword}>
+                    Generate Password
+                </GenerateButton>
             </Row>
             <ResultContainer>
                 <GeneratedTitle>Generated Password:</GeneratedTitle>
@@ -192,7 +196,6 @@ const PasswordGeneratorWindow = () => {
                     </IconButton>
                 </PasswordContainer>
             </ResultContainer>
-
         </Shell>
     );
 };

@@ -1,153 +1,158 @@
-import { useMemo, useState } from "react";
-import styled from "styled-components";
-import { InsetSurface, Stack, Row, InsetWindowShell, Title, Subtitle } from "@primitives";
-import { Button } from "@atoms";
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
+import {
+    InsetSurface,
+    Stack,
+    Row,
+    InsetWindowShell,
+    Title,
+    Subtitle,
+} from '@primitives';
+import { Button } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetWindowShell)`
-`;
+const Shell = styled(InsetWindowShell)``;
 
 const Form = styled.form`
-  min-height: 0;
-  display: grid;
-  grid-template-rows: auto auto auto 1fr auto;
-  gap: 0.9rem;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 0.9rem;
 `;
 
 const Field = styled.div`
-  display: grid;
-  gap: 0.35rem;
+    display: grid;
+    gap: 0.35rem;
 `;
 
 const Label = styled.label`
-  font-size: 0.82rem;
-  color: ${({ theme }) => theme.palette.tertiary[0]};
+    font-size: 0.82rem;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
 `;
 
 const Input = styled.input`
-  width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    box-sizing: border-box;
 
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.primary[0]};
+    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    background: ${({ theme }) => theme.palette.grays[2]};
+    color: ${({ theme }) => theme.palette.primary[0]};
 
-  border-radius: 12px;
-  padding: 0.55rem 0.65rem;
-  outline: none;
+    border-radius: 12px;
+    padding: 0.55rem 0.65rem;
+    outline: none;
 
-  /* Remove spinner */
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  appearance: textfield;
+    /* Remove spinner */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    appearance: textfield;
 
-  &:focus {
-    border-color: ${({ theme }) => theme.palette.accent[0]};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-  }
+    &:focus {
+        border-color: ${({ theme }) => theme.palette.accent[0]};
+        box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
+    }
 
-  &::placeholder {
-    color: ${({ theme }) => theme.palette.tertiary[0]};
-    opacity: 0.7;
-  }
+    &::placeholder {
+        color: ${({ theme }) => theme.palette.tertiary[0]};
+        opacity: 0.7;
+    }
 `;
 
-const ResetButton = styled(Button)`
-`;
+const ResetButton = styled(Button)``;
 
 const Chips = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.45rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    flex-wrap: wrap;
 `;
 
 const Chip = styled(Button)`
-  padding: 0.35rem 1rem;
-  font-size: 0.82rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.82rem;
 `;
 
 const SplitRow = styled(Row)`
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.6rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
 `;
 
 const Stepper = styled(Row)`
-  gap: 0.45rem;
-  align-items: center;
+    gap: 0.45rem;
+    align-items: center;
 `;
 
 const StepBtn = styled(Button)`
-  width: 30px;
-  height: 25px;
+    width: 30px;
+    height: 25px;
 
-  font-weight: 800;
-  line-height: 1;
-  
-  &:hover {
-    background: ${({ theme }) => theme.palette.grays[5]};
-  }
+    font-weight: 800;
+    line-height: 1;
+
+    &:hover {
+        background: ${({ theme }) => theme.palette.grays[5]};
+    }
 `;
 
 const SplitBadge = styled(Input)`
-  min-width: 44px;
-  max-width: 80px;
-  text-align: center;
+    min-width: 44px;
+    max-width: 80px;
+    text-align: center;
 
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.primary[0]};
+    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    background: ${({ theme }) => theme.palette.grays[2]};
+    color: ${({ theme }) => theme.palette.primary[0]};
 
-  border-radius: 10px;
-  padding: 0.5rem 0.5rem;
-  font-weight: 650;
+    border-radius: 10px;
+    padding: 0.5rem 0.5rem;
+    font-weight: 650;
 `;
 
 const Results = styled(InsetSurface)`
-  padding: 0.85rem;
-  border-radius: 12px;
+    padding: 0.85rem;
+    border-radius: 12px;
 
-  background: ${({ theme }) => theme.palette.grays[2]};
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    background: ${({ theme }) => theme.palette.grays[2]};
+    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
 
-  display: grid;
-  gap: 0.55rem;
-  align-content: start;
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
 `;
 
 const ResultRow = styled(Row)`
-  justify-content: space-between;
-  align-items: baseline;
+    justify-content: space-between;
+    align-items: baseline;
 `;
 
 const ResultLabel = styled.div`
-  font-size: 0.85rem;
-  color: ${({ theme }) => theme.palette.secondary[0]};
+    font-size: 0.85rem;
+    color: ${({ theme }) => theme.palette.secondary[0]};
 `;
 
 const ResultValue = styled.div`
-  font-size: 1.05rem;
-  font-weight: 650;
-  color: ${({ theme }) => theme.palette.primary[0]};
+    font-size: 1.05rem;
+    font-weight: 650;
+    color: ${({ theme }) => theme.palette.primary[0]};
 `;
 
 const Hint = styled.div`
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.palette.tertiary[0]};
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
 `;
 
 const Divider = styled.div`
-  height: 1px;
-  background: ${({ theme }) => theme.palette.grays[4]};
-  opacity: 0.9;
-  margin: 0.15rem 0;
+    height: 1px;
+    background: ${({ theme }) => theme.palette.grays[4]};
+    opacity: 0.9;
+    margin: 0.15rem 0;
 `;
 
 /* ----------------------------- */
@@ -157,7 +162,7 @@ const Divider = styled.div`
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
 const toMoney = (n) => {
-    if (!Number.isFinite(n)) return "0.00";
+    if (!Number.isFinite(n)) return '0.00';
     return n.toFixed(2);
 };
 
@@ -178,9 +183,9 @@ const safeInt = (s) => {
 const TipCalculatorWindow = () => {
     const QUICK_TIPS = [15, 18, 20];
 
-    const [billAmount, setBillAmount] = useState("");
-    const [tipPercentage, setTipPercentage] = useState("");
-    const [split, setSplit] = useState("1");
+    const [billAmount, setBillAmount] = useState('');
+    const [tipPercentage, setTipPercentage] = useState('');
+    const [split, setSplit] = useState('1');
 
     const bill = useMemo(() => safeFloat(billAmount), [billAmount]);
     const tipPct = useMemo(() => safeFloat(tipPercentage), [tipPercentage]);
@@ -208,9 +213,9 @@ const TipCalculatorWindow = () => {
     };
 
     const reset = () => {
-        setBillAmount("");
-        setTipPercentage("");
-        setSplit("1");
+        setBillAmount('');
+        setTipPercentage('');
+        setSplit('1');
     };
 
     const bumpSplit = (delta) => {
@@ -243,9 +248,14 @@ const TipCalculatorWindow = () => {
                 </Field>
 
                 <Field>
-                    <Row $gap="0.6rem" style={{ justifyContent: "space-between" }}>
+                    <Row
+                        $gap="0.6rem"
+                        style={{ justifyContent: 'space-between' }}
+                    >
                         <Label htmlFor="tip">Tip Percentage</Label>
-                        <span style={{ fontSize: "0.78rem", opacity: 0.8 }}>Quick tips:</span>
+                        <span style={{ fontSize: '0.78rem', opacity: 0.8 }}>
+                            Quick tips:
+                        </span>
                     </Row>
 
                     <Chips aria-label="Quick tip percentages">
@@ -282,7 +292,12 @@ const TipCalculatorWindow = () => {
                         </Label>
 
                         <Stepper aria-label="Split stepper">
-                            <StepBtn type="button" onClick={() => bumpSplit(-1)} title="Decrease split" variant="icon">
+                            <StepBtn
+                                type="button"
+                                onClick={() => bumpSplit(-1)}
+                                title="Decrease split"
+                                variant="icon"
+                            >
                                 –
                             </StepBtn>
                             <SplitBadge
@@ -295,7 +310,12 @@ const TipCalculatorWindow = () => {
                                 value={split}
                                 onChange={(e) => setSplit(e.target.value)}
                             />
-                            <StepBtn type="button" onClick={() => bumpSplit(1)} title="Increase split" variant="icon">
+                            <StepBtn
+                                type="button"
+                                onClick={() => bumpSplit(1)}
+                                title="Increase split"
+                                variant="icon"
+                            >
                                 +
                             </StepBtn>
                         </Stepper>
@@ -309,27 +329,41 @@ const TipCalculatorWindow = () => {
                         <>
                             <ResultRow>
                                 <ResultLabel>Tip</ResultLabel>
-                                <ResultValue>${toMoney(computed.tip)}</ResultValue>
+                                <ResultValue>
+                                    ${toMoney(computed.tip)}
+                                </ResultValue>
                             </ResultRow>
 
                             <ResultRow>
                                 <ResultLabel>Total</ResultLabel>
-                                <ResultValue>${toMoney(computed.total)}</ResultValue>
+                                <ResultValue>
+                                    ${toMoney(computed.total)}
+                                </ResultValue>
                             </ResultRow>
 
                             <Divider />
 
                             <ResultRow>
                                 <ResultLabel>
-                                    Per person <span style={{ opacity: 0.8 }}>({people})</span>
+                                    Per person{' '}
+                                    <span style={{ opacity: 0.8 }}>
+                                        ({people})
+                                    </span>
                                 </ResultLabel>
-                                <ResultValue>${toMoney(computed.perPerson)}</ResultValue>
+                                <ResultValue>
+                                    ${toMoney(computed.perPerson)}
+                                </ResultValue>
                             </ResultRow>
                         </>
                     )}
                 </Results>
 
-                <ResetButton type="button" onClick={reset} title="Reset fields" variant="secondary">
+                <ResetButton
+                    type="button"
+                    onClick={reset}
+                    title="Reset fields"
+                    variant="secondary"
+                >
                     Reset
                 </ResetButton>
             </Form>

@@ -1,68 +1,68 @@
-import { useMemo, useState } from "react";
-import styled from "styled-components";
-import { UNIT_CATEGORIES } from "@constants/unitConversions";
-import { convert } from "@utils/convertUnits";
-import { InsetSurface } from "@primitives";
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
+import { UNIT_CATEGORIES } from '@constants/unitConversions';
+import { convert } from '@utils/convertUnits';
+import { InsetSurface } from '@primitives';
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
 const Shell = styled(InsetSurface)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
-  border-radius: 12px;
-  gap: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    gap: 0.7rem;
 `;
 
 const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 `;
 
 const StyledInput = styled.input`
-  width: 13rem;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
+    width: 13rem;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
 
-  border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-  background: ${({ theme }) => theme.palette.grays[2]};
-  color: ${({ theme }) => theme.palette.primary[0]};
+    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    background: ${({ theme }) => theme.palette.grays[2]};
+    color: ${({ theme }) => theme.palette.primary[0]};
 
-  border-radius: 12px;
-  padding: 0.45rem 0.65rem;
-  outline: none;
+    border-radius: 12px;
+    padding: 0.45rem 0.65rem;
+    outline: none;
 
-  /* Remove spinner */
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  appearance: textfield;
+    /* Remove spinner */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    appearance: textfield;
 
-  &:focus {
-    border-color: ${({ theme }) => theme.palette.accent[0]};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-  }
+    &:focus {
+        border-color: ${({ theme }) => theme.palette.accent[0]};
+        box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
+    }
 
-  &::placeholder {
-    color: ${({ theme }) => theme.palette.tertiary[0]};
-    opacity: 0.7;
-  }
+    &::placeholder {
+        color: ${({ theme }) => theme.palette.tertiary[0]};
+        opacity: 0.7;
+    }
 `;
 
 const StyledLabel = styled.label`
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.palette.tertiary[0]};
-  text-transform: capitalize;
+    font-size: 0.9rem;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+    text-transform: capitalize;
 `;
 
 /* ----------------------------- */
@@ -70,23 +70,27 @@ const StyledLabel = styled.label`
 /* ----------------------------- */
 
 const parseLooseNumber = (s) => {
-    const v = String(s ?? "").trim();
-    if (v === "" || v === "." || v === "-" || v === "-.") return null;
+    const v = String(s ?? '').trim();
+    if (v === '' || v === '.' || v === '-' || v === '-.') return null;
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
 };
 
-const formatPlain = (n, { maxFrac = 10, sciAt = 1e9, sciBelow = 1e-6 } = {}) => {
-    if (!Number.isFinite(n)) return "";
+const formatPlain = (
+    n,
+    { maxFrac = 10, sciAt = 1e9, sciBelow = 1e-6 } = {},
+) => {
+    if (!Number.isFinite(n)) return '';
     const abs = Math.abs(n);
-    if (abs !== 0 && (abs >= sciAt || abs < sciBelow)) return n.toExponential(6);
+    if (abs !== 0 && (abs >= sciAt || abs < sciBelow))
+        return n.toExponential(6);
 
     const s = n.toLocaleString(undefined, {
         useGrouping: false,
         maximumFractionDigits: maxFrac,
     });
 
-    return s.includes(".") ? s.replace(/\.?0+$/, "") : s;
+    return s.includes('.') ? s.replace(/\.?0+$/, '') : s;
 };
 
 /* ----------------------------- */
@@ -96,30 +100,30 @@ const formatPlain = (n, { maxFrac = 10, sciAt = 1e9, sciBelow = 1e-6 } = {}) => 
 export default function UnitCard({ categoryKey }) {
     const category = useMemo(
         () => UNIT_CATEGORIES[categoryKey] ?? null,
-        [categoryKey]
+        [categoryKey],
     );
 
     const unitKeys = useMemo(
         () => (category ? Object.keys(category.units) : []),
-        [category]
+        [category],
     );
 
-    const [activeUnit, setActiveUnit] = useState(category?.base ?? "");
-    const [activeValue, setActiveValue] = useState("0");
+    const [activeUnit, setActiveUnit] = useState(category?.base ?? '');
+    const [activeValue, setActiveValue] = useState('0');
 
     const values = useMemo(() => {
-        if (!category) return Object.fromEntries(unitKeys.map((k) => [k, ""]));
+        if (!category) return Object.fromEntries(unitKeys.map((k) => [k, '']));
 
         const n = parseLooseNumber(activeValue);
-        if (n === null) return Object.fromEntries(unitKeys.map((k) => [k, ""]));
+        if (n === null) return Object.fromEntries(unitKeys.map((k) => [k, '']));
 
-        const maxFrac = categoryKey === "temperature" ? 2 : 10;
+        const maxFrac = categoryKey === 'temperature' ? 2 : 10;
 
         return Object.fromEntries(
             unitKeys.map((toUnit) => {
                 const out = convert(categoryKey, n, activeUnit, toUnit);
                 return [toUnit, formatPlain(out, { maxFrac })];
-            })
+            }),
         );
     }, [category, activeUnit, activeValue, unitKeys, categoryKey]);
 
@@ -138,7 +142,11 @@ export default function UnitCard({ categoryKey }) {
                     <StyledInput
                         type="text"
                         inputMode="decimal"
-                        value={unitKey === activeUnit ? activeValue : values[unitKey]}
+                        value={
+                            unitKey === activeUnit
+                                ? activeValue
+                                : values[unitKey]
+                        }
                         onChange={handleChange(unitKey)}
                     />
                 </InfoRow>
