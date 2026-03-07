@@ -160,10 +160,12 @@ export const PROGRAMS = [
         iconSrc: 'Dictionary.png',
         group: 'Mini Apps',
         subgroup: 'Data',
-        size: WINDOW_SIZE.sm,
+        size: { w: 820, h: 560 },
         noScroll: false,
         desktop: false,
         home: { ax: 0.06, ay: 0.56 },
+        defaultOpen: true,
+        defaultState: 'window',
     },
 
     {
