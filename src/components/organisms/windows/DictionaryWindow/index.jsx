@@ -18,6 +18,7 @@ import { Button } from '@atoms';
 const Shell = styled(InsetWindowShell)`
     grid-template-rows: auto auto 1fr;
     padding: 0;
+    gap: 0.25rem;
 `;
 
 const TitleColumn = styled(Stack)`
@@ -33,6 +34,7 @@ const Form = styled.form`
     grid-template-columns: 1fr auto;
     gap: 1rem;
     padding: 0.75rem 1rem;
+    margin-top: 0.25rem;
 
     background: ${({ theme }) => theme.palette.grays[3]};
 `;
@@ -46,7 +48,7 @@ const FormInput = styled.input`
     color: ${({ theme }) => theme.palette.primary[0]};
 
     border-radius: 12px;
-    padding: 0.55rem 0.65rem;
+    padding: 0.55rem 1.2rem;
     outline: none;
 
     &:focus {
@@ -82,23 +84,35 @@ const DefinitionBody = styled(InsetSurface)`
     box-sizing: border-box;
 `;
 
-// Serched word and pronunciation - sticky at top of scroll
+// Searched word and pronunciation - sticky at top of scroll
 const DefinitionItem = styled(Row)`
     position: sticky;
     top: 0;
     background: ${({ theme }) => theme.palette.grays[2]};
     border-bottom: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    padding: 0 2rem 0.25rem;
 `;
 
 const Word = styled.span`
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.9rem;
     margin-right: 0.5rem;
     text-transform: capitalize;
 `;
 
+const PhoneticPronunciationContainer = styled.div`
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.25rem;
+    align-items: center;
+`;
+
 const Phonetic = styled.span`
     font-style: italic;
+    font-size: 1.2rem;
     color: ${({ theme }) => theme.palette.tertiary[0]};
 `;
 
@@ -106,7 +120,7 @@ const Pronunciation = styled.audio``;
 
 const PlayButton = styled(Button)``;
 
-const PLayIcon = styled.img`
+const PlayIcon = styled.img`
     width: 16px;
     height: 16px;
 `;
@@ -141,14 +155,46 @@ const Details = styled.details`
 `;
 
 const Summary = styled.summary`
+    display: flex;
+    align-items: center;
     cursor: pointer;
     font-size: 0.9rem;
-    color: ${({ theme }) => theme.palette.accent[0]};
+    color: ${({ theme }) => theme.palette.primary[0]};
+    text-transform: capitalize;
+    background: ${({ theme }) => theme.palette.grays[4]};
+    padding: 0.25rem 1rem;
+    font-weight: 500;
+
+    /* Remove default marker */
+    list-style: none;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+
+    &::marker {
+        display: none;
+    }
+
+    /* Custom marker */
+    &::before {
+        content: '▸';
+        display: inline-block;
+        margin-right: 0.5rem;
+        transition: transform 0.2s ease;
+    }
+
+    /* When details is open */
+    details[open] &::before {
+        transform: rotate(90deg);
+    }
 `;
 
-const DefinitionText = styled.p`
-    margin-left: 1.5rem;
-    margin-top: 0.25rem;
+const DefinitionHeader = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background: ${({ theme }) => theme.palette.grays[3]};
 `;
 
 const DefinitionList = styled.ol`
@@ -168,6 +214,18 @@ const SynonymList = styled.ul`
 
 const SynonymItem = styled.li``;
 
+const NoResults = styled.div`
+    padding: 2rem;
+    text-align: center;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+`;
+
+const Loading = styled.div`
+    padding: 2rem;
+    text-align: center;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+`;
+
 /* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
@@ -181,7 +239,7 @@ const DictionaryWindow = () => {
         ? `https://api.dictionaryapi.dev/api/v2/entries/en/${submittedTerm}`
         : null;
 
-    const { data, error, loading } = useFetch(url);
+    const { data, loading } = useFetch(url);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -192,10 +250,8 @@ const DictionaryWindow = () => {
     };
 
     const entry = data?.[0];
-
-    const audioUrl = entry?.phonetics?.find(
-        (phonetic) => phonetic.audio,
-    )?.audio;
+    const phoneticText = entry?.phonetics?.find((phonetic) => phonetic.text)?.text;
+    const audioUrl = entry?.phonetics?.find((phonetic) => phonetic.audio)?.audio;
 
     useEffect(() => {
         if (audioRef.current) {
@@ -204,11 +260,15 @@ const DictionaryWindow = () => {
         }
     }, [audioUrl]);
 
-    const toggleAudio = () => {
+    const toggleAudio = async () => {
         if (!audioRef.current) return;
 
         if (audioRef.current.paused) {
-            audioRef.current.play();
+            try {
+                await audioRef.current.play();
+            } catch (err) {
+                console.error('Failed to play audio:', err);
+            }
         } else {
             audioRef.current.pause();
         }
@@ -218,24 +278,27 @@ const DictionaryWindow = () => {
         <Shell>
             <TitleColumn>
                 <Title>Dictionary</Title>
-                <Subtitle>Mini App</Subtitle>
+                <Subtitle>Look up word definitions and pronunciations.</Subtitle>
             </TitleColumn>
             <Form onSubmit={handleSearch}>
                 <FormInput
+                    aria-label="Search dictionary"
                     placeholder="Search..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <SubmitButton type="submit">Search</SubmitButton>
             </Form>
-            {!loading && data && (
+            {loading && <Loading>Loading...</Loading>}
+            {!loading && !entry && submittedTerm && <NoResults>No results found.</NoResults>}
+            {!loading && entry && (
                 <DefinitionBody>
                     <DefinitionItem>
                         <Word>{entry.word}</Word>
 
-                        {entry.phonetics && entry.phonetics.length > 0 && (
-                            <>
-                                <Phonetic>{entry.phonetics[0].text}</Phonetic>
+                        {(phoneticText || audioUrl) && (
+                            <PhoneticPronunciationContainer>
+                                {phoneticText && <Phonetic>{phoneticText}</Phonetic>}
 
                                 {audioUrl && (
                                     <>
@@ -248,41 +311,26 @@ const DictionaryWindow = () => {
                                             onClick={toggleAudio}
                                             variant="icon"
                                         >
-                                            <PLayIcon
+                                            <PlayIcon
                                                 src="svg/audio.svg"
-                                                alt="Play"
+                                                alt="Play pronunciation"
                                             />
                                         </PlayButton>
                                     </>
                                 )}
-                            </>
+                            </PhoneticPronunciationContainer>
                         )}
                     </DefinitionItem>
                     <MeaningContainer>
                         {entry.meanings.map((meaning, index) => (
-                            <Details key={index} name="partOfSpeech">
+                            <Details key={index} name="dictionary-meanings">
                                 <Summary>{meaning.partOfSpeech}</Summary>
 
-                                {meaning.synonyms &&
-                                    meaning.synonyms.length > 0 && (
-                                        <>
-                                            <DefinitionText>
-                                                <strong>Synonyms:</strong>
-                                            </DefinitionText>
-                                            <SynonymList>
-                                                {meaning.synonyms.map(
-                                                    (synonym, synIndex) => (
-                                                        <SynonymItem
-                                                            key={synIndex}
-                                                        >
-                                                            {synonym}
-                                                        </SynonymItem>
-                                                    ),
-                                                )}
-                                            </SynonymList>
-                                        </>
-                                    )}
 
+
+                                <DefinitionHeader>
+                                    <strong>Definitions:</strong>
+                                </DefinitionHeader>
                                 <DefinitionList>
                                     {meaning.definitions.map(
                                         (def, defIndex) => (
@@ -317,6 +365,26 @@ const DictionaryWindow = () => {
                                         ),
                                     )}
                                 </DefinitionList>
+
+                                {meaning.synonyms &&
+                                    meaning.synonyms.length > 0 && (
+                                        <>
+                                            <DefinitionHeader>
+                                                <strong>Synonyms:</strong>
+                                            </DefinitionHeader>
+                                            <SynonymList>
+                                                {meaning.synonyms.map(
+                                                    (synonym, synIndex) => (
+                                                        <SynonymItem
+                                                            key={synIndex}
+                                                        >
+                                                            {synonym}
+                                                        </SynonymItem>
+                                                    ),
+                                                )}
+                                            </SynonymList>
+                                        </>
+                                    )}
                             </Details>
                         ))}
                     </MeaningContainer>
