@@ -12,7 +12,7 @@ import TicTacToeWindow from './TicTacToeWindow';
 import WorkoutLogWindow from './WorkoutLogWindow';
 import TaskLogWindow from './TaskLogWindow';
 import DictionaryWindow from './DictionaryWindow';
-import RecipebookWindow from './RecipebookWindow';
+import RecipeBookWindow from './RecipeBookWindow';
 
 export const WINDOW_COMPONENTS = {
     about: AboutWindow,
@@ -29,5 +29,5 @@ export const WINDOW_COMPONENTS = {
     workoutlog: WorkoutLogWindow,
     tasklog: TaskLogWindow,
     dictionary: DictionaryWindow,
-    recipebook: RecipebookWindow,
+    recipebook: RecipeBookWindow,
 };

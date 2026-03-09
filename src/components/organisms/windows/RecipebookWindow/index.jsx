@@ -10,6 +10,7 @@ import {
     Subtitle,
 } from '@primitives';
 import { Button } from '@atoms';
+import printRecipe from '@utils/printRecipe';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -47,7 +48,6 @@ const Form = styled.form`
     margin-top: 0.25rem;
 
     background: ${({ theme }) => theme.palette.grays[3]};
-
 `;
 
 const FormInput = styled.input`
@@ -86,7 +86,7 @@ const ResultsContainer = styled.div`
     flex-direction: column;
     border-right: 1px solid ${({ theme }) => theme.palette.grays[4]};
     box-sizing: border-box;
-    
+
     height: 100%;
     min-height: 0;
     overflow-y: auto;
@@ -113,7 +113,8 @@ const ResultsContainer = styled.div`
 const ResultItem = styled.button`
     width: 100%;
     text-align: left;
-    background: transparent;
+    background: ${({ $active, theme }) =>
+        $active ? theme.palette.grays[3] : 'transparent'};
     border: 0;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid ${({ theme }) => theme.palette.grays[4]};
@@ -210,6 +211,12 @@ const RecipeThumbnail = styled.img`
 const RecipeInstructions = styled.p`
     white-space: pre-wrap;
     padding: 1rem;
+    margin: 0;
+`;
+
+const IngredientsTitle = styled.h3`
+    margin: 0;
+    margin-bottom: 0.5rem;
 `;
 
 const IngredientsList = styled.ul`
@@ -223,10 +230,20 @@ const IngredientItem = styled.li`
     margin-bottom: 0.25rem;
 `;
 
+const ButtonRow = styled(Row)`
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+
+    padding: 0.75rem 0;
+    margin-bottom: 2rem;
+
+    background: ${({ theme }) => theme.palette.grays[1]};
+`;
+
 const YouTubeButton = styled(Button)`
     width: fit-content;
     padding: 0.5rem 2rem;
-    margin: 0 2rem 1rem;
 
     border: 1px solid ${({ theme }) => theme.palette.grays[6]};
 `;
@@ -235,6 +252,10 @@ const YouTubeText = styled.span`
     color: ${({ theme }) => theme.palette.alert[0]};
 `;
 
+const PrintButton = styled(Button)`
+    width: fit-content;
+    padding: 0.5rem 3rem;
+`;
 
 /* ----------------------------- */
 /* API CREDIT */
@@ -245,7 +266,7 @@ const APIInfo = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     background: ${({ theme }) => theme.palette.grays[3]};
 `;
 
@@ -260,7 +281,7 @@ const APICredit = styled.a`
 /* COMPONENT */
 /* ----------------------------- */
 
-const RecipebookWindow = () => {
+const RecipeBookWindow = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [submittedTerm, setSubmittedTerm] = useState('');
     const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -271,11 +292,12 @@ const RecipebookWindow = () => {
         const trimmed = searchTerm.trim();
         if (trimmed === '') return;
 
+        setSelectedRecipe(null);
         setSubmittedTerm(trimmed);
     };
 
     const url = submittedTerm
-        ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${submittedTerm}`
+        ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(submittedTerm)}`
         : null;
 
     const { data, loading } = useFetch(url);
@@ -294,7 +316,9 @@ const RecipebookWindow = () => {
         <Shell>
             <TitleColumn>
                 <Title>Recipe Book</Title>
-                <Subtitle>Coming Soon!</Subtitle>
+                <Subtitle>
+                    Search and discover meal recipes from around the world
+                </Subtitle>
             </TitleColumn>
             <Form onSubmit={handleSearch}>
                 <FormInput
@@ -312,14 +336,25 @@ const RecipebookWindow = () => {
                     {!loading && recipes.length === 0 && submittedTerm && (
                         <NoResults>No results found.</NoResults>
                     )}
-                    {!loading && recipes.length > 0 && (
+                    {!loading &&
+                        recipes.length > 0 &&
                         recipes.map((recipe) => (
-                            <ResultItem key={recipe.idMeal} onClick={() => setSelectedRecipe(recipe)}>
+                            <ResultItem
+                                key={recipe.idMeal}
+                                $active={
+                                    selectedRecipe?.idMeal === recipe.idMeal
+                                }
+                                onClick={() => setSelectedRecipe(recipe)}
+                            >
                                 {recipe.strMeal}
-                                {recipe.strMealThumb && <ResultThumbnail src={recipe.strMealThumb} alt={recipe.strMeal} />}
+                                {recipe.strMealThumb && (
+                                    <ResultThumbnail
+                                        src={recipe.strMealThumb}
+                                        alt={recipe.strMeal}
+                                    />
+                                )}
                             </ResultItem>
-                        ))
-                    )}
+                        ))}
                 </ResultsContainer>
                 <RecipeContainer>
                     {selectedRecipe && (
@@ -334,14 +369,30 @@ const RecipebookWindow = () => {
                                     />
 
                                     <IngredientsList>
-                                        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => {
-                                            const ingredient = selectedRecipe[`strIngredient${num}`];
-                                            const measure = selectedRecipe[`strMeasure${num}`];
+                                        <IngredientsTitle>
+                                            Ingredients:
+                                        </IngredientsTitle>
+                                        {Array.from(
+                                            { length: 20 },
+                                            (_, i) => i + 1,
+                                        ).map((num) => {
+                                            const ingredient =
+                                                selectedRecipe[
+                                                    `strIngredient${num}`
+                                                ];
+                                            const measure =
+                                                selectedRecipe[
+                                                    `strMeasure${num}`
+                                                ];
 
-                                            if (ingredient && ingredient.trim() !== '') {
+                                            if (
+                                                ingredient &&
+                                                ingredient.trim() !== ''
+                                            ) {
                                                 return (
                                                     <IngredientItem key={num}>
-                                                        {measure} {ingredient}
+                                                        {measure?.trim()}{' '}
+                                                        {ingredient}
                                                     </IngredientItem>
                                                 );
                                             }
@@ -349,19 +400,35 @@ const RecipebookWindow = () => {
                                             return null;
                                         })}
                                     </IngredientsList>
-
                                 </ImageIngredientContainer>
                                 <RecipeInstructions>
                                     {selectedRecipe.strInstructions}
                                 </RecipeInstructions>
-                                {selectedRecipe.strYoutube && (
-                                    <YouTubeButton
-                                        onClick={() => window.open(selectedRecipe.strYoutube, '_blank', 'noopener,noreferrer')}
+                                <ButtonRow>
+                                    {selectedRecipe.strYoutube && (
+                                        <YouTubeButton
+                                            onClick={() =>
+                                                window.open(
+                                                    selectedRecipe.strYoutube,
+                                                    '_blank',
+                                                    'noopener,noreferrer',
+                                                )
+                                            }
+                                            variant="secondary"
+                                        >
+                                            Watch on{' '}
+                                            <YouTubeText>YouTube</YouTubeText>
+                                        </YouTubeButton>
+                                    )}
+                                    <PrintButton
+                                        onClick={() =>
+                                            printRecipe(selectedRecipe)
+                                        }
                                         variant="primary"
                                     >
-                                        Watch on <YouTubeText>YouTube</YouTubeText>
-                                    </YouTubeButton>
-                                )}
+                                        Print Recipe
+                                    </PrintButton>
+                                </ButtonRow>
                             </RecipeContent>
                         </>
                     )}
@@ -380,4 +447,4 @@ const RecipebookWindow = () => {
     );
 };
 
-export default RecipebookWindow;
+export default RecipeBookWindow;
