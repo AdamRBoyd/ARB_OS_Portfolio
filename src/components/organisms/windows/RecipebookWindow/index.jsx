@@ -223,6 +223,19 @@ const IngredientItem = styled.li`
     margin-bottom: 0.25rem;
 `;
 
+const YouTubeButton = styled(Button)`
+    width: fit-content;
+    padding: 0.5rem 2rem;
+    margin: 0 2rem 1rem;
+
+    border: 1px solid ${({ theme }) => theme.palette.grays[6]};
+`;
+
+const YouTubeText = styled.span`
+    color: ${({ theme }) => theme.palette.alert[0]};
+`;
+
+
 /* ----------------------------- */
 /* API CREDIT */
 /* ----------------------------- */
@@ -341,6 +354,14 @@ const RecipebookWindow = () => {
                                 <RecipeInstructions>
                                     {selectedRecipe.strInstructions}
                                 </RecipeInstructions>
+                                {selectedRecipe.strYoutube && (
+                                    <YouTubeButton
+                                        onClick={() => window.open(selectedRecipe.strYoutube, '_blank', 'noopener,noreferrer')}
+                                        variant="primary"
+                                    >
+                                        Watch on <YouTubeText>YouTube</YouTubeText>
+                                    </YouTubeButton>
+                                )}
                             </RecipeContent>
                         </>
                     )}
