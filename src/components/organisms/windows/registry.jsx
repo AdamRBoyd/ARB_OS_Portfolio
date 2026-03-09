@@ -13,6 +13,7 @@ import WorkoutLogWindow from './WorkoutLogWindow';
 import TaskLogWindow from './TaskLogWindow';
 import DictionaryWindow from './DictionaryWindow';
 import RecipeBookWindow from './RecipeBookWindow';
+import WeatherWindow from './WeatherWindow';
 
 export const WINDOW_COMPONENTS = {
     about: AboutWindow,
@@ -30,4 +31,5 @@ export const WINDOW_COMPONENTS = {
     tasklog: TaskLogWindow,
     dictionary: DictionaryWindow,
     recipebook: RecipeBookWindow,
+    weather: WeatherWindow,
 };
