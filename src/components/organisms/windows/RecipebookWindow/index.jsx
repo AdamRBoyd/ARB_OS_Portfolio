@@ -12,6 +12,8 @@ import {
 import { Button } from '@atoms';
 import printRecipe from '@utils/printRecipe';
 
+const STORAGE_KEY = 'recipebook';
+
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
@@ -282,9 +284,38 @@ const APICredit = styled.a`
 /* ----------------------------- */
 
 const RecipeBookWindow = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [submittedTerm, setSubmittedTerm] = useState('');
-    const [selectedRecipe, setSelectedRecipe] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(() => {
+        return sessionStorage.getItem(`${STORAGE_KEY}-searchTerm`) || '';
+    });
+
+    const [submittedTerm, setSubmittedTerm] = useState(() => {
+        return sessionStorage.getItem(`${STORAGE_KEY}-submittedTerm`) || '';
+    });
+
+    const [selectedRecipe, setSelectedRecipe] = useState(() => {
+        const saved = sessionStorage.getItem(`${STORAGE_KEY}-selectedRecipe`);
+        return saved ? JSON.parse(saved) : null;
+    });
+
+    useEffect(() => {
+        sessionStorage.setItem(`${STORAGE_KEY}-searchTerm`, searchTerm);
+    }, [searchTerm]);
+
+    useEffect(() => {
+        sessionStorage.setItem(`${STORAGE_KEY}-submittedTerm`, submittedTerm);
+    }, [submittedTerm]);
+
+    useEffect(() => {
+        if (selectedRecipe) {
+            sessionStorage.setItem(
+                `${STORAGE_KEY}-selectedRecipe`,
+                JSON.stringify(selectedRecipe),
+            );
+        } else {
+            sessionStorage.removeItem(`${STORAGE_KEY}-selectedRecipe`);
+        }
+    }, [selectedRecipe]);
+
     const recipeContentRef = useRef(null);
 
     const handleSearch = (e) => {
