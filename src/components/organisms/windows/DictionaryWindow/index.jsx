@@ -16,7 +16,7 @@ import { Button } from '@atoms';
 /* ----------------------------- */
 
 const Shell = styled(InsetWindowShell)`
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     padding: 0;
     gap: 0.25rem;
 `;
@@ -227,6 +227,26 @@ const Loading = styled.div`
 `;
 
 /* ----------------------------- */
+/* API CREDIT */
+/* ----------------------------- */
+
+const APIInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    background: ${({ theme }) => theme.palette.grays[3]};
+`;
+
+const APICredit = styled.a`
+    font-size: 0.75rem;
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+    text-decoration: none;
+    margin: 0.5rem;
+`;
+
+/* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
 
@@ -390,6 +410,15 @@ const DictionaryWindow = () => {
                     </MeaningContainer>
                 </DefinitionBody>
             )}
+            <APIInfo>
+                <APICredit
+                    href="https://dictionaryapi.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Powered by Free Dictionary API
+                </APICredit>
+            </APIInfo>
         </Shell>
     );
 };

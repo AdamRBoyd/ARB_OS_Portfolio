@@ -152,8 +152,6 @@ export const PROGRAMS = [
         home: { ax: 0.36, ay: 0.28 },
     },
 
-    // ---------------- FUTURE MINI APPS ----------------
-
     {
         id: 'dictionary',
         title: 'Dictionary',
@@ -164,6 +162,20 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.06, ay: 0.56 },
+    },
+
+    // ---------------- FUTURE MINI APPS ----------------
+
+    {
+        id: 'recipebook',
+        title: 'Recipe Book',
+        iconSrc: 'RecipeBook.png',
+        group: 'Mini Apps',
+        subgroup: 'Data',
+        size: WINDOW_SIZE.lg,
+        noScroll: false,
+        desktop: false,
+        home: { ax: 0.78, ay: 0.56 },
         defaultOpen: true,
         defaultState: 'window',
     },
@@ -180,15 +192,4 @@ export const PROGRAMS = [
         home: { ax: 0.22, ay: 0.56 },
     },
 
-    {
-        id: 'recipebook',
-        title: 'Recipe Book',
-        iconSrc: 'RecipeBook.png',
-        group: 'Mini Apps',
-        subgroup: 'Data',
-        size: WINDOW_SIZE.sm,
-        noScroll: false,
-        desktop: false,
-        home: { ax: 0.78, ay: 0.56 },
-    },
 ];
