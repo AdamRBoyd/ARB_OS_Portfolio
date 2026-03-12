@@ -28,24 +28,9 @@ const TitleColumn = styled(Stack)`
     margin: 0.9rem 1rem 0.2rem;
 `;
 
-const BodyContainer = styled.div`
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-
-    height: 100%;
-    min-height: 0;
-`;
-
 /* ----------------------------- */
 /* Form */
 /* ----------------------------- */
-
-const ListFormContainer = styled(InsetSurface)`
-    min-height: 0;
-    min-width: 0;
-    overflow: hidden;
-`;
 
 const Form = styled.form`
     display: grid;
@@ -109,12 +94,20 @@ const WeatherDisplayContainer = styled.div`
     overflow: auto;
 `;
 
+const WeatherInfoRow = styled(Row)`
+    gap: 2rem;
+    padding: 0 1rem;
+    justify-content: center;
+`;
+
 const WeatherLeft = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
+    border-right: 1px solid ${({ theme }) => theme.palette.grays[4]};
+    padding-right: 3rem;
 `;
 
 const WeatherRight = styled.div`
@@ -125,7 +118,39 @@ const WeatherRight = styled.div`
     gap: 0.25rem;
 `;
 
-const WeatherIcon = styled.img``;
+const WeatherIcon = styled.img`
+    width: 100px;
+    height: 100px;
+    margin: 0;
+`;
+
+const WeatherDescription = styled.p`
+    font-size: 1.25rem;
+    text-transform: capitalize;
+    margin: 0;
+`;
+
+const WeatherTemp = styled.p`
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+`;
+
+const WeatherFeelsLike = styled.p`
+    font-size: 1rem;
+    font-style: italic;
+    margin: 0;
+`;
+
+const WeatherLowHigh = styled.p`
+    font-size: 1rem;
+    margin: 0;
+`;
+
+const WeatherInfoItem = styled.p`
+    font-size: 0.9rem;
+    margin: 0;
+`;
 
 /* ----------------------------- */
 /* API CREDIT */
@@ -312,18 +337,36 @@ const WeatherWindow = () => {
             {loading && <div>Loading...</div>}
             {weatherData && !inputError && (
                 <WeatherDisplayContainer>
-                    <WeatherLocation>Weather for {weatherData.name}, {weatherData.sys.country}</WeatherLocation>
-                    <WeatherLeft>
-                        <p>{weatherData.weather[0].description}</p>
-                        <WeatherIcon
-                            src={`https://openweathermap.org/payload/api/media/file/${weatherData.weather[0].icon}.png`}
-                        />
-                        <p>Temperature: {weatherData.main.temp} °F</p>
-                    </WeatherLeft>
-                    <WeatherRight>
-                        <p>Humidity: {weatherData.main.humidity}%</p>
-                        <p>Wind Speed: {weatherData.wind.speed} mph</p>
-                    </WeatherRight>
+                    <WeatherLocation>
+                        Weather for {weatherData.name},{' '}
+                        {weatherData.sys.country}
+                    </WeatherLocation>
+                    <WeatherInfoRow>
+                        <WeatherLeft>
+                            <WeatherDescription>
+                                {weatherData.weather[0].description}
+                            </WeatherDescription>
+                            <WeatherIcon
+                                src={`https://openweathermap.org/payload/api/media/file/${weatherData.weather[0].icon}.png`}
+                            />
+                            <WeatherTemp>
+                                Temperature: {weatherData.main.temp} °F
+                            </WeatherTemp>
+                            <WeatherFeelsLike>
+                                Feels Like: {weatherData.main.feels_like} °F
+                            </WeatherFeelsLike>
+                            <WeatherLowHigh>{`High: ${weatherData.main.temp_max} °F  |  Low: ${weatherData.main.temp_min} °F`}</WeatherLowHigh>
+                        </WeatherLeft>
+                        <WeatherRight>
+                            <WeatherInfoItem>Humidity: {weatherData.main.humidity}%</WeatherInfoItem>
+                            <WeatherInfoItem>Pressure: {weatherData.main.pressure} hPa</WeatherInfoItem>
+                            <WeatherInfoItem>Wind Speed: {weatherData.wind.speed} mph {weatherData.wind.deg}°</WeatherInfoItem>
+                            <WeatherInfoItem>Visibility: {weatherData.visibility} meters</WeatherInfoItem>
+                            <WeatherInfoItem>Sun Rise: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</WeatherInfoItem>
+                            <WeatherInfoItem>Sun Set: {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</WeatherInfoItem>
+                            <WeatherInfoItem>Coordinates: {weatherData.coord.lat}, {weatherData.coord.lon}</WeatherInfoItem>
+                        </WeatherRight>
+                    </WeatherInfoRow>
                 </WeatherDisplayContainer>
             )}
             <APIInfo>
