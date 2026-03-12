@@ -90,6 +90,44 @@ const UseLocalDataButton = styled(Button)`
 `;
 
 /* ----------------------------- */
+/* Weather Display */
+/* ----------------------------- */
+
+const WeatherLocation = styled.h2`
+    margin: 0;
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    background: ${({ theme }) => theme.palette.grays[4]};
+    z-index: 2;
+`;
+
+const WeatherDisplayContainer = styled.div`
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+    overflow: auto;
+`;
+
+const WeatherLeft = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+`;
+
+const WeatherRight = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+`;
+
+const WeatherIcon = styled.img``;
+
+/* ----------------------------- */
 /* API CREDIT */
 /* ----------------------------- */
 
@@ -173,24 +211,14 @@ const WeatherWindow = () => {
         }
     }, [data]);
 
-    const fetchByZip = async (zip) => {
-        setUrl(
-            `https://api.openweathermap.org/data/2.5/weather?zip=${zip},US&units=imperial&appid=${apiKey}`,
-        );
-    };
-
-    const fetchByCityStateCountry = async ({ city, state, country }) => {
-        setUrl(
-            `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},${state},${country}&units=imperial&appid=${apiKey}`,
-        );
-    };
-
     const handleLocationSearch = async (input) => {
         const trimmed = input.trim();
 
         if (/^\d{5}(?:-\d{4})?$/.test(trimmed)) {
             setSubmittedLocation(trimmed);
-            return fetchByZip(trimmed);
+            return setUrl(
+                `https://api.openweathermap.org/data/2.5/weather?zip=${trimmed},US&units=imperial&appid=${apiKey}`,
+            );
         }
 
         const match = trimmed.match(
@@ -202,11 +230,13 @@ const WeatherWindow = () => {
 
             setSubmittedLocation(trimmed);
 
-            return fetchByCityStateCountry({
-                city: city.trim(),
-                state: state.toUpperCase(),
-                country: country.toUpperCase(),
-            });
+            const formattedCity = city.trim();
+            const formattedState = state.toUpperCase();
+            const formattedCountry = country.toUpperCase();
+
+            return setUrl(
+                `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(formattedCity)},${formattedState},${formattedCountry}&units=imperial&appid=${apiKey}`,
+            );
         }
 
         throw new Error(
@@ -237,6 +267,7 @@ const WeatherWindow = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 setSubmittedLocation('Local Weather');
+                setSearchLocation('');
                 setUrl(
                     `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=${apiKey}`,
                 );
@@ -270,10 +301,7 @@ const WeatherWindow = () => {
                 <UseLocalDataButton
                     type="button"
                     variant="secondary"
-                    onClick={() => {
-                        handleUseLocalData();
-                        setSearchLocation('');
-                    }}
+                    onClick={handleUseLocalData}
                 >
                     Use Local Data
                 </UseLocalDataButton>
@@ -282,15 +310,28 @@ const WeatherWindow = () => {
             {inputError && <div>{inputError}</div>}
 
             {loading && <div>Loading...</div>}
-            {weatherData && !inputError && (<div>
-                <h2>{weatherData.name}</h2>
-                <p>{weatherData.weather[0].description}</p>
-                <p>Temperature: {weatherData.main.temp} °F</p>
-                <p>Humidity: {weatherData.main.humidity}%</p>
-                <p>Wind Speed: {weatherData.wind.speed} mph</p>
-            </div>)}
+            {weatherData && !inputError && (
+                <WeatherDisplayContainer>
+                    <WeatherLocation>Weather for {weatherData.name}, {weatherData.sys.country}</WeatherLocation>
+                    <WeatherLeft>
+                        <p>{weatherData.weather[0].description}</p>
+                        <WeatherIcon
+                            src={`https://openweathermap.org/payload/api/media/file/${weatherData.weather[0].icon}.png`}
+                        />
+                        <p>Temperature: {weatherData.main.temp} °F</p>
+                    </WeatherLeft>
+                    <WeatherRight>
+                        <p>Humidity: {weatherData.main.humidity}%</p>
+                        <p>Wind Speed: {weatherData.wind.speed} mph</p>
+                    </WeatherRight>
+                </WeatherDisplayContainer>
+            )}
             <APIInfo>
-                <APICredit href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
+                <APICredit
+                    href="https://openweathermap.org/api"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     Weather data provided by OpenWeatherMap
                 </APICredit>
             </APIInfo>
