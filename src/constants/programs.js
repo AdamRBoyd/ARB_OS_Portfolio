@@ -186,8 +186,6 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.22, ay: 0.56 },
-        defaultOpen: true,
-        defaultState: 'window',
     },
 
 ];

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import useFetch from '@state/useFetch';
 import {
-    InsetSurface,
     Stack,
     Row,
     InsetWindowShell,
