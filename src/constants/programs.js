@@ -176,8 +176,6 @@ export const PROGRAMS = [
         home: { ax: 0.78, ay: 0.56 },
     },
 
-    // ---------------- FUTURE MINI APPS ----------------
-
     {
         id: 'weather',
         title: 'Weather',
