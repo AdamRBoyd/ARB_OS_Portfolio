@@ -184,7 +184,7 @@ export const PROGRAMS = [
         iconSrc: 'Weather.png',
         group: 'Mini Apps',
         subgroup: 'Data',
-        size: WINDOW_SIZE.lg,
+        size: { w: 860, h: 560 },
         noScroll: false,
         desktop: false,
         home: { ax: 0.22, ay: 0.56 },

@@ -9,7 +9,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Divider } from '@atoms';
 import apiKeys from '@/apiKeys.json';
 
 const STORAGE_KEY = 'weatherAppData';
@@ -49,6 +49,7 @@ const FormInput = styled.input`
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
     background: ${({ theme }) => theme.palette.grays[2]};
     color: ${({ theme }) => theme.palette.primary[0]};
+    font-size: 0.8rem;
 
     border-radius: 12px;
     padding: 0.55rem 1.2rem;
@@ -66,7 +67,7 @@ const FormInput = styled.input`
 `;
 
 const SubmitButton = styled(Button)`
-    padding: 0.55rem 5rem;
+    padding: 0.55rem 4rem;
 `;
 
 const UseLocalDataButton = styled(Button)`
@@ -107,49 +108,87 @@ const WeatherLeft = styled.div`
     justify-content: center;
     gap: 0.25rem;
     border-right: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    padding-right: 3rem;
+    padding-right: 4rem;
 `;
 
 const WeatherRight = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 0.25rem;
+    padding-left: 2rem;
 `;
 
 const WeatherIcon = styled.img`
     width: 100px;
     height: 100px;
-    margin: 0;
 `;
 
-const WeatherDescription = styled.p`
-    font-size: 1.25rem;
+const WeatherDescription = styled.div`
+    font-size: 0.9rem;
     text-transform: capitalize;
-    margin: 0;
+
+    color: ${({ theme }) => theme.palette.tertiary[0]};
 `;
 
-const WeatherTemp = styled.p`
+const WeatherIconTemp = styled(Row)`
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 0;
 `;
 
-const WeatherFeelsLike = styled.p`
-    font-size: 1rem;
-    font-style: italic;
-    margin: 0;
-`;
-
-const WeatherLowHigh = styled.p`
-    font-size: 1rem;
-    margin: 0;
-`;
-
-const WeatherInfoItem = styled.p`
+const WeatherFeelsLike = styled.div`
     font-size: 0.9rem;
-    margin: 0;
+    font-style: italic;
+
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+`;
+
+const WeatherLowHighGroup = styled.div`
+    display: flex;
+    gap: 1rem;
+`;
+
+const WeatherLowHigh = styled.div`
+    font-size: 0.9rem;
+
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+`;
+
+const WeatherInfoItem = styled.div`
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0.5rem;
+
+    font-size: 0.8rem;
+
+    background: ${({ theme }) => theme.palette.grays[3]};
+    padding: 0.25rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+
+`;
+
+const WeatherLabel = styled.span`
+    font-weight: 500;
+`;
+
+const WeatherValue = styled.span`
+    text-align: left;
+`;
+
+const ErrorMessage = styled.div`
+    color: ${({ theme }) => theme.palette.accent[0]};
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+`;
+
+const LoadingMessage = styled.div`
+    color: ${({ theme }) => theme.palette.tertiary[0]};
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
 `;
 
 /* ----------------------------- */
@@ -173,6 +212,20 @@ const APICredit = styled.a`
 `;
 
 /* ----------------------------- */
+/* UTILS */
+/* ----------------------------- */
+
+const getWindDirection = (deg) => {
+    const directions = [
+        "N", "NNE", "NE", "ENE",
+        "E", "ESE", "SE", "SSE",
+        "S", "SSW", "SW", "WSW",
+        "W", "WNW", "NW", "NNW"
+    ];
+    return directions[Math.round(deg / 22.5) % 16];
+};
+
+/* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
 
@@ -185,15 +238,6 @@ const WeatherWindow = () => {
         return sessionStorage.getItem(`${STORAGE_KEY}-submittedLocation`) || '';
     });
 
-    const [cachedWeatherData] = useState(() => {
-        try {
-            const stored = sessionStorage.getItem(`${STORAGE_KEY}-weatherData`);
-            return stored ? JSON.parse(stored) : null;
-        } catch {
-            return null;
-        }
-    });
-
     const [url, setUrl] = useState(() => {
         return sessionStorage.getItem(`${STORAGE_KEY}-url`) || null;
     });
@@ -201,10 +245,12 @@ const WeatherWindow = () => {
     const [manualError, setManualError] = useState('');
 
     const apiKey = apiKeys.codeWeather.appid;
+    const urlBase = `https://api.openweathermap.org/data/2.5/weather`;
+    const querySuffix = `&units=imperial&appid=${apiKey}`;
 
     const { data, error, loading } = useFetch(url);
 
-    const weatherData = data || cachedWeatherData;
+    const weatherData = data;
     const inputError =
         manualError || (error ? 'Failed to fetch weather data.' : '');
 
@@ -227,22 +273,13 @@ const WeatherWindow = () => {
         }
     }, [url]);
 
-    useEffect(() => {
-        if (data) {
-            sessionStorage.setItem(
-                `${STORAGE_KEY}-weatherData`,
-                JSON.stringify(data),
-            );
-        }
-    }, [data]);
-
     const handleLocationSearch = async (input) => {
         const trimmed = input.trim();
 
         if (/^\d{5}(?:-\d{4})?$/.test(trimmed)) {
             setSubmittedLocation(trimmed);
             return setUrl(
-                `https://api.openweathermap.org/data/2.5/weather?zip=${trimmed},US&units=imperial&appid=${apiKey}`,
+                `${urlBase}?zip=${trimmed},US${querySuffix}`,
             );
         }
 
@@ -260,7 +297,7 @@ const WeatherWindow = () => {
             const formattedCountry = country.toUpperCase();
 
             return setUrl(
-                `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(formattedCity)},${formattedState},${formattedCountry}&units=imperial&appid=${apiKey}`,
+                `${urlBase}?q=${encodeURIComponent(formattedCity)},${formattedState},${formattedCountry}${querySuffix}`,
             );
         }
 
@@ -294,7 +331,7 @@ const WeatherWindow = () => {
                 setSubmittedLocation('Local Weather');
                 setSearchLocation('');
                 setUrl(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=${apiKey}`,
+                    `${urlBase}?lat=${position.coords.latitude}&lon=${position.coords.longitude}${querySuffix}`,
                 );
             },
             () => {
@@ -307,7 +344,7 @@ const WeatherWindow = () => {
         <Shell>
             <TitleColumn>
                 <Title>Weather App</Title>
-                <Subtitle>This is a placeholder for the Weather App.</Subtitle>
+                <Subtitle>Get current weather data for any location worldwide.</Subtitle>
             </TitleColumn>
 
             <Form onSubmit={handleSubmit}>
@@ -332,10 +369,10 @@ const WeatherWindow = () => {
                 </UseLocalDataButton>
             </Form>
 
-            {inputError && <div>{inputError}</div>}
+            {inputError && <ErrorMessage>{inputError}</ErrorMessage>}
 
-            {loading && <div>Loading...</div>}
-            {weatherData && !inputError && (
+            {loading && <LoadingMessage>Loading...</LoadingMessage>}
+            {weatherData && !inputError && !loading && (
                 <WeatherDisplayContainer>
                     <WeatherLocation>
                         Weather for {weatherData.name},{' '}
@@ -346,25 +383,58 @@ const WeatherWindow = () => {
                             <WeatherDescription>
                                 {weatherData.weather[0].description}
                             </WeatherDescription>
-                            <WeatherIcon
-                                src={`https://openweathermap.org/payload/api/media/file/${weatherData.weather[0].icon}.png`}
-                            />
-                            <WeatherTemp>
-                                Temperature: {weatherData.main.temp} °F
-                            </WeatherTemp>
+                            <WeatherIconTemp>
+                                <WeatherIcon
+                                    src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                                />
+                                {weatherData.main.temp} °F
+                            </WeatherIconTemp>
                             <WeatherFeelsLike>
                                 Feels Like: {weatherData.main.feels_like} °F
                             </WeatherFeelsLike>
-                            <WeatherLowHigh>{`High: ${weatherData.main.temp_max} °F  |  Low: ${weatherData.main.temp_min} °F`}</WeatherLowHigh>
+                            <WeatherLowHighGroup>
+                                <WeatherLowHigh>{`Low: ${weatherData.main.temp_min} °F`}</WeatherLowHigh>
+                                <Divider height="1rem" />
+                                <WeatherLowHigh>{`High: ${weatherData.main.temp_max} °F`}</WeatherLowHigh>
+                            </WeatherLowHighGroup>
                         </WeatherLeft>
                         <WeatherRight>
-                            <WeatherInfoItem>Humidity: {weatherData.main.humidity}%</WeatherInfoItem>
-                            <WeatherInfoItem>Pressure: {weatherData.main.pressure} hPa</WeatherInfoItem>
-                            <WeatherInfoItem>Wind Speed: {weatherData.wind.speed} mph {weatherData.wind.deg}°</WeatherInfoItem>
-                            <WeatherInfoItem>Visibility: {weatherData.visibility} meters</WeatherInfoItem>
-                            <WeatherInfoItem>Sun Rise: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</WeatherInfoItem>
-                            <WeatherInfoItem>Sun Set: {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</WeatherInfoItem>
-                            <WeatherInfoItem>Coordinates: {weatherData.coord.lat}, {weatherData.coord.lon}</WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Humidity:</WeatherLabel>
+                                <WeatherValue>
+                                    {weatherData.main.humidity}%
+                                </WeatherValue>
+                            </WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Wind Speed:</WeatherLabel>
+                                <WeatherValue>
+                                    {weatherData.wind.speed} mph {weatherData.wind?.deg != null && getWindDirection(weatherData.wind.deg)}
+                                </WeatherValue>
+                            </WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Pressure:</WeatherLabel>
+                                <WeatherValue>
+                                    {weatherData.main.pressure} hPa
+                                </WeatherValue>
+                            </WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Visibility:</WeatherLabel>
+                                <WeatherValue>
+                                    {(weatherData.visibility / 1609).toFixed(1)} miles
+                                </WeatherValue>
+                            </WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Sun:</WeatherLabel>
+                                <WeatherValue>
+                                    {`${new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()} → ${new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}`}
+                                </WeatherValue>
+                            </WeatherInfoItem>
+                            <WeatherInfoItem>
+                                <WeatherLabel>Coordinates:</WeatherLabel>
+                                <WeatherValue>
+                                    {`${weatherData.coord.lat} lat, ${weatherData.coord.lon} lon`}
+                                </WeatherValue>
+                            </WeatherInfoItem>
                         </WeatherRight>
                     </WeatherInfoRow>
                 </WeatherDisplayContainer>
