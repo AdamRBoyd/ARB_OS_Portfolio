@@ -8,7 +8,8 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Input } from '@atoms';
+import { Form } from '@molecules';
 
 const STORAGE_KEY = 'taskLogTasks';
 
@@ -53,37 +54,12 @@ const ListFormContainer = styled(InsetSurface)`
 /* FORM */
 /* ----------------------------- */
 
-const TaskForm = styled.form`
-    display: grid;
+const TaskForm = styled(Form)`
     grid-template-columns: 1fr auto auto;
-    gap: 1rem;
-    padding: 0.75rem 1rem;
-
-    background: ${({ theme }) => theme.palette.grays[3]};
+    margin: 0;
 `;
 
-const TaskFormInput = styled.input`
-    width: 100%;
-    box-sizing: border-box;
-
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.grays[2]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-
-    border-radius: 12px;
-    padding: 0.55rem 0.65rem;
-    outline: none;
-
-    &:focus {
-        border-color: ${({ theme }) => theme.palette.accent[0]};
-        box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-    }
-
-    &::placeholder {
-        color: ${({ theme }) => theme.palette.tertiary[0]};
-        opacity: 0.7;
-    }
-`;
+const TaskFormInput = styled(Input)``;
 
 const SubmitButton = styled(Button)``;
 

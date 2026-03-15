@@ -8,7 +8,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Input } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -33,17 +33,8 @@ const Label = styled.label`
     color: ${({ theme }) => theme.palette.tertiary[0]};
 `;
 
-const Input = styled.input`
-    width: 100%;
-    box-sizing: border-box;
-
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.grays[2]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-
-    border-radius: 12px;
+const FormInput = styled(Input)`
     padding: 0.55rem 0.65rem;
-    outline: none;
 
     /* Remove spinner */
     &::-webkit-outer-spin-button,
@@ -52,16 +43,6 @@ const Input = styled.input`
         margin: 0;
     }
     appearance: textfield;
-
-    &:focus {
-        border-color: ${({ theme }) => theme.palette.accent[0]};
-        box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-    }
-
-    &::placeholder {
-        color: ${({ theme }) => theme.palette.tertiary[0]};
-        opacity: 0.7;
-    }
 `;
 
 const ResetButton = styled(Button)``;
@@ -101,7 +82,7 @@ const StepBtn = styled(Button)`
     }
 `;
 
-const SplitBadge = styled(Input)`
+const SplitBadge = styled(FormInput)`
     min-width: 44px;
     max-width: 80px;
     text-align: center;
@@ -235,7 +216,7 @@ const TipCalculatorWindow = () => {
             <Form onSubmit={onSubmit}>
                 <Field>
                     <Label htmlFor="bill">Bill Amount</Label>
-                    <Input
+                    <FormInput
                         id="bill"
                         type="number"
                         inputMode="decimal"

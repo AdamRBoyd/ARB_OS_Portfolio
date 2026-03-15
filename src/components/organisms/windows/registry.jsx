@@ -1,35 +1,35 @@
 import AboutWindow from './AboutWindow';
-import ProjectsWindow from './ProjectsWindow';
-import ResumeWindow from './ResumeWindow';
 import BrowserWindow from './BrowserWindow';
 import CalculatorWindow from './CalculatorWindow';
-import TipCalculatorWindow from './TipCalculatorWindow';
-import GradientPickerWindow from './GradientPickerWindow';
-import ToDoWindow from './ToDoWindow';
-import PasswordGeneratorWindow from './PasswordGeneratorWindow';
-import UnitConverterWindow from './UnitConverterWindow';
-import TicTacToeWindow from './TicTacToeWindow';
-import WorkoutLogWindow from './WorkoutLogWindow';
-import TaskLogWindow from './TaskLogWindow';
 import DictionaryWindow from './DictionaryWindow';
+import GradientPickerWindow from './GradientPickerWindow';
+import PasswordGeneratorWindow from './PasswordGeneratorWindow';
+import ProjectsWindow from './ProjectsWindow';
 import RecipeBookWindow from './RecipeBookWindow';
+import ResumeWindow from './ResumeWindow';
+import TaskLogWindow from './TaskLogWindow';
+import TicTacToeWindow from './TicTacToeWindow';
+import TipCalculatorWindow from './TipCalculatorWindow';
+import ToDoWindow from './ToDoWindow';
+import UnitConverterWindow from './UnitConverterWindow';
 import WeatherWindow from './WeatherWindow';
+import WorkoutLogWindow from './WorkoutLogWindow';
 
 export const WINDOW_COMPONENTS = {
     about: AboutWindow,
-    projects: ProjectsWindow,
-    resume: ResumeWindow,
     browser: BrowserWindow,
     calculator: CalculatorWindow,
-    tipcalculator: TipCalculatorWindow,
-    gradientpicker: GradientPickerWindow,
-    todo: ToDoWindow,
-    passwordgenerator: PasswordGeneratorWindow,
-    unitconverter: UnitConverterWindow,
-    tictactoe: TicTacToeWindow,
-    workoutlog: WorkoutLogWindow,
-    tasklog: TaskLogWindow,
     dictionary: DictionaryWindow,
+    gradientpicker: GradientPickerWindow,
+    passwordgenerator: PasswordGeneratorWindow,
+    projects: ProjectsWindow,
     recipebook: RecipeBookWindow,
+    resume: ResumeWindow,
+    tasklog: TaskLogWindow,
+    tictactoe: TicTacToeWindow,
+    tipcalculator: TipCalculatorWindow,
+    todo: ToDoWindow,
+    unitconverter: UnitConverterWindow,
     weather: WeatherWindow,
+    workoutlog: WorkoutLogWindow,
 };

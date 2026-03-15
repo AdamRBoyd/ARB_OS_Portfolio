@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { PROGRAMS } from '@constants/programs';
+import { Input } from '@atoms';
 
 const Panel = styled.div`
     position: absolute;
@@ -54,21 +55,11 @@ const Scroller = styled.div`
     }
 `;
 
-const Search = styled.input`
-    box-sizing: border-box;
-    width: 100%;
+const Search = styled(Input)`
     max-width: 100%;
 
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
     background: ${({ theme }) => theme.palette.shadow[3]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-    border-radius: 12px;
     padding: 0.55rem 0.65rem;
-    outline: none;
-
-    &:focus {
-        border-color: ${({ theme }) => theme.palette.accent[0]};
-    }
 `;
 
 const Group = styled.div`

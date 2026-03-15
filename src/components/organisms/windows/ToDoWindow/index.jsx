@@ -8,7 +8,8 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Input } from '@atoms';
+import { Form } from '@molecules';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -18,10 +19,10 @@ const Shell = styled(InsetWindowShell)`
     grid-template-rows: auto auto auto auto 1fr;
 `;
 
-const Form = styled.form`
-    display: grid;
-    grid-template-columns: 1fr auto;
+const TaskForm = styled(Form)`
     gap: 0.75rem;
+    background: transparent;
+    padding: 0 0.5rem;
 `;
 
 const InputGroup = styled(Row)`
@@ -33,9 +34,8 @@ const InputGroup = styled(Row)`
     color: ${({ theme }) => theme.palette.primary[0]};
 
     border-radius: 12px;
-    padding: 0.55rem 0.65rem;
-    border-radius: 12px;
-    padding: 0.55rem 0.65rem;
+    padding: 0.15rem 0.65rem 0 0.25rem;
+
 
     /* highlight ONLY if you want it */
     &:focus-within {
@@ -44,24 +44,18 @@ const InputGroup = styled(Row)`
     }
 `;
 
-const Input = styled.input`
+const FormInput = styled(Input)`
     width: 100%;
     border: 0;
     background: transparent;
     color: inherit;
     font-size: 1rem;
 
-    outline: none;
     box-shadow: none;
 
     &:focus {
         outline: none;
         box-shadow: none;
-    }
-
-    &::placeholder {
-        color: ${({ theme }) => theme.palette.tertiary[0]};
-        opacity: 0.7;
     }
 `;
 
@@ -80,7 +74,9 @@ const CloseIcon = styled.img`
     }
 `;
 
-const AddButton = styled(Button)``;
+const AddButton = styled(Button)`
+    padding: 0.4rem 2rem;
+`;
 
 const ListContainer = styled(InsetSurface)`
     padding: 0.85rem;
@@ -243,9 +239,9 @@ const ToDoWindow = () => {
                     Organize your tasks and boost your productivity!
                 </Subtitle>
             </Stack>
-            <Form onSubmit={handleAddItem}>
+            <TaskForm onSubmit={handleAddItem}>
                 <InputGroup>
-                    <Input
+                    <FormInput
                         type="text"
                         value={item}
                         onChange={(e) => setItem(e.target.value)}
@@ -263,7 +259,7 @@ const ToDoWindow = () => {
                 <AddButton type="submit" variant="primary">
                     {editing ? 'Update' : 'Add'}
                 </AddButton>
-            </Form>
+            </TaskForm>
             <Hint>Hint: Click on a task to mark it as completed.</Hint>
             <Title>Your Tasks:</Title>
             <ListContainer>

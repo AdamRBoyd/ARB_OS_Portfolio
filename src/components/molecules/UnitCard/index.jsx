@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { UNIT_CATEGORIES } from '@constants/unitConversions';
 import { convert } from '@utils/convertUnits';
 import { InsetSurface } from '@primitives';
+import { Input } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -27,18 +28,11 @@ const InfoRow = styled.div`
     width: 100%;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled(Input)`
     width: 13rem;
     text-overflow: ellipsis;
-    box-sizing: border-box;
 
-    border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.grays[2]};
-    color: ${({ theme }) => theme.palette.primary[0]};
-
-    border-radius: 12px;
     padding: 0.45rem 0.65rem;
-    outline: none;
 
     /* Remove spinner */
     &::-webkit-outer-spin-button,
@@ -47,16 +41,6 @@ const StyledInput = styled.input`
         margin: 0;
     }
     appearance: textfield;
-
-    &:focus {
-        border-color: ${({ theme }) => theme.palette.accent[0]};
-        box-shadow: 0 0 0 3px ${({ theme }) => theme.palette.accent[0]}22;
-    }
-
-    &::placeholder {
-        color: ${({ theme }) => theme.palette.tertiary[0]};
-        opacity: 0.7;
-    }
 `;
 
 const StyledLabel = styled.label`
