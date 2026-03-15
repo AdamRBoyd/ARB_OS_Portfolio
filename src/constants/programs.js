@@ -19,7 +19,6 @@ export const PROGRAMS = [
         defaultState: 'window',
         home: { ax: 0.06, ay: 0.08 }, // upper left
     },
-
     {
         id: 'resume',
         title: 'Resume',
@@ -30,7 +29,6 @@ export const PROGRAMS = [
         desktop: true,
         home: { ax: 0.22, ay: 0.16 }, // slightly right & down
     },
-
     {
         id: 'projects',
         title: 'Projects',
@@ -41,9 +39,7 @@ export const PROGRAMS = [
         desktop: true,
         home: { ax: 0.5, ay: 0.08 }, // upper right quadrant
     },
-
     // ---------------- MINI APPS ----------------
-
     {
         id: 'calculator',
         title: 'Calculator',
@@ -55,7 +51,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.78, ay: 0.48 }, // bottom right
     },
-
     {
         id: 'tipcalculator',
         title: 'Tip Calculator',
@@ -67,7 +62,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.78, ay: 0.28 }, // right mid
     },
-
     {
         id: 'gradientpicker',
         title: 'Gradient Picker',
@@ -79,7 +73,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.36, ay: 0.52 }, // lower center-left
     },
-
     {
         id: 'todo',
         title: 'To-Do List',
@@ -91,7 +84,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.18, ay: 0.32 }, // mid-left
     },
-
     {
         id: 'passwordgenerator',
         title: 'Password Generator',
@@ -103,7 +95,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.58, ay: 0.48 }, // lower right-center
     },
-
     {
         id: 'unitconverter',
         title: 'Unit Converter',
@@ -115,7 +106,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.5, ay: 0.32 },
     },
-
     {
         id: 'tictactoe',
         title: 'Tic Tac Toe',
@@ -127,7 +117,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.5, ay: 0.56 },
     },
-
     {
         id: 'workoutlog',
         title: 'Workout Log',
@@ -139,7 +128,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.64, ay: 0.56 },
     },
-
     {
         id: 'tasklog',
         title: 'Task Log',
@@ -151,7 +139,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.36, ay: 0.28 },
     },
-
     {
         id: 'dictionary',
         title: 'Dictionary',
@@ -163,7 +150,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.06, ay: 0.56 },
     },
-
     {
         id: 'recipebook',
         title: 'Recipe Book',
@@ -175,7 +161,6 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.78, ay: 0.56 },
     },
-
     {
         id: 'weather',
         title: 'Weather',
@@ -187,5 +172,4 @@ export const PROGRAMS = [
         desktop: false,
         home: { ax: 0.22, ay: 0.56 },
     },
-
 ];

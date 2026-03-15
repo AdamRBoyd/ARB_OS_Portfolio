@@ -330,7 +330,7 @@ export const WindowButton = styled.button`
     border: none;
     border-radius: 8px;
 
-    background: ${({ theme }) => theme.palette.graybutton[0]};
+    background: ${({ theme }) => theme.palette.grays[4]};
     color: ${({ theme }) => theme.palette.secondary[0]};
 
     cursor: pointer;

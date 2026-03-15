@@ -290,15 +290,12 @@ export default function useWindowManager(initialWindows = DEFAULT_WINDOWS) {
         windows,
         stack,
         activeId,
-
         visibleWindows,
         minimizedWindows,
         openWindows,
         minimizingIds,
         closingIds,
-
         isActive,
-
         openWindow,
         openOrFocus,
         focusWindow,

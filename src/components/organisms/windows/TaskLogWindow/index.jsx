@@ -59,8 +59,6 @@ const TaskForm = styled(Form)`
     margin: 0;
 `;
 
-const TaskFormInput = styled(Input)``;
-
 const SubmitButton = styled(Button)``;
 
 const ResetButton = styled(Button)``;
@@ -304,7 +302,7 @@ const TaskLogWindow = () => {
                             resetForm();
                         }}
                     >
-                        <TaskFormInput
+                        <Input
                             type="text"
                             placeholder="Task description"
                             value={description}

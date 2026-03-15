@@ -24,7 +24,6 @@ export default defineConfig({
       "@windows": path.resolve(__dirname, "./src/components/organisms/windows"),
       "@pages": path.resolve(__dirname, "./src/components/pages"),
       "@primitives": path.resolve(__dirname, "./src/components/primitives"),
-      "@templates": path.resolve(__dirname, "./src/components/templates"),
       "@constants": path.resolve(__dirname, "./src/constants"),
       "@json": path.resolve(__dirname, "./src/json"),
       "@state": path.resolve(__dirname, "./src/state"),

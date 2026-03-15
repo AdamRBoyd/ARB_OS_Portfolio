@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 const StyledIcon = styled.img`
-  width: ${(props) => props.width || "16px"};
-  height: ${(props) => props.height || "16px"};
+  width: 16px;
+  height: 16px;
 `;
 
-const Icon = ({ src, alt, width, height, ...props }) => {
-  return <StyledIcon src={src} alt={alt} width={width} height={height} {...props} />;
+const Icon = ({ src, alt, ...props }) => {
+  return <StyledIcon src={src} alt={alt} {...props} />;
 };
 
 export default Icon;

@@ -9,8 +9,6 @@ theme.palette = {
     active: ['#4CC9F0'], // active window surfaces, active states
 
     background: ['#0B0F14'], // desktop background
-    bluebutton: ['#2563EB'], // strong CTA (resume/download)
-    graybutton: ['#2A3340'], // secondary buttons
 
     grays: [
         '#0B0F14', // 0 darkest (desktop)

@@ -18,7 +18,7 @@ const Label = styled.div`
 const Button = styled.a`
     text-decoration: none;
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.graybutton[0]};
+    background: ${({ theme }) => theme.palette.grays[4]};
     color: ${({ theme }) => theme.palette.primary[0]};
     border-radius: 12px;
     padding: 0.15rem 0.65rem;

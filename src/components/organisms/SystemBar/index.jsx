@@ -147,7 +147,7 @@ const TopSystemBar = ({
                         <Divider height="1.2rem" />
                         <span
                             onPointerDown={(e) => e.stopPropagation()}
-                            onClick={(e) => {
+                            onClick={() => {
                                 setCalendarOpen((v) => !v);
                             }}
                             style={{ cursor: 'pointer' }}
