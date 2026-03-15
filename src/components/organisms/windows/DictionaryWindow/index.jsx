@@ -9,7 +9,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button, Input } from '@atoms';
+import { Button, Input, Icon } from '@atoms';
 import { Form } from '@molecules';
 
 /* ----------------------------- */
@@ -91,11 +91,6 @@ const Phonetic = styled.span`
 const Pronunciation = styled.audio``;
 
 const PlayButton = styled(Button)``;
-
-const PlayIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
 
 // Container for meanings - scrollable
 const MeaningContainer = styled(Stack)`
@@ -303,7 +298,7 @@ const DictionaryWindow = () => {
                                             onClick={toggleAudio}
                                             variant="icon"
                                         >
-                                            <PlayIcon
+                                            <Icon
                                                 src="svg/audio.svg"
                                                 alt="Play pronunciation"
                                             />

@@ -8,7 +8,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button, Input } from '@atoms';
+import { Button, Input, Icon } from '@atoms';
 import { Form } from '@molecules';
 
 /* ----------------------------- */
@@ -163,11 +163,6 @@ const DimmableIcon = styled(Button)`
     }
 `;
 
-const ButtonIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
-
 const Hint = styled.div`
     font-size: 0.8rem;
     color: ${({ theme }) => theme.palette.tertiary[0]};
@@ -281,7 +276,7 @@ const ToDoWindow = () => {
                                     }}
                                     $completed={todo.completed}
                                 >
-                                    <ButtonIcon src="/svg/edit.svg" alt="" />
+                                    <Icon src="/svg/edit.svg" alt="" />
                                 </DimmableIcon>
                                 <IconButton
                                     variant="icon"
@@ -291,7 +286,7 @@ const ToDoWindow = () => {
                                         handleDeleteItem(i);
                                     }}
                                 >
-                                    <ButtonIcon src="/svg/delete.svg" alt="" />
+                                    <Icon src="/svg/delete.svg" alt="" />
                                 </IconButton>
                             </ButtonContainer>
                         </ListItem>

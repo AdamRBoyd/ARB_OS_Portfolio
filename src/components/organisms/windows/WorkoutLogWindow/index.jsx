@@ -7,7 +7,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button, Input, Select, Option } from '@atoms';
+import { Button, Input, Icon, Select, Option } from '@atoms';
 
 const WORKOUT_TYPES = [
     'Chest',
@@ -201,11 +201,6 @@ const ButtonContainer = styled.div`
 `;
 
 const IconButton = styled(Button)``;
-
-const ButtonIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
 
 /* ----------------------------- */
 /* HELPERS */
@@ -457,7 +452,7 @@ const WorkoutLogWindow = () => {
                                             handleEdit(w);
                                         }}
                                     >
-                                        <ButtonIcon
+                                        <Icon
                                             src="/svg/edit.svg"
                                             alt=""
                                         />
@@ -472,7 +467,7 @@ const WorkoutLogWindow = () => {
                                             handleDelete(w.id);
                                         }}
                                     >
-                                        <ButtonIcon
+                                        <Icon
                                             src="/svg/delete.svg"
                                             alt=""
                                         />

@@ -8,7 +8,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Icon } from '@atoms';
 
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
 const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -92,11 +92,6 @@ const PasswordText = styled.div`
 `;
 
 const IconButton = styled(Button)``;
-
-const ButtonIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
 
 /* ----------------------------- */
 /* COMPONENT */
@@ -188,7 +183,7 @@ const PasswordGeneratorWindow = () => {
                         {generatedPassword}
                     </PasswordText>
                     <IconButton variant="icon" onClick={copyToClipboard}>
-                        <ButtonIcon
+                        <Icon
                             src="/svg/copy.svg"
                             alt="Copy to clipboard"
                             title="Copy to clipboard"

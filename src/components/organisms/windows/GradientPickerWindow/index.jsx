@@ -7,7 +7,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button } from '@atoms';
+import { Button, Icon } from '@atoms';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -153,11 +153,6 @@ const GradientResult = styled(InsetSurface)`
 
 const CopyButton = styled(Button)``;
 
-const ButtonIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
-
 /* ----------------------------- */
 /* COMPONENT */
 /* ----------------------------- */
@@ -212,7 +207,7 @@ const GradientPickerWindow = () => {
             <GradientResult>
                 {gradientCss}
                 <CopyButton onClick={copyToClipboard} variant="icon">
-                    <ButtonIcon
+                    <Icon
                         src="/svg/copy.svg"
                         alt="Copy to clipboard"
                         title="Copy to clipboard"

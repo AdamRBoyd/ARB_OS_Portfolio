@@ -8,7 +8,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button, Input } from '@atoms';
+import { Button, Input, Icon } from '@atoms';
 import { Form } from '@molecules';
 
 const STORAGE_KEY = 'taskLogTasks';
@@ -164,11 +164,6 @@ const DurationCell = styled(LineCell)`
 `;
 
 const IconButton = styled(Button)``;
-
-const ButtonIcon = styled.img`
-    width: 16px;
-    height: 16px;
-`;
 
 /* ----------------------------- */
 /* HELPERS */
@@ -366,7 +361,7 @@ const TaskLogWindow = () => {
                                                     }
                                                     variant="icon"
                                                 >
-                                                    <ButtonIcon
+                                                    <Icon
                                                         src="/svg/checkmark.svg"
                                                         alt="Checkmark"
                                                     />
@@ -380,7 +375,7 @@ const TaskLogWindow = () => {
                                             }
                                             variant="icon"
                                         >
-                                            <ButtonIcon
+                                            <Icon
                                                 src="/svg/delete.svg"
                                                 alt="Delete"
                                             />
