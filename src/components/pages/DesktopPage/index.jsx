@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useWindowManager from '@state/useWindowManager';
+import styled from 'styled-components';
 
 import { DesktopShell, DesktopContent, DockArea } from '@primitives';
 
@@ -8,6 +9,20 @@ import { StartMenu } from '@molecules';
 import PowerOffOverlay from '@atoms/system/PowerOffOverlay';
 
 const POWER_KEY = 'os_powered_off';
+
+const DesktopCopyright = styled.div`
+  position: fixed;
+  bottom: 3.9rem;   /* adjust based on Dock height */
+  right: 1.8rem;
+
+  font-size: 0.65rem;
+  color: ${({ theme }) => theme.palette.tertiary[0]};
+
+  opacity: 0.65;
+  letter-spacing: 0.02em;
+  user-select: none;
+  pointer-events: none; /* prevents interaction interference */
+`;
 
 const DesktopPage = () => {
     const wm = useWindowManager();
@@ -90,6 +105,10 @@ const DesktopPage = () => {
                         onToggleStart={() => setStartOpen((v) => !v)}
                         onCloseStart={() => setStartOpen(false)}
                     />
+
+                <DesktopCopyright>
+                    &copy; {new Date().getFullYear()} Adam Boyd. All rights reserved.
+                </DesktopCopyright>
                 </DockArea>
 
                 {/* Overlay LAST so it sits above everything */}
