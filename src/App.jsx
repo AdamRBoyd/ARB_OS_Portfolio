@@ -1,13 +1,34 @@
+import { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
 import useIsMobile from './utils/useIsMobile';
 
-import { DesktopPage, NotFoundPage, ResumePage, MobilePage, MobileAboutPage, MobileResumePage } from '@pages';
+import {
+    DesktopPage,
+    NotFoundPage,
+    ResumePage,
+    MobilePage,
+    MobileAboutPage,
+    MobileResumePage,
+    StartupSequence,
+} from '@pages';
 import theme from '@theme';
+
+const POWER_KEY = 'startup_complete';
 
 function App() {
     const isMobile = useIsMobile();
+
+    const [startupComplete, setStartupComplete] = useState(() => {
+        return sessionStorage.getItem(POWER_KEY) === 'true';
+    });
+
+    const handleStartupComplete = () => {
+        sessionStorage.setItem(POWER_KEY, 'true');
+        setStartupComplete(true);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             {isMobile ? (
@@ -17,6 +38,8 @@ function App() {
                     <Route path="/about" element={<MobileAboutPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
+            ) : !startupComplete ? (
+                <StartupSequence onComplete={handleStartupComplete} />
             ) : (
                 <Routes>
                     <Route path="/" element={<DesktopPage />} />

@@ -8,7 +8,7 @@ import { DesktopIcons, WindowLayer, Dock, SystemBar } from '@organisms';
 import { StartMenu } from '@molecules';
 import PowerOffOverlay from '@atoms/system/PowerOffOverlay';
 
-const POWER_KEY = 'os_powered_off';
+const POWER_KEY = 'startup_complete';
 
 const DesktopCopyright = styled.div`
   position: fixed;
@@ -32,10 +32,7 @@ const DesktopPage = () => {
         : 'Desktop';
     const [startOpen, setStartOpen] = useState(false);
 
-    const [poweredOff, setPoweredOff] = useState(() => {
-        sessionStorage.removeItem(POWER_KEY); // restart on reload
-        return false;
-    });
+    const [poweredOff, setPoweredOff] = useState(false);
 
     // Lock scrolling while powered off
     useEffect(() => {
@@ -49,7 +46,7 @@ const DesktopPage = () => {
     }, [poweredOff]);
 
     const handlePowerOff = () => {
-        sessionStorage.setItem(POWER_KEY, '1');
+        sessionStorage.removeItem(POWER_KEY);
         setStartOpen(false);
         setSelectedIconId(null);
         setPoweredOff(true);
@@ -106,9 +103,9 @@ const DesktopPage = () => {
                         onCloseStart={() => setStartOpen(false)}
                     />
 
-                <DesktopCopyright>
-                    &copy; {new Date().getFullYear()} Adam Boyd. All rights reserved.
-                </DesktopCopyright>
+                    <DesktopCopyright>
+                        &copy; {new Date().getFullYear()} Adam Boyd. All rights reserved.
+                    </DesktopCopyright>
                 </DockArea>
 
                 {/* Overlay LAST so it sits above everything */}
