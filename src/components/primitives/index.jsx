@@ -80,7 +80,9 @@ export const SystemBar = styled.div`
 
     padding: 0 1rem;
 
-    background: ${({ theme }) => theme.palette.grays[1]};
+    background: ${({ theme }) => theme.palette.grays[2]}88;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-bottom: 1px solid ${({ theme }) => theme.palette.grays[4]};
 
     z-index: 1100;
@@ -117,7 +119,8 @@ export const SystemPill = styled.div`
     padding: 0.35rem 0.6rem;
     border-radius: 999px;
 
-    background: ${({ theme }) => theme.palette.grays[2]};
+    background: ${({ theme }) => theme.palette.grays[2]}88;
+
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
 
     color: ${({ theme }) => theme.palette.secondary[0]};
@@ -398,13 +401,13 @@ export const DockArea = styled.div`
     right: 0;
     bottom: 0;
 
-    height: 56px;
+    height: 48px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 0 0.5rem;
+    padding: 0;
 
     /* allow clicks only on dock contents */
     pointer-events: none;
@@ -433,15 +436,13 @@ export const Dock = styled.div`
     align-items: stretch; /* ← allow items to stretch */
     justify-content: center;
 
-    padding: 0; /* ← NO vertical padding */
+    padding: 0 0.5rem;
 
-    background: transparent;
+    background: ${({ theme }) => theme.palette.grays[2]}88;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 
     border: transparent 1px solid;
-    border-radius: 999px;
-
     box-shadow: 0 20px 50px ${({ theme }) => theme.palette.shadow[4]};
 `;
 

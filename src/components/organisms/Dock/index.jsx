@@ -44,16 +44,16 @@ const Item = styled(DockItemBase)`
 `;
 
 const StartButton = styled.button`
-    height: 100%;
+    height: 80%;
     display: inline-flex;
     align-items: center;
     align-self: center;
 
     border-radius: 10px;
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
-    background: ${({ theme }) => theme.palette.grays[2]};
+    background: ${({ theme }) => theme.palette.grays[2]}88;
 
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
     margin-right: 0.75rem;
 
     color: ${({ theme }) => theme.palette.secondary[0]};
@@ -95,7 +95,7 @@ const Label = styled.span`
 
 const StartLabel = styled(Label)`
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
 `;
 
 /* ----------------------------- */
