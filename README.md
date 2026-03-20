@@ -93,6 +93,7 @@ public/
 ├── apiKeys.json
 ├── App.jsx
 ├── main.jsx
+```
 ---
 
 ## 🧩 Extensible Wallpaper System
@@ -109,6 +110,7 @@ Add new wallpapers without modifying application code.
     "src": "default.jpg"
   }
 ]
+```
 
 ### File Placement
 
@@ -133,7 +135,7 @@ The structure is as follows:
         "appid": "Your appid, supplied by OpenWeather"
     }
 }
-
+```
 ---
 
 ## ▶️ Getting Started
