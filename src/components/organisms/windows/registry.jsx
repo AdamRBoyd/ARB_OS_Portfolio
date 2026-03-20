@@ -14,6 +14,7 @@ import ToDoWindow from './ToDoWindow';
 import UnitConverterWindow from './UnitConverterWindow';
 import WeatherWindow from './WeatherWindow';
 import WorkoutLogWindow from './WorkoutLogWindow';
+import WallpaperPickerWindow from './WallpaperPickerWindow';
 
 export const WINDOW_COMPONENTS = {
     about: AboutWindow,
@@ -32,4 +33,5 @@ export const WINDOW_COMPONENTS = {
     unitconverter: UnitConverterWindow,
     weather: WeatherWindow,
     workoutlog: WorkoutLogWindow,
+    wallpaperpicker: WallpaperPickerWindow,
 };

@@ -39,6 +39,17 @@ export const PROGRAMS = [
         desktop: true,
         home: { ax: 0.5, ay: 0.08 }, // upper right quadrant
     },
+    // ---------------- SETTINGS ----------------
+    {
+        id: "wallpaperpicker",
+        title: "Wallpaper",
+        iconSrc: "Wallpaper.png",
+        group: "Settings",
+        size: { w: 960, h: 560 },
+        noScroll: false,
+        desktop: false,
+        home: { ax: 0.19, ay: 0.30 }, // mid-left
+    },
     // ---------------- MINI APPS ----------------
     {
         id: 'calculator',

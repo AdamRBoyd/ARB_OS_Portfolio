@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import useWindowManager from '@state/useWindowManager';
 import styled from 'styled-components';
 
@@ -9,6 +9,16 @@ import { StartMenu } from '@molecules';
 import PowerOffOverlay from '@atoms/system/PowerOffOverlay';
 
 const POWER_KEY = 'startup_complete';
+const WALLPAPER_KEY = "desktop_wallpaper";
+
+const DesktopShellWithWallpaper = styled(DesktopShell)`
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("${({ $wallpaper }) => $wallpaper || ""}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
 
 const DesktopCopyright = styled.div`
   position: fixed;
@@ -52,12 +62,59 @@ const DesktopPage = () => {
         setPoweredOff(true);
     };
 
+    // Load wallpaper from localStorage
+    const [wallpapers, setWallpapers] = useState([]);
+    const [selectedWallpaperId, setSelectedWallpaperId] = useState(
+        () => localStorage.getItem(WALLPAPER_KEY) || ""
+    );
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function loadWallpapers() {
+            try {
+                const res = await fetch("/json/wallpapers.json");
+                if (!res.ok) throw new Error("Failed to load wallpapers");
+                const data = await res.json();
+
+                if (!isMounted) return;
+                setWallpapers(Array.isArray(data) ? data : []);
+                const savedId = localStorage.getItem(WALLPAPER_KEY);
+
+                if (savedId && data.some((item) => item.id === savedId)) {
+                    setSelectedWallpaperId(savedId);
+                } else if (data.length > 0) {
+                    setSelectedWallpaperId(data[0].id);
+                    localStorage.setItem(WALLPAPER_KEY, data[0].id);
+                }
+            } catch (err) {
+                console.error("Wallpaper load error:", err);
+            }
+        }
+
+        loadWallpapers();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const selectedWallpaper = useMemo(() => {
+        return wallpapers.find((item) => item.id === selectedWallpaperId) || null;
+    }, [wallpapers, selectedWallpaperId]);
+
+    const handleWallpaperSelect = (id) => {
+        setSelectedWallpaperId(id);
+        localStorage.setItem(WALLPAPER_KEY, id);
+    };
+
     return (
-        <DesktopShell
+        <DesktopShellWithWallpaper
             onPointerDown={() => {
                 setSelectedIconId(null);
                 setStartOpen(false);
             }}
+            $wallpaper={`/images/wallpapers/full/${selectedWallpaper?.src}`}
         >
             <DesktopContent>
                 <SystemBar
@@ -82,6 +139,9 @@ const DesktopPage = () => {
                     onClose={wm.closeWindow}
                     onOpenUrl={wm.openUrlWindow}
                     onAnyInteraction={() => setSelectedIconId(null)}
+                    wallpapers={wallpapers}
+                    selectedWallpaperId={selectedWallpaperId}
+                    onSelectWallpaper={handleWallpaperSelect}
                 />
 
                 {/* Start Menu */}
@@ -111,7 +171,7 @@ const DesktopPage = () => {
                 {/* Overlay LAST so it sits above everything */}
                 {poweredOff && <PowerOffOverlay />}
             </DesktopContent>
-        </DesktopShell>
+        </DesktopShellWithWallpaper>
     );
 };
 

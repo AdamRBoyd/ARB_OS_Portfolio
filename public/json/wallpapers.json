@@ -1,0 +1,98 @@
+[
+    {
+        "id": "default",
+        "title": "ARBOS",
+        "src": "ARBOS.jpg"
+    },
+    {
+        "id": "abandoned-boats",
+        "title": "Abandoned boats on a rocky shore",
+        "src": "Abandoned-boats-on-a-rocky-shore.jpg"
+    },
+    {
+        "id": "coastal-pathway",
+        "title": "Coastal pathway on a cloudy day",
+        "src": "Coastal-pathway-on-a-cloudy-day.jpg"
+    },
+    {
+        "id": "crows-on-power-lines",
+        "title": "Crows on power lines in gray sky",
+        "src": "Crows-on-power-lines-in-gray-sky.jpg"
+    },
+    {
+        "id": "golden-gate-bridge-at-night",
+        "title": "Golden Gate Bridge at night",
+        "src": "Golden-Gate-Bridge-at-night.jpg"
+    },
+    {
+        "id": "misty-morning-with-perched-crows",
+        "title": "Misty morning with perched crows",
+        "src": "Misty-morning-with-perched-crows.jpg"
+    },
+    {
+        "id": "moonlit-night-in-a-peaceful-neighborhood",
+        "title": "Moonlit night in a peaceful neighborhood",
+        "src": "Moonlit-night-in-a-peaceful-neighborhood.jpg"
+    },
+    {
+        "id": "moonlit-ocean-with-mountain-silhouettes",
+        "title": "Moonlit ocean with mountain silhouettes",
+        "src": "Moonlit-ocean-with-mountain-silhouettes.jpg"
+    },
+    {
+        "id": "morning-mist-in-a-peaceful-park",
+        "title": "Morning mist in a peaceful park",
+        "src": "Morning-mist-in-a-peaceful-park.jpg"
+    },
+    {
+        "id": "quiet-suburban-night-with-orion",
+        "title": "Quiet suburban night with Orion",
+        "src": "Quiet-suburban-night-with-Orion.jpg"
+    },
+    {
+        "id": "red-ivy-on-rustic-barn",
+        "title": "Red ivy on rustic barn",
+        "src": "Red-ivy-on-rustic-barn.jpg"
+    },
+    {
+        "id": "sheep-grazing-in-a-sunny-field",
+        "title": "Sheep grazing in a sunny field",
+        "src": "Sheep-grazing-in-a-sunny-field.jpg"
+    },
+    {
+        "id": "stellar-light-trails-in-deep-space",
+        "title": "Stellar light trails in deep space",
+        "src": "Stellar-light-trails-in-deep-space.jpg"
+    },
+    {
+        "id": "sunlight-through-the-kelp-forest",
+        "title": "Sunlight through the kelp forest",
+        "src": "Sunlight-through-the-kelp-forest.jpg"
+    },
+    {
+        "id": "sunny-countryside-with-patchwork-fields",
+        "title": "Sunny countryside with patchwork fields",
+        "src": "Sunny-countryside-with-patchwork-fields.jpg"
+    },
+    {
+        "id": "sunset-over-a-rugged-valley",
+        "title": "Sunset over a rugged valley",
+        "src": "Sunset-over-a-rugged-valley.jpg"
+    },
+    {
+        "id": "twilight-moonrise-over-tranquil-waters",
+        "title": "Twilight moonrise over tranquil waters",
+        "src": "Twilight-moonrise-over-tranquil-waters.jpg"
+    },
+    {
+        "id": "twilight-reflections-on-a-waterfront-street",
+        "title": "Twilight reflections on a waterfront street",
+        "src": "Twilight-reflections-on-a-waterfront-street.jpg"
+    },
+    {
+        "id": "vintage-train-on-mountain-trestle-bridge",
+        "title": "Vintage train on mountain trestle bridge",
+        "src": "Vintage-train-on-mountain-trestle-bridge.jpg"
+    }
+]
+

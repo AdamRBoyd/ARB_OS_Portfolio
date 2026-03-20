@@ -20,6 +20,9 @@ const WindowLayer = ({
     minimizingIds = [],
     closingIds = [],
     onOpenUrl,
+    wallpapers,
+    selectedWallpaperId,
+    onSelectWallpaper,
 }) => {
     return (
         <>
@@ -93,6 +96,9 @@ const WindowLayer = ({
                                     window={w}
                                     isActive={isActive}
                                     actions={{ openUrlWindow: onOpenUrl }}
+                                    wallpapers={wallpapers}
+                                    selectedWallpaperId={selectedWallpaperId}
+                                    onSelectWallpaper={onSelectWallpaper}
                                 />
                             ) : (
                                 <div style={{ color: 'inherit' }}>

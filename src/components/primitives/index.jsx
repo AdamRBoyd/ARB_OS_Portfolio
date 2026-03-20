@@ -1,5 +1,4 @@
 import styled, { keyframes, css } from 'styled-components';
-import wallpaper from '@assets/wallpaper.png';
 
 /* ----------------------------- */
 /* FLEX PRIMITIVES */
@@ -39,11 +38,6 @@ export const DesktopShell = styled.div`
     width: 100%;
     height: 100vh;
     overflow: hidden;
-
-    background-image: url(${wallpaper});
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     color: ${({ theme }) => theme.palette.primary[0]};
 
