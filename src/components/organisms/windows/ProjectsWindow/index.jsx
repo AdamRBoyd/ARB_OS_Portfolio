@@ -101,6 +101,15 @@ const NavButton = styled(Button)`
     font-weight: 500;
 `;
 
+const FunnyButton = styled(NavButton)`
+    &:hover {
+        background: transparent;
+        color: transparent;
+        border-color: transparent;
+        cursor: default;
+    }
+`;
+
 const ProjectsWindow = ({ actions, window: win }) => {
     const [projects, setProjects] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -160,6 +169,12 @@ const ProjectsWindow = ({ actions, window: win }) => {
 
         load();
     }, []);
+
+    const handleFunnyClick = () => {
+        alert(
+            "Seriously...? \nYou're already here... \nWhat more do you want?",
+        );
+    };
 
     return (
         <Shell $fullscreen={isFullscreen}>
@@ -244,6 +259,17 @@ const ProjectsWindow = ({ actions, window: win }) => {
                                 >
                                     GitHub
                                 </NavButton>
+                            )}
+
+                            {selected.funny && (
+                                <>
+                                    <FunnyButton onClick={handleFunnyClick}>
+                                        Live Site
+                                    </FunnyButton>
+                                    <FunnyButton onClick={handleFunnyClick}>
+                                        Open in Browser ↗
+                                    </FunnyButton>
+                                </>
                             )}
 
                             {selected.link && (

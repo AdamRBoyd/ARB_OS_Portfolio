@@ -1,5 +1,15 @@
 [
     {
+        "imageSrc": "/images/projects/AdamRBoydDev.jpg",
+        "previewSrc": "/images/projects/AdamRBoydDev.jpg",
+        "title": "My Portfolio Website",
+        "description": "The website you're currently on! Built with React and styled-components.",
+        "link": "",
+        "github": "https://github.com/AdamRBoyd/ARB_OS_Portfolio",
+        "funny": true,
+        "tags": ["Frontend", "Personal", "React"]
+    },
+    {
         "imageSrc": "/images/projects/AnvilandEmberMetalworks.jpg",
         "previewSrc": "/images/projects/AnvilandEmberMetalworks.jpg",
         "title": "Anvil and Ember Metalworks",
