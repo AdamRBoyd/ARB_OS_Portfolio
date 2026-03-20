@@ -6,7 +6,7 @@ import { Input } from '@atoms';
 const Panel = styled.div`
     position: absolute;
     left: 0.5rem;
-    bottom: 62px;
+    bottom: 60px;
     width: 340px;
     max-height: min(600px, calc(100vh - 120px));
     overflow: hidden;

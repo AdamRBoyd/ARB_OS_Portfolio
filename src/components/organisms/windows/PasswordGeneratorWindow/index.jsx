@@ -124,7 +124,7 @@ const PasswordGeneratorWindow = () => {
 
     return (
         <Shell>
-            <Stack gap="0.25rem">
+            <Stack $gap="0.25rem">
                 <Title>Password Generator</Title>
                 <Subtitle>Customize your password options below:</Subtitle>
             </Stack>
