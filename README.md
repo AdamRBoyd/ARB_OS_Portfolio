@@ -122,7 +122,7 @@ Add new wallpapers without modifying application code.
 
 ---
 
-### Api Keys
+### Api Keys (apiKeys.json in src)
 
 This file is not synced to my GitHub as is includes personal API keys.
 
