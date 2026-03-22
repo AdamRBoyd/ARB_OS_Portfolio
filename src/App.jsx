@@ -21,11 +21,11 @@ function App() {
     const isMobile = useIsMobile();
 
     const [startupComplete, setStartupComplete] = useState(() => {
-        return sessionStorage.getItem(POWER_KEY) === 'true';
+        return localStorage.getItem(POWER_KEY) === 'true';
     });
 
     const handleStartupComplete = () => {
-        sessionStorage.setItem(POWER_KEY, 'true');
+        localStorage.setItem(POWER_KEY, 'true');
         setStartupComplete(true);
     };
 

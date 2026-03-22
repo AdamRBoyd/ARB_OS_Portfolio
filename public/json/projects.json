@@ -16,7 +16,7 @@
         "description": "My custom jewelry business website.",
         "link": "http://anvilandembermetalworks.com",
         "github": "https://github.com/AdamRBoyd/AnvilandEmber-Website",
-        "tags": ["Frontend", "Business", "Personal"]
+        "tags": ["Frontend", "Business", "Personal", "React"]
     },
     {
         "imageSrc": "/images/projects/AlicesWebsite.jpg",
@@ -25,7 +25,7 @@
         "description": "A genealogy website for Alice Boyd.",
         "link": "https://boydhouse.com/alice",
         "github": "https://github.com/AdamRBoyd/AlicesFamilyHistories",
-        "tags": ["Frontend", "Client", "Family"]
+        "tags": ["Frontend", "Client", "Family", "React"]
     },
     {
         "imageSrc": "/images/projects/Boydhouse.jpg",
@@ -34,7 +34,7 @@
         "description": "The main website for the Boydhouse family.",
         "link": "https://boydhouse.com/",
         "github": "",
-        "tags": ["Family", "Website", "Personal", "HTML"]
+        "tags": ["Family", "Website", "Personal", "HTML", "Client"]
     },
     {
         "imageSrc": "/images/projects/Github.png",
@@ -52,7 +52,7 @@
         "description": "A repository of programming assignments from my time at school.",
         "link": "",
         "github": "https://github.com/AdamRBoyd/School_Programming_Assignments",
-        "tags": ["School", "Programming", "Personal"]
+        "tags": ["School"]
     },
     {
         "imageSrc": "/images/projects/Github.png",
@@ -61,6 +61,6 @@
         "description": "All the projects from my website development class.",
         "link": "",
         "github": "https://github.com/AdamRBoyd/Website_Development_Class",
-        "tags": ["School", "Web Development", "Personal"]
+        "tags": ["School"]
     }
 ]

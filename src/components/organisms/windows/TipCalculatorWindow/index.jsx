@@ -20,7 +20,7 @@ const Form = styled.form`
     min-height: 0;
     display: grid;
     grid-template-rows: auto auto auto 1fr auto;
-    gap: 0.9rem;
+    gap: 0.7rem;
 `;
 
 const Field = styled.div`
@@ -104,7 +104,7 @@ const Results = styled(InsetSurface)`
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};
 
     display: grid;
-    gap: 0.55rem;
+    gap: 0.4rem;
     align-content: start;
 `;
 

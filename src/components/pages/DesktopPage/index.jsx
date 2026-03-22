@@ -56,7 +56,7 @@ const DesktopPage = () => {
     }, [poweredOff]);
 
     const handlePowerOff = () => {
-        sessionStorage.removeItem(POWER_KEY);
+        localStorage.removeItem(POWER_KEY);
         setStartOpen(false);
         setSelectedIconId(null);
         setPoweredOff(true);
