@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 import {
     WindowFrame,
     FullscreenFrame,
@@ -8,7 +10,24 @@ import {
     WindowBody,
 } from '@primitives';
 
+import { Button } from '@atoms';
+
 import { WINDOW_COMPONENTS } from '@windows/registry';
+
+const GitHubButton = styled(Button)`
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+`;
+
+const GitHubIcon = styled.img`
+    width: 14px;
+    height: 14px;
+    align-self: center;
+`;
 
 const WindowLayer = ({
     windows = [],
@@ -20,6 +39,7 @@ const WindowLayer = ({
     minimizingIds = [],
     closingIds = [],
     onOpenUrl,
+    sourceUrl,
     wallpapers,
     selectedWallpaperId,
     onSelectWallpaper,
@@ -30,6 +50,7 @@ const WindowLayer = ({
                 const isFullscreen = w.state === 'fullscreen';
                 const Frame = isFullscreen ? FullscreenFrame : WindowFrame;
                 const isActive = w.id === activeId;
+                const githubUrl = `https://github.com/AdamRBoyd/ARB_OS_Portfolio/blob/main/src/components/organisms/windows/${sourceUrl}/index.jsx`;
 
                 const WindowComponent =
                     w.type === 'browser'
@@ -62,6 +83,23 @@ const WindowLayer = ({
                             <WindowTitle $isActive={isActive}>
                                 {w.title}
                             </WindowTitle>
+
+                            {w.sourceUrl && (
+                                <GitHubButton
+                                    onPointerDown={(e) => e.stopPropagation()}
+                                    onClick={() =>
+                                        window.open(
+                                            githubUrl,
+                                            '_blank'
+                                        )
+                                    }
+                                    aria-label="View source on GitHub"
+                                    variant="header"
+                                >
+                                    <GitHubIcon src="/svg/github.svg" alt="GitHub" />
+                                    View Code
+                                </GitHubButton>
+                            )}
 
                             <WindowControls>
                                 <WindowButton

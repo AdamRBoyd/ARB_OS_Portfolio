@@ -49,6 +49,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.19, ay: 0.30 }, // mid-left
+        sourceUrl: "WallpaperPickerWindow"
     },
     // ---------------- MINI APPS ----------------
     {
@@ -61,6 +62,7 @@ export const PROGRAMS = [
         noScroll: true,
         desktop: false,
         home: { ax: 0.78, ay: 0.48 }, // bottom right
+        sourceUrl: "CalculatorWindow"
     },
     {
         id: 'tipcalculator',
@@ -72,6 +74,7 @@ export const PROGRAMS = [
         noScroll: true,
         desktop: false,
         home: { ax: 0.78, ay: 0.28 }, // right mid
+        sourceUrl: "TipCalculatorWindow"
     },
     {
         id: 'gradientpicker',
@@ -83,6 +86,7 @@ export const PROGRAMS = [
         noScroll: true,
         desktop: false,
         home: { ax: 0.36, ay: 0.52 }, // lower center-left
+        sourceUrl: "GradientPickerWindow"
     },
     {
         id: 'todo',
@@ -94,6 +98,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.18, ay: 0.32 }, // mid-left
+        sourceUrl: "ToDoWindow"
     },
     {
         id: 'passwordgenerator',
@@ -105,6 +110,7 @@ export const PROGRAMS = [
         noScroll: true,
         desktop: false,
         home: { ax: 0.58, ay: 0.48 }, // lower right-center
+        sourceUrl: "PasswordGeneratorWindow"
     },
     {
         id: 'unitconverter',
@@ -116,6 +122,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.5, ay: 0.32 },
+        sourceUrl: "UnitConverterWindow"
     },
     {
         id: 'tictactoe',
@@ -127,6 +134,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.5, ay: 0.56 },
+        sourceUrl: "TicTacToeWindow"
     },
     {
         id: 'workoutlog',
@@ -138,6 +146,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.64, ay: 0.56 },
+        sourceUrl: "WorkoutLogWindow"
     },
     {
         id: 'tasklog',
@@ -149,6 +158,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.36, ay: 0.28 },
+        sourceUrl: "TaskLogWindow"
     },
     {
         id: 'dictionary',
@@ -160,6 +170,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.06, ay: 0.56 },
+        sourceUrl: "DictionaryWindow"
     },
     {
         id: 'recipebook',
@@ -171,6 +182,7 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.78, ay: 0.56 },
+        sourceUrl: "RecipebookWindow"
     },
     {
         id: 'weather',
@@ -182,5 +194,6 @@ export const PROGRAMS = [
         noScroll: false,
         desktop: false,
         home: { ax: 0.22, ay: 0.56 },
+        sourceUrl: "WeatherWindow"
     },
 ];

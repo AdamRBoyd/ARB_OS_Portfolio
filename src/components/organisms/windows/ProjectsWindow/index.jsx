@@ -69,7 +69,7 @@ const Card = styled(InsetSurface)`
 
     border: 1px solid
         ${({ theme, $selected }) =>
-            $selected ? theme.palette.accent[0] : theme.palette.grays[4]};
+        $selected ? theme.palette.accent[0] : theme.palette.grays[4]};
 
     background: ${({ theme, $selected }) =>
         $selected ? theme.palette.grays[3] : theme.palette.grays[2]};
@@ -104,16 +104,22 @@ const NavButton = styled(Button)`
 const FunnyButton = styled(NavButton)`
     &:hover {
         background: transparent;
-        color: transparent;
+        color: ${({ theme }) => theme.palette.secondary[0]};
         border-color: transparent;
-        cursor: default;
     }
+`;
+
+const ArrowIcon = styled.img`
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
 `;
 
 const ProjectsWindow = ({ actions, window: win }) => {
     const [projects, setProjects] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
     const [filter, setFilter] = useState('All');
+    const [hovered, setHovered] = useState(null);
 
     const isFullscreen = win?.state === 'fullscreen';
 
@@ -263,11 +269,26 @@ const ProjectsWindow = ({ actions, window: win }) => {
 
                             {selected.funny && (
                                 <>
-                                    <FunnyButton onClick={handleFunnyClick}>
-                                        Live Site
+                                    <FunnyButton
+                                        onClick={handleFunnyClick}
+                                        onMouseEnter={() => { setHovered('liveSite'); }}
+                                        onMouseLeave={() => { setHovered(null); }}
+                                        style={{ width: "80px" }}
+                                    >
+                                        {hovered === 'liveSite' ? "Nope..." : "Live Site"}
                                     </FunnyButton>
-                                    <FunnyButton onClick={handleFunnyClick}>
-                                        Open in Browser ↗
+                                    
+                                    <FunnyButton
+                                        onClick={handleFunnyClick}
+                                        onMouseEnter={() => { setHovered('browser'); }}
+                                        onMouseLeave={() => { setHovered(null); }}
+                                        style={{ width: "141px" }}
+                                    >
+                                        {hovered === 'browser' ? "Don't do it..." : 
+                                        <>
+                                            Open in Browser
+                                            <ArrowIcon src='/svg/diagonalArrow.svg'/>
+                                        </>}
                                     </FunnyButton>
                                 </>
                             )}
@@ -294,7 +315,8 @@ const ProjectsWindow = ({ actions, window: win }) => {
                                             )
                                         }
                                     >
-                                        Open in Browser ↗
+                                        Open in Browser
+                                        <ArrowIcon src='/svg/diagonalArrow.svg'/>
                                     </NavButton>
                                 </>
                             )}

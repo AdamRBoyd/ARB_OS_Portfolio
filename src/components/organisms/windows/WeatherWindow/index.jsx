@@ -361,15 +361,15 @@ const WeatherWindow = () => {
                                 <WeatherIcon
                                     src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                                 />
-                                {weatherData.main.temp} °F
+                                {weatherData.main.temp.toFixed(1)} °F
                             </WeatherIconTemp>
                             <WeatherFeelsLike>
-                                Feels Like: {weatherData.main.feels_like} °F
+                                Feels Like: {weatherData.main.feels_like.toFixed(1)} °F
                             </WeatherFeelsLike>
                             <WeatherLowHighGroup>
-                                <WeatherLowHigh>{`Low: ${weatherData.main.temp_min} °F`}</WeatherLowHigh>
+                                <WeatherLowHigh>{`Low: ${weatherData.main.temp_min.toFixed(1)} °F`}</WeatherLowHigh>
                                 <Divider height="1rem" />
-                                <WeatherLowHigh>{`High: ${weatherData.main.temp_max} °F`}</WeatherLowHigh>
+                                <WeatherLowHigh>{`High: ${weatherData.main.temp_max.toFixed(1)} °F`}</WeatherLowHigh>
                             </WeatherLowHighGroup>
                         </WeatherLeft>
                         <WeatherRight>

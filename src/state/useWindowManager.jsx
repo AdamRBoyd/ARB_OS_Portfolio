@@ -79,10 +79,10 @@ const makeInitialWindows = () => {
             iconSrc: p.iconSrc,
             home: p.home,
             noScroll: !!p.noScroll,
+            sourceUrl: p.sourceUrl,
 
             state,
             isOpen,
-
             x: START_X,
             y: START_Y,
         };

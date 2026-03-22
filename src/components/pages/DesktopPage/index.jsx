@@ -70,7 +70,6 @@ const DesktopPage = () => {
     selectWallpaper,
   } = useWallpapers();
 
-
     return (
         <DesktopShellWithWallpaper
             onPointerDown={() => {
@@ -101,6 +100,7 @@ const DesktopPage = () => {
                     onToggleFullscreen={wm.toggleFullscreen}
                     onClose={wm.closeWindow}
                     onOpenUrl={wm.openUrlWindow}
+                    sourceUrl={wm.windows[wm.activeId]?.sourceUrl}
                     onAnyInteraction={() => setSelectedIconId(null)}
                     wallpapers={wallpapers}
                     selectedWallpaperId={selectedWallpaperId}

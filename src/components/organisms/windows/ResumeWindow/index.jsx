@@ -29,6 +29,12 @@ const Button = styled.a`
     }
 `;
 
+const ArrowIcon = styled.img`
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+`;
+
 const ViewerWrap = styled.div`
     flex: 1;
     min-height: 0;
@@ -52,7 +58,8 @@ const ResumeWindow = () => {
 
                     <Row $gap="0.5rem" style={{ justifyContent: 'flex-end' }}>
                         <Button href={PDF_URL} target="_blank" rel="noreferrer">
-                            Open in Browser ↗
+                            Open in Browser
+                            <ArrowIcon src='/svg/diagonalArrow.svg' />
                         </Button>
                         <Button href={PDF_URL} download>
                             Download
