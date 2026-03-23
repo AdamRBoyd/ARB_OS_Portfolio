@@ -5,7 +5,11 @@
 # - React Router SPA fallback (e.g. /resume)
 # -----------------------------------
 
+Options -Indexes
+Options -MultiViews
+
 RewriteEngine On
+RewriteBase /
 
 # 1) Canonical host: adamboyd.dev (redirect www to root)
 RewriteCond %{HTTP_HOST} ^www\.adamboyd\.dev$ [NC]
@@ -16,11 +20,7 @@ RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # 3) SPA fallback: serve index.html for all non-file/non-dir requests
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-RewriteRule ^ index.html [L]
-
-# 4) Prevent directory listings (optional safety)
-Options -Indexes
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

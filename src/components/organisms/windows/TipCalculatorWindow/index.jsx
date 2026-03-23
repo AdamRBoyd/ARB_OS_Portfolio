@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import {
     InsetSurface,
     Stack,
@@ -14,7 +15,10 @@ import { Button, Input } from '@atoms';
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetWindowShell)``;
+const Shell = styled(InsetWindowShell)`
+    width: min(400px, 100%);
+    margin-inline: auto;
+`;
 
 const Form = styled.form`
     min-height: 0;

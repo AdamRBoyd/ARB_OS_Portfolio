@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+
 import {
     InsetSurface,
     Stack,
@@ -21,6 +22,8 @@ const SYMBOLS = '!@#$%^&*_-+=';
 
 const Shell = styled(InsetWindowShell)`
     grid-template-rows: repeat(6, auto) 1fr;
+    width: min(400px, 100%);
+    margin-inline: auto;
 `;
 
 const LengthLabel = styled.label`

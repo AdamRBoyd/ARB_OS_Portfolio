@@ -1,13 +1,19 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import { InsetSurface, Stack, InsetWindowShell } from '@primitives';
+
 import { evaluate } from 'mathjs';
 
 /* ----------------------------- */
 /* LAYOUT */
 /* ----------------------------- */
 
-const Shell = styled(InsetWindowShell)``;
+const Shell = styled(InsetWindowShell)`
+    width: min(400px, 100%);
+    height: min(540px, 100%);
+    margin-inline: auto;
+`;
 
 /* ----------------------------- */
 /* SCREEN */

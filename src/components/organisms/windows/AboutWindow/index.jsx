@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Stack, InsetWindowShell, Title, Subtitle } from '@primitives';
 
 /* ----------------------------- */
@@ -8,11 +9,12 @@ import { Stack, InsetWindowShell, Title, Subtitle } from '@primitives';
 const Shell = styled(InsetWindowShell)``;
 
 const Content = styled.div`
-    padding: 0.85rem;
+    padding: 1rem;
     border-radius: 12px;
 
-    display: grid;
-    gap: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
     background: ${({ theme }) => theme.palette.grays[2]};
     border: 1px solid ${({ theme }) => theme.palette.grays[4]};

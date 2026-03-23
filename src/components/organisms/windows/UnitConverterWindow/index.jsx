@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import UnitCard from '@molecules/UnitCard';
 import styled from 'styled-components';
+
 import { Stack, InsetWindowShell, Title, Subtitle } from '@primitives';
 import { Select, Option } from '@atoms';
+import UnitCard from '@molecules/UnitCard';
 
 /* ----------------------------- */
 /* LAYOUT */
@@ -10,6 +11,9 @@ import { Select, Option } from '@atoms';
 
 const Shell = styled(InsetWindowShell)`
     grid-template-rows: auto auto 1fr;
+    width: min(400px, 100%);
+    height: min(500px, 100%);
+    margin-inline: auto;
 `;
 
 const SelectWrapper = styled.div`
