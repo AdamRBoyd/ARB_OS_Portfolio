@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { PROGRAMS } from '@constants/programs';
+
 import { Stack } from '@primitives';
+import { PROGRAMS } from '@constants/programs';
 import DesktopIcon from '@molecules/DesktopIcon';
 
 const DESKTOP_ICONS = PROGRAMS.filter((p) => p.desktop).map(

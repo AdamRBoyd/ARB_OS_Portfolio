@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import useFetch from '@state/useFetch';
+
 import {
     Stack,
     Row,
@@ -10,6 +10,7 @@ import {
 } from '@primitives';
 import { Button, Divider, Input } from '@atoms';
 import { Form } from '@molecules';
+import useFetch from '@state/useFetch';
 import apiKeys from '@/apiKeys.json';
 
 const STORAGE_KEY = 'weatherAppData';

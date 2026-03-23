@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import './App.css';
+
 import useIsMobile from './state/useIsMobile';
+import './App.css';
 
 import {
     DesktopPage,

@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import useWindowManager from '@state/useWindowManager';
-import useWallpapers from '@state/useWallpapers';
 import styled from 'styled-components';
 
 import { DesktopShell, DesktopContent, DockArea } from '@primitives';
-
 import { DesktopIcons, WindowLayer, Dock, SystemBar } from '@organisms';
 import { StartMenu } from '@molecules';
 import PowerOffOverlay from '@atoms/system/PowerOffOverlay';
+import useWindowManager from '@state/useWindowManager';
+import useWallpapers from '@state/useWallpapers';
 
 const POWER_KEY = 'startup_complete';
 

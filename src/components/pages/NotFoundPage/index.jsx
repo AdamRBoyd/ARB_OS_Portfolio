@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { InsetWindowShell } from "@primitives";
+
 import { Button } from "@atoms";
+import { InsetWindowShell } from "@primitives";
 
 const Shell = styled(InsetWindowShell)`
     display: flex;

@@ -9,9 +9,7 @@ import {
     WindowButton,
     WindowBody,
 } from '@primitives';
-
 import { Button } from '@atoms';
-
 import { WINDOW_COMPONENTS } from '@windows/registry';
 
 const GitHubButton = styled(Button)`

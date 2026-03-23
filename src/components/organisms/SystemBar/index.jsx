@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+
+import { Divider } from '@atoms';
 import {
     SystemBar as Bar,
     SystemIdentity,
@@ -6,15 +8,14 @@ import {
     SystemRight,
     SystemPill,
 } from '@primitives';
-
-import useFakeSystemStatus from '@state/useFakeSystemStatus';
 import {
     WifiIcon,
     BatteryIcon,
     VolumeIcon,
 } from '@atoms/system/SystemIcons';
+import useFakeSystemStatus from '@state/useFakeSystemStatus';
+
 import CalendarPopover from '../../atoms/system/CalendarPopover';
-import { Divider } from '@atoms';
 
 const formatTime = (d) =>
     d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

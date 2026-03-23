@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Dock as DockShell, DockItem as DockItemBase } from '@primitives';
 
-import { LINKEDIN_URL, GITHUB_URL } from '@constants/urls';
 import { Divider } from '@atoms';
+import { Dock as DockShell, DockItem as DockItemBase } from '@primitives';
+import { LINKEDIN_URL, GITHUB_URL } from '@constants/urls';
 
 /* ----------------------------- */
 /* STYLES */

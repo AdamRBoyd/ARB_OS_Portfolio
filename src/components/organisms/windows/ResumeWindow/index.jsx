@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Stack, Row, InsetSurface } from '@primitives';
 
+import { Stack, Row, InsetSurface } from '@primitives';
 import { PDF_URL } from '@constants/urls';
 
 const Bar = styled(InsetSurface)`

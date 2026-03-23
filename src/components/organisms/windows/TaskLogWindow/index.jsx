@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
-import { AnalogClock, DigitalClock } from '@molecules';
+
 import {
     InsetSurface,
     Stack,
@@ -9,7 +9,7 @@ import {
     Subtitle,
 } from '@primitives';
 import { Button, Input, Icon } from '@atoms';
-import { Form } from '@molecules';
+import { AnalogClock, DigitalClock, Form } from '@molecules';
 
 const STORAGE_KEY = 'taskLogTasks';
 

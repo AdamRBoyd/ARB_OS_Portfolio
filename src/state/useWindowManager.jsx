@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback, useRef } from 'react';
+
 import { PROGRAMS, WINDOW_SIZE } from '@constants/programs';
 
 /**

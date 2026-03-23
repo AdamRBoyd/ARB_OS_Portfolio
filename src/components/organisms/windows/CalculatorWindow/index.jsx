@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { evaluate } from 'mathjs';
 
 import { InsetSurface, Stack, InsetWindowShell } from '@primitives';
 
-import { evaluate } from 'mathjs';
 
 /* ----------------------------- */
 /* LAYOUT */

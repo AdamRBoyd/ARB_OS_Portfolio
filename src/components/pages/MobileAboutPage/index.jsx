@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@atoms';
 import { Title, Subtitle, Row, Stack } from '@primitives';
 

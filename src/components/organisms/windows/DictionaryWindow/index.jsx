@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
-import useFetch from '@state/useFetch';
+
+import { Button, Input, Icon } from '@atoms';
+import { Form } from '@molecules';
 import {
     InsetSurface,
     Stack,
@@ -9,8 +11,7 @@ import {
     Title,
     Subtitle,
 } from '@primitives';
-import { Button, Input, Icon } from '@atoms';
-import { Form } from '@molecules';
+import useFetch from '@state/useFetch';
 
 /* ----------------------------- */
 /* LAYOUT */

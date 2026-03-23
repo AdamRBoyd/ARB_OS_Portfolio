@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { UNIT_CATEGORIES } from '@constants/unitConversions';
-import { convert } from '@utils/convertUnits';
-import { InsetSurface } from '@primitives';
+
 import { Input } from '@atoms';
+import { InsetSurface } from '@primitives';
+import { convert } from '@utils/convertUnits';
+import { UNIT_CATEGORIES } from '@constants/unitConversions';
 
 /* ----------------------------- */
 /* LAYOUT */
